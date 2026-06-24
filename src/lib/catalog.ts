@@ -1,12 +1,7 @@
 import coverAcrylic from "@/assets/cover-acrylic.jpg";
 import coverMetal from "@/assets/cover-metal.jpg";
 import coverMerch from "@/assets/cover-merch.jpg";
-import mockAcrylicBlock from "@/assets/mock-acrylic-block.jpg";
-import mockAcrylicStandee from "@/assets/mock-acrylic-standee.jpg";
 import mockAcrylicPanel from "@/assets/mock-acrylic-panel.jpg";
-import mockKeychain from "@/assets/mock-keychain.jpg";
-import mockMagnet from "@/assets/mock-magnet.jpg";
-import mockShaker from "@/assets/mock-shaker.jpg";
 import mockMetal from "@/assets/mock-metal.jpg";
 import mockTshirt from "@/assets/mock-tshirt.jpg";
 import mockTote from "@/assets/mock-tote.jpg";
@@ -42,27 +37,32 @@ export type Product = {
   thumb: string;
   // Print area as percentages of the mockup image (where art is overlaid in the live preview).
   printArea?: { top: number; left: number; width: number; height: number; rounded?: number };
+  /** When set, the customizer pre-filters the style gallery to this category. */
+  defaultCategory?: Template["category"];
 };
 
 export type Template = {
   id: string;
   name: string;
   nameKm?: string;
-  category: "Fan art / K-pop" | "Anime OC" | "Graduation" | "Pre-wedding / Couple" | "Family & Travel" | "Corporate / Logo";
+  category:
+    | "Teddy / Baby"
+    | "Floral"
+    | "Minimalist"
+    | "Fan art / K-pop"
+    | "Anime OC"
+    | "Graduation"
+    | "Pre-wedding / Couple"
+    | "Family & Travel"
+    | "Corporate / Logo";
   image: string;
 };
 
 const U = (q: string, w = 800, h = 800) =>
   `https://images.unsplash.com/${q}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 
-// Studio-grade product mockups — locally generated, blank surfaces so uploads composite cleanly.
 const MOCK = {
-  acrylicBlock: mockAcrylicBlock,
-  acrylicStandee: mockAcrylicStandee,
   acrylicPanel: mockAcrylicPanel,
-  keychain: mockKeychain,
-  magnet: mockMagnet,
-  shaker: mockShaker,
   metalWall: mockMetal,
   tshirt: mockTshirt,
   tote: mockTote,
@@ -74,6 +74,16 @@ const MOCK = {
 };
 
 export const TEMPLATES: Template[] = [
+  // ── Acrylic Panel styles — layered die-cut layouts ──
+  { id: "teddy-haru", name: "HARU · Teddy", category: "Teddy / Baby", image: U("photo-1559454403-b8fb88521f80", 800, 800) },
+  { id: "teddy-cream", name: "Cream Bear", category: "Teddy / Baby", image: U("photo-1582722872445-44dc5f7e3c8f", 800, 800) },
+  { id: "teddy-baby", name: "My Baby", category: "Teddy / Baby", image: U("photo-1519689680058-324335c77eba", 800, 800) },
+  { id: "teddy-bee", name: "Little Bee", category: "Teddy / Baby", image: U("photo-1503454537195-1dcabb73ffb9", 800, 800) },
+  { id: "floral-1", name: "Wildflower", category: "Floral", image: U("photo-1490750967868-88aa4486c946", 800, 800) },
+  { id: "floral-2", name: "Peony Frame", category: "Floral", image: U("photo-1487530811176-3780de880c2d", 800, 800) },
+  { id: "floral-3", name: "Pressed Botanical", category: "Floral", image: U("photo-1454425064867-19e0ec64472f", 800, 800) },
+  { id: "min-1", name: "Single Frame", category: "Minimalist", image: U("photo-1494891848038-7bd202a2afeb", 800, 800) },
+  { id: "min-2", name: "Type Only", category: "Minimalist", image: U("photo-1517816743773-6e0fd518b4a6", 800, 800) },
   { id: "kpop-1", name: "K-Pop Stage", category: "Fan art / K-pop", image: U("photo-1493225457124-a3eb161ffa5f", 800, 800) },
   { id: "kpop-2", name: "Idol Portrait", category: "Fan art / K-pop", image: U("photo-1509631179647-0177331693ae", 800, 800) },
   { id: "anime-1", name: "OC Sketch", category: "Anime OC", image: U("photo-1578632767115-351597cf2477", 800, 800) },
@@ -89,65 +99,29 @@ export const TEMPLATES: Template[] = [
 ];
 
 export const PRODUCTS: Product[] = [
-  // ── Acrylic ──
+  // ── Acrylic — ONE flagship product, many styles ──
   {
-    id: "photo-block",
+    id: "acrylic-panel",
     line: "acrylic",
-    name: "Photo Block",
-    nameKm: "ប្លុករូបថត",
-    blurb: "Free-standing acrylic block, polished edges, UV print.",
-    basePrice: 15,
-    sizes: [
-      { id: "s", label: "S", dims: "10×15cm", price: 15 },
-      { id: "m", label: "M", dims: "15×20cm", price: 25 },
-      { id: "l", label: "L", dims: "20×30cm", price: 40 },
-      { id: "xl", label: "XL", dims: "30×40cm", price: 55 },
-    ],
-    mockup: MOCK.acrylicBlock,
-    thumb: MOCK.acrylicBlock,
-    printArea: { top: 31, left: 30, width: 39, height: 42, rounded: 2 },
-  },
-  {
-    id: "custom-standee",
-    line: "acrylic",
-    name: "Custom Standee",
-    blurb: "Die-cut acrylic figure with matching base.",
-    basePrice: 8,
-    priceFrom: 8,
-    priceTo: 15,
-    sizes: [
-      { id: "s", label: "S", dims: "10cm", price: 8 },
-      { id: "m", label: "M", dims: "15cm", price: 12 },
-      { id: "l", label: "L", dims: "20cm", price: 15 },
-    ],
-    mockup: MOCK.acrylicStandee,
-    thumb: MOCK.acrylicStandee,
-    printArea: { top: 18, left: 38, width: 24, height: 58, rounded: 999 },
-  },
-  {
-    id: "photo-panel",
-    line: "acrylic",
-    name: "Photo Panel",
-    blurb: "Wall-hung acrylic panel with stainless standoffs.",
+    name: "Acrylic Panel",
+    nameKm: "ផ្ទាំងអាគ្រីលីច",
+    blurb:
+      "Layered clear-acrylic panel — your photos set inside cute die-cut shapes (teddy, florals, nameplates). Free-standing, A4 or A5.",
     basePrice: 25,
     sizes: [
-      { id: "s", label: "S", dims: "20×30cm", price: 25 },
-      { id: "m", label: "M", dims: "30×40cm", price: 40 },
-      { id: "l", label: "L", dims: "40×60cm", price: 55 },
+      { id: "a5", label: "A5", dims: "14.8×21cm", price: 25 },
+      { id: "a4", label: "A4", dims: "21×29.7cm", price: 35 },
     ],
+    options: [
+      { type: "toggle", id: "nameplate", label: "Add custom nameplate", priceDelta: 2, hint: "e.g. \"HARU\", \"my baby\"" },
+      { type: "toggle", id: "stand", label: "Wood display stand", priceDelta: 3 },
+    ],
+    bulkNote: "−15% at 20+ panels",
     mockup: MOCK.acrylicPanel,
     thumb: MOCK.acrylicPanel,
     printArea: { top: 24, left: 25, width: 50, height: 53, rounded: 1 },
+    defaultCategory: "Teddy / Baby",
   },
-  { id: "keychain", line: "acrylic", name: "Acrylic Keychain", blurb: "Double-side print, anti-scratch coat.", basePrice: 5, priceFrom: 5, priceTo: 9,
-    sizes: [{ id: "s", label: "5cm", price: 5 }, { id: "m", label: "7cm", price: 7 }, { id: "l", label: "9cm", price: 9 }],
-    mockup: MOCK.keychain, thumb: MOCK.keychain, printArea: { top: 38, left: 37, width: 25, height: 38, rounded: 4 } },
-  { id: "magnet", line: "acrylic", name: "Acrylic Magnet", blurb: "Strong neodymium magnet backing.", basePrice: 4, priceFrom: 4, priceTo: 8,
-    sizes: [{ id: "s", label: "5cm", price: 4 }, { id: "m", label: "7cm", price: 6 }, { id: "l", label: "9cm", price: 8 }],
-    mockup: MOCK.magnet, thumb: MOCK.magnet, printArea: { top: 25, left: 26, width: 48, height: 50, rounded: 2 } },
-  { id: "shaker", line: "acrylic", name: "Shaker Acrylic", blurb: "Sealed glitter cavity, floating charms.", basePrice: 10, priceFrom: 10, priceTo: 18,
-    sizes: [{ id: "s", label: "S", price: 10 }, { id: "m", label: "M", price: 14 }, { id: "l", label: "L", price: 18 }],
-    mockup: MOCK.shaker, thumb: MOCK.shaker, printArea: { top: 32, left: 37, width: 26, height: 36, rounded: 999 } },
 
   // ── Metal ──
   {
@@ -156,12 +130,11 @@ export const PRODUCTS: Product[] = [
     name: "Metal Wall Print",
     nameKm: "ផ្ទាំងលោហៈ Ultra-HD",
     blurb: "Ultra-HD dye-sublimated aluminum. Light, vivid, will outlive the wall.",
-    basePrice: 22,
+    basePrice: 10,
     sizes: [
-      { id: "s", label: "S", dims: "20×30cm", price: 22 },
-      { id: "m", label: "M", dims: "30×40cm", price: 32 },
-      { id: "l", label: "L", dims: "35×49cm", price: 45 },
-      { id: "xl", label: "XL", dims: "54×74cm", price: 79 },
+      { id: "m", label: "M", dims: "20×30cm", price: 10 },
+      { id: "l", label: "L", dims: "30×40cm", price: 18 },
+      { id: "xl", label: "XL", dims: "35×49cm", price: 23 },
     ],
     options: [
       { type: "toggle", id: "magnet", label: "Magnetic mount kit", priceDelta: 0.5, hint: "No nails, no holes — rental friendly." },
@@ -202,14 +175,14 @@ export const PRODUCTS: Product[] = [
 
 export const LINES: { key: LineKey; title: string; titleKm: string; subtitle: string; accentVar: string; cover: string }[] = [
   { key: "acrylic", title: "Acrylic", titleKm: "អាគ្រីលីច",
-    subtitle: "Line 01 — Objects you hold, stand, and keep.",
-    accentVar: "var(--earth)", cover: coverAcrylic },
+    subtitle: "Line 01 — Layered acrylic panels, set with your photos.",
+    accentVar: "var(--gold-deep)", cover: coverAcrylic },
   { key: "metal", title: "Metal", titleKm: "លោហៈ",
     subtitle: "Line 02 — Ultra-HD wall art. Premium.",
-    accentVar: "var(--ink)", cover: coverMetal },
+    accentVar: "var(--gold)", cover: coverMetal },
   { key: "merch", title: "Merch", titleKm: "ទំនិញ",
     subtitle: "Line 03 — Wearables, drinkware, everyday print.",
-    accentVar: "var(--forest)", cover: coverMerch },
+    accentVar: "var(--gold-deep)", cover: coverMerch },
 ];
 
 export const STUDIO = {
