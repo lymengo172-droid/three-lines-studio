@@ -9,38 +9,215 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as MetalRouteImport } from './routes/metal'
+import { Route as MerchRouteImport } from './routes/merch'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as CartRouteImport } from './routes/cart'
+import { Route as BulkRouteImport } from './routes/bulk'
+import { Route as AcrylicRouteImport } from './routes/acrylic'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MetalRoute = MetalRouteImport.update({
+  id: '/metal',
+  path: '/metal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BulkRoute = BulkRouteImport.update({
+  id: '/bulk',
+  path: '/bulk',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcrylicRoute = AcrylicRouteImport.update({
+  id: '/acrylic',
+  path: '/acrylic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductLineIdRoute = ProductLineIdRouteImport.update({
+  id: '/product/$line/$id',
+  path: '/product/$line/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
+  '/cart': typeof CartRoute
+  '/checkout': typeof CheckoutRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/acrylic'
+    | '/bulk'
+    | '/cart'
+    | '/checkout'
+    | '/merch'
+    | '/metal'
+    | '/sitemap.xml'
+    | '/product/$line/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/acrylic'
+    | '/bulk'
+    | '/cart'
+    | '/checkout'
+    | '/merch'
+    | '/metal'
+    | '/sitemap.xml'
+    | '/product/$line/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/acrylic'
+    | '/bulk'
+    | '/cart'
+    | '/checkout'
+    | '/merch'
+    | '/metal'
+    | '/sitemap.xml'
+    | '/product/$line/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AcrylicRoute: typeof AcrylicRoute
+  BulkRoute: typeof BulkRoute
+  CartRoute: typeof CartRoute
+  CheckoutRoute: typeof CheckoutRoute
+  MerchRoute: typeof MerchRoute
+  MetalRoute: typeof MetalRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/metal': {
+      id: '/metal'
+      path: '/metal'
+      fullPath: '/metal'
+      preLoaderRoute: typeof MetalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bulk': {
+      id: '/bulk'
+      path: '/bulk'
+      fullPath: '/bulk'
+      preLoaderRoute: typeof BulkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acrylic': {
+      id: '/acrylic'
+      path: '/acrylic'
+      fullPath: '/acrylic'
+      preLoaderRoute: typeof AcrylicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +225,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$line/$id': {
+      id: '/product/$line/$id'
+      path: '/product/$line/$id'
+      fullPath: '/product/$line/$id'
+      preLoaderRoute: typeof ProductLineIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AcrylicRoute: AcrylicRoute,
+  BulkRoute: BulkRoute,
+  CartRoute: CartRoute,
+  CheckoutRoute: CheckoutRoute,
+  MerchRoute: MerchRoute,
+  MetalRoute: MetalRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
