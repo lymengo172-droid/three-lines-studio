@@ -1,3 +1,21 @@
+import coverAcrylic from "@/assets/cover-acrylic.jpg";
+import coverMetal from "@/assets/cover-metal.jpg";
+import coverMerch from "@/assets/cover-merch.jpg";
+import mockAcrylicBlock from "@/assets/mock-acrylic-block.jpg";
+import mockAcrylicStandee from "@/assets/mock-acrylic-standee.jpg";
+import mockAcrylicPanel from "@/assets/mock-acrylic-panel.jpg";
+import mockKeychain from "@/assets/mock-keychain.jpg";
+import mockMagnet from "@/assets/mock-magnet.jpg";
+import mockShaker from "@/assets/mock-shaker.jpg";
+import mockMetal from "@/assets/mock-metal.jpg";
+import mockTshirt from "@/assets/mock-tshirt.jpg";
+import mockTote from "@/assets/mock-tote.jpg";
+import mockMug from "@/assets/mock-mug.jpg";
+import mockCap from "@/assets/mock-cap.jpg";
+import mockBottle from "@/assets/mock-bottle.jpg";
+import mockGlass from "@/assets/mock-glass.jpg";
+import mockPen from "@/assets/mock-pen.jpg";
+
 // Edit this file to swap real photos, prices, and templates.
 
 export type LineKey = "acrylic" | "metal" | "merch";
@@ -35,22 +53,22 @@ export type Template = {
 const U = (q: string, w = 800, h = 800) =>
   `https://images.unsplash.com/${q}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 
-// Lightweight mockups — neutral product silhouettes so uploaded art composites cleanly.
+// Studio-grade product mockups — locally generated, blank surfaces so uploads composite cleanly.
 const MOCK = {
-  acrylicBlock: U("photo-1607344645866-009c320b63e0", 900, 900),
-  acrylicStandee: U("photo-1611162616305-c69b3fa7fbe0", 900, 900),
-  acrylicPanel: U("photo-1505691938895-1758d7feb511", 900, 900),
-  keychain: U("photo-1593998066526-65fcab3021a2", 900, 900),
-  magnet: U("photo-1606744824163-985d376605aa", 900, 900),
-  shaker: U("photo-1611162617213-7d7a39e9b1d7", 900, 900),
-  metalWall: U("photo-1513519245088-0e12902e5a38", 1200, 900),
-  tshirt: U("photo-1521572163474-6864f9cf17ab", 900, 900),
-  tote: U("photo-1591348278863-a8fb3887e2aa", 900, 900),
-  mug: U("photo-1514228742587-6b1558fcca3d", 900, 900),
-  cap: U("photo-1588850561407-ed78c282e89b", 900, 900),
-  bottle: U("photo-1602143407151-7111542de6e8", 900, 900),
-  glass: U("photo-1572119865084-43c285814d63", 900, 900),
-  pen: U("photo-1583485088034-697b5bc36b92", 900, 900),
+  acrylicBlock: mockAcrylicBlock,
+  acrylicStandee: mockAcrylicStandee,
+  acrylicPanel: mockAcrylicPanel,
+  keychain: mockKeychain,
+  magnet: mockMagnet,
+  shaker: mockShaker,
+  metalWall: mockMetal,
+  tshirt: mockTshirt,
+  tote: mockTote,
+  mug: mockMug,
+  cap: mockCap,
+  bottle: mockBottle,
+  glass: mockGlass,
+  pen: mockPen,
 };
 
 export const TEMPLATES: Template[] = [
@@ -170,30 +188,15 @@ export const PRODUCTS: Product[] = [
 ];
 
 export const LINES: { key: LineKey; title: string; titleKm: string; subtitle: string; accentVar: string; cover: string }[] = [
-  {
-    key: "acrylic",
-    title: "Acrylic",
-    titleKm: "អាគ្រីលីច",
+  { key: "acrylic", title: "Acrylic", titleKm: "អាគ្រីលីច",
     subtitle: "Line 01 — Objects you hold, stand, and keep.",
-    accentVar: "var(--earth)",
-    cover: U("photo-1611162617213-7d7a39e9b1d7", 1400, 900),
-  },
-  {
-    key: "metal",
-    title: "Metal",
-    titleKm: "លោហៈ",
+    accentVar: "var(--earth)", cover: coverAcrylic },
+  { key: "metal", title: "Metal", titleKm: "លោហៈ",
     subtitle: "Line 02 — Ultra-HD wall art. Premium.",
-    accentVar: "var(--ink)",
-    cover: U("photo-1513519245088-0e12902e5a38", 1400, 900),
-  },
-  {
-    key: "merch",
-    title: "Merch",
-    titleKm: "ទំនិញ",
+    accentVar: "var(--ink)", cover: coverMetal },
+  { key: "merch", title: "Merch", titleKm: "ទំនិញ",
     subtitle: "Line 03 — Wearables, drinkware, everyday print.",
-    accentVar: "var(--forest)",
-    cover: U("photo-1521572163474-6864f9cf17ab", 1400, 900),
-  },
+    accentVar: "var(--forest)", cover: coverMerch },
 ];
 
 export const STUDIO = {
