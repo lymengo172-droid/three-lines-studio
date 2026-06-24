@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
+import { Route as CartRouteImport } from './routes/cart'
 import { Route as AcrylicRouteImport } from './routes/acrylic'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
@@ -23,6 +24,11 @@ const MetalRoute = MetalRouteImport.update({
 const MerchRoute = MerchRouteImport.update({
   id: '/merch',
   path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CartRoute = CartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AcrylicRoute = AcrylicRouteImport.update({
@@ -44,6 +50,7 @@ const ProductLineIdRoute = ProductLineIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acrylic': typeof AcrylicRoute
+  '/cart': typeof CartRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/product/$line/$id': typeof ProductLineIdRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acrylic': typeof AcrylicRoute
+  '/cart': typeof CartRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/product/$line/$id': typeof ProductLineIdRoute
@@ -59,21 +67,36 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/acrylic': typeof AcrylicRoute
+  '/cart': typeof CartRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
+  fullPaths:
+    | '/'
+    | '/acrylic'
+    | '/cart'
+    | '/merch'
+    | '/metal'
+    | '/product/$line/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
-  id: '__root__' | '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
+  to: '/' | '/acrylic' | '/cart' | '/merch' | '/metal' | '/product/$line/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/acrylic'
+    | '/cart'
+    | '/merch'
+    | '/metal'
+    | '/product/$line/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcrylicRoute: typeof AcrylicRoute
+  CartRoute: typeof CartRoute
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
   ProductLineIdRoute: typeof ProductLineIdRoute
@@ -93,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/merch'
       fullPath: '/merch'
       preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cart': {
+      id: '/cart'
+      path: '/cart'
+      fullPath: '/cart'
+      preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/acrylic': {
@@ -122,6 +152,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcrylicRoute: AcrylicRoute,
+  CartRoute: CartRoute,
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
   ProductLineIdRoute: ProductLineIdRoute,
