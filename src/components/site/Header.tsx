@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { ShoppingBag, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { useStore, t } from "@/lib/store";
-import { STUDIO } from "@/lib/catalog";
 
 export function Header() {
   const { lang, setLang, count } = useStore();
