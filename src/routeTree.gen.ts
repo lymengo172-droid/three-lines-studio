@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -19,6 +20,11 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MetalRoute = MetalRouteImport.update({
   id: '/metal',
   path: '/metal',
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/merch'
     | '/metal'
+    | '/sitemap.xml'
     | '/product/$line/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/merch'
     | '/metal'
+    | '/sitemap.xml'
     | '/product/$line/$id'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/merch'
     | '/metal'
+    | '/sitemap.xml'
     | '/product/$line/$id'
   fileRoutesById: FileRoutesById
 }
@@ -144,11 +156,19 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/metal': {
       id: '/metal'
       path: '/metal'
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
