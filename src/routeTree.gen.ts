@@ -9,38 +9,99 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MetalRouteImport } from './routes/metal'
+import { Route as MerchRouteImport } from './routes/merch'
+import { Route as AcrylicRouteImport } from './routes/acrylic'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
+const MetalRoute = MetalRouteImport.update({
+  id: '/metal',
+  path: '/metal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MerchRoute = MerchRouteImport.update({
+  id: '/merch',
+  path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcrylicRoute = AcrylicRouteImport.update({
+  id: '/acrylic',
+  path: '/acrylic',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductLineIdRoute = ProductLineIdRouteImport.update({
+  id: '/product/$line/$id',
+  path: '/product/$line/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acrylic': typeof AcrylicRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acrylic': typeof AcrylicRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acrylic': typeof AcrylicRoute
+  '/merch': typeof MerchRoute
+  '/metal': typeof MetalRoute
+  '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
+  id: '__root__' | '/' | '/acrylic' | '/merch' | '/metal' | '/product/$line/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcrylicRoute: typeof AcrylicRoute
+  MerchRoute: typeof MerchRoute
+  MetalRoute: typeof MetalRoute
+  ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/metal': {
+      id: '/metal'
+      path: '/metal'
+      fullPath: '/metal'
+      preLoaderRoute: typeof MetalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/merch': {
+      id: '/merch'
+      path: '/merch'
+      fullPath: '/merch'
+      preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/acrylic': {
+      id: '/acrylic'
+      path: '/acrylic'
+      fullPath: '/acrylic'
+      preLoaderRoute: typeof AcrylicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +109,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$line/$id': {
+      id: '/product/$line/$id'
+      path: '/product/$line/$id'
+      fullPath: '/product/$line/$id'
+      preLoaderRoute: typeof ProductLineIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcrylicRoute: AcrylicRoute,
+  MerchRoute: MerchRoute,
+  MetalRoute: MetalRoute,
+  ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
