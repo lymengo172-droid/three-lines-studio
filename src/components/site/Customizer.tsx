@@ -5,8 +5,10 @@ import { useStore, t } from "@/lib/store";
 import { PreviewMockup } from "./PreviewMockup";
 import { Upload, Check } from "lucide-react";
 
-const CATEGORIES = [
-  "Fan art / K-pop", "Anime OC", "Graduation", "Pre-wedding / Couple", "Family & Travel", "Corporate / Logo",
+const ALL_CATEGORIES = [
+  "Teddy / Baby", "Floral", "Minimalist",
+  "Fan art / K-pop", "Anime OC", "Graduation",
+  "Pre-wedding / Couple", "Family & Travel", "Corporate / Logo",
 ] as const;
 
 export function Customizer({ product }: { product: Product }) {
@@ -14,7 +16,10 @@ export function Customizer({ product }: { product: Product }) {
   const navigate = useNavigate();
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const [cat, setCat] = useState<(typeof CATEGORIES)[number]>("Family & Travel");
+  const CATEGORIES = ALL_CATEGORIES;
+  const [cat, setCat] = useState<(typeof ALL_CATEGORIES)[number]>(
+    (product.defaultCategory as (typeof ALL_CATEGORIES)[number]) ?? "Family & Travel"
+  );
   const [templateId, setTemplateId] = useState<string | undefined>();
   const [uploadedArt, setUploadedArt] = useState<string | undefined>();
   const [sizeId, setSizeId] = useState<string | undefined>(product.sizes?.[0]?.id);

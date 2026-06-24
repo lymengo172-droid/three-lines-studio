@@ -22,52 +22,54 @@ function Index() {
   const { lang } = useStore();
   return (
     <Shell>
-      {/* Hero */}
-      <section className="mx-auto grid max-w-7xl items-end gap-10 px-5 pt-10 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-24">
+      {/* Hero — gold on noir */}
+      <section className="noir relative overflow-hidden">
+        <div className="mx-auto grid max-w-7xl items-end gap-10 px-5 pt-14 pb-20 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-28 lg:pb-28">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">
             {t("Phnom Penh · Custom print studio · est. 2024", "ភ្នំពេញ · ស្ទូឌីយោបោះពុម្ព", lang)}
           </p>
           <h1 className="mt-5 text-[3.25rem] font-black leading-[0.92] tracking-[-0.04em] sm:text-7xl lg:text-[6.5rem]">
             {t("Three lines.", "បីផ្នែក។", lang)}<br/>
             {t("One studio.", "ស្ទូឌីយោមួយ។", lang)}<br/>
-            <span className="text-signal">{t("Built for Cambodia.", "សម្រាប់កម្ពុជា។", lang)}</span>
+            <span className="gold-text">{t("Built for Cambodia.", "សម្រាប់កម្ពុជា។", lang)}</span>
           </h1>
           <p className="mt-7 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
             {t("We don't shout — the product does the talking. Acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram.",
                "យើងមិនស្រែក — ផលិតផលនិយាយជំនួស។ វត្ថុអាគ្រីលីច, លោហៈ Ultra-HD និងទំនិញតាមតម្រូវ។", lang)}
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/acrylic" className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90">
+            <Link to="/acrylic" className="btn-gold rounded-full px-6 py-3 text-sm font-semibold">
               {t("Start designing", "ចាប់ផ្តើមរចនា", lang)}
             </Link>
-            <Link to="/bulk" className="rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-accent">
+            <Link to="/bulk" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
               {t("B2B inquiries", "បញ្ជាទិញច្រើន", lang)}
             </Link>
           </div>
         </div>
         <div className="relative">
-          <div className="overflow-hidden rounded-2xl shadow-[0_40px_90px_-40px_rgba(0,0,0,0.35)]">
+          <div className="overflow-hidden rounded-2xl glow-gold">
             <img src={heroImg} alt="Ultra-HD metal wall print in a minimalist interior" className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]" width={1280} height={1600} />
           </div>
-          <div className="absolute -bottom-4 -left-4 hidden rounded-xl border border-border bg-background/90 px-4 py-3 text-xs backdrop-blur sm:block">
-            <div className="font-semibold">Line 02 — Metal</div>
-            <div className="text-muted-foreground">Ultra-HD. No nails, no holes.</div>
+          <div className="absolute -bottom-4 -left-4 hidden rounded-xl glass-dark px-4 py-3 text-xs sm:block">
+            <div className="font-semibold text-gold">Line 02 — Metal</div>
+            <div className="text-white/70">Ultra-HD. No nails, no holes.</div>
           </div>
+        </div>
         </div>
       </section>
 
       {/* Marquee strip */}
-      <section className="mt-20 overflow-hidden border-y border-border bg-foreground py-4 text-background">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-x-8 gap-y-2 px-5 text-[11px] font-medium uppercase tracking-[0.25em]">
+      <section className="overflow-hidden border-y border-border bg-noir py-4 text-white">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-x-8 gap-y-2 px-5 text-[11px] font-medium uppercase tracking-[0.3em]">
           <span>UV-cured print</span>
-          <span className="opacity-50">·</span>
+          <span className="text-gold">·</span>
           <span>Ultra-HD aluminum</span>
-          <span className="opacity-50">·</span>
+          <span className="text-gold">·</span>
           <span>KHQR / ABA pay</span>
-          <span className="opacity-50">·</span>
+          <span className="text-gold">·</span>
           <span>Bulk 50+ pricing</span>
-          <span className="opacity-50">·</span>
+          <span className="text-gold">·</span>
           <span>Showroom in Toul Kork</span>
         </div>
       </section>
@@ -80,14 +82,16 @@ function Index() {
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-6">
         {LINES.map((l, i) => (
-          <Link key={l.key} to={`/${l.key}` as "/acrylic"} className="group relative block overflow-hidden rounded-2xl bg-neutral-100">
+          <Link key={l.key} to={`/${l.key}` as "/acrylic"} className={`group relative block overflow-hidden rounded-2xl ${l.key === "metal" ? "noir glow-gold" : "bg-neutral-100 gold-hairline"}`}>
             <img src={l.cover} alt={l.title} loading="lazy" className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className={`absolute inset-0 ${l.key === "metal" ? "bg-gradient-to-t from-black/85 via-black/30 to-transparent" : "bg-gradient-to-t from-black/65 via-black/10 to-transparent"}`} />
             <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-80">Line 0{i + 1}</div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gold">Line 0{i + 1}</div>
               <div className="mt-1 flex items-end justify-between gap-2">
                 <div>
-                  <h2 className="text-3xl font-black tracking-tight">{l.title}</h2>
+                  <h2 className="text-3xl font-black tracking-tight">
+                    {l.key === "metal" ? <span className="gold-text">{l.title}</span> : l.title}
+                  </h2>
                   <div className="text-xs opacity-80">{l.titleKm}</div>
                 </div>
                 <ArrowUpRight className="h-6 w-6 shrink-0 transition group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -113,7 +117,7 @@ function Index() {
             { n: "04", k: t("Order", "បញ្ជាទិញ", lang), d: t("Send to us on Telegram, pay with ABA / KHQR / COD.", "ផ្ញើតាម Telegram, បង់ ABA / KHQR / COD។", lang) },
           ].map((s) => (
             <li key={s.n} className="bg-background p-6">
-              <div className="text-xs font-semibold text-signal">{s.n}</div>
+              <div className="text-xs font-semibold text-gold-deep">{s.n}</div>
               <div className="mt-2 text-lg font-bold">{s.k}</div>
               <p className="mt-1 text-sm text-muted-foreground">{s.d}</p>
             </li>

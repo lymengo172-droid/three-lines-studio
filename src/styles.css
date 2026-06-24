@@ -64,32 +64,44 @@
   --color-signal: var(--signal);
   --color-earth: var(--earth);
   --color-forest: var(--forest);
+  --color-gold: var(--gold);
+  --color-gold-bright: var(--gold-bright);
+  --color-gold-deep: var(--gold-deep);
+  --color-noir: var(--noir);
+  --color-noir-2: var(--noir-2);
   --font-display: "Inter", "Helvetica Neue", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 :root {
   --radius: 0.625rem;
-  --paper: oklch(0.985 0.005 95);
-  --ink: oklch(0.16 0.006 250);
-  --signal: oklch(0.58 0.21 28);
-  --signal-foreground: oklch(0.985 0.005 95);
+  /* Warm ivory paper + near-black ink */
+  --paper: oklch(0.975 0.012 85);   /* #FAF8F2 */
+  --ink: oklch(0.18 0.005 60);      /* #1A1A1A */
+  /* Gold palette — #D4AF37 / #F5D77E / #A07B22 */
+  --gold: oklch(0.78 0.13 86);
+  --gold-bright: oklch(0.88 0.12 92);
+  --gold-deep: oklch(0.58 0.11 78);
+  --noir: oklch(0.13 0.005 260);    /* #0B0B0D */
+  --noir-2: oklch(0.18 0.005 260);  /* #15151A */
+  --signal: var(--gold);
+  --signal-foreground: oklch(0.13 0.005 260);
   --earth: oklch(0.63 0.11 55);
   --forest: oklch(0.45 0.09 155);
-  --line-muted: oklch(0.88 0.005 95);
+  --line-muted: oklch(0.9 0.01 85);
   --background: var(--paper);
   --foreground: var(--ink);
   --card: oklch(1 0 0);
   --card-foreground: var(--ink);
   --popover: oklch(1 0 0);
   --popover-foreground: var(--ink);
-  --primary: var(--signal);
+  --primary: var(--ink);
   --primary-foreground: var(--signal-foreground);
-  --secondary: oklch(0.95 0.005 95);
+  --secondary: oklch(0.95 0.008 85);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.95 0.005 95);
+  --muted: oklch(0.95 0.008 85);
   --muted-foreground: oklch(0.45 0.01 250);
-  --accent: oklch(0.93 0.01 95);
+  --accent: oklch(0.93 0.015 85);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0.005 95);
@@ -164,5 +176,62 @@
   }
   h1, h2, h3 {
     letter-spacing: -0.025em;
+  }
+}
+
+/* ───────────── Luxury utilities ─────────────
+ * Gold-on-dark "noir" wrapper used for the Metal line and the home hero.
+ * Apply with `<section class="noir">…</section>` — children inherit the dark theme.
+ */
+@utility noir {
+  --background: var(--noir);
+  --foreground: oklch(0.97 0.005 85);
+  --card: var(--noir-2);
+  --card-foreground: oklch(0.97 0.005 85);
+  --muted: oklch(0.22 0.005 260);
+  --muted-foreground: oklch(0.7 0.01 85);
+  --accent: oklch(0.22 0.005 260);
+  --accent-foreground: oklch(0.97 0.005 85);
+  --border: oklch(0.78 0.13 86 / 0.22);
+  --input: oklch(1 0 0 / 0.12);
+  --primary: var(--gold);
+  --primary-foreground: var(--noir);
+  background-color: var(--noir);
+  color: oklch(0.97 0.005 85);
+  background-image:
+    radial-gradient(60% 50% at 20% 0%, oklch(0.78 0.13 86 / 0.10), transparent 70%),
+    radial-gradient(50% 40% at 100% 100%, oklch(0.78 0.13 86 / 0.06), transparent 70%);
+}
+
+@utility gold-text {
+  background-image: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 45%, var(--gold-deep) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gold-hairline {
+  border: 1px solid color-mix(in oklch, var(--gold) 55%, transparent);
+}
+
+@utility glow-gold {
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--gold) 35%, transparent),
+    0 20px 60px -20px color-mix(in oklch, var(--gold) 35%, transparent);
+}
+
+@utility glass-dark {
+  background-color: oklch(0.18 0.005 260 / 0.55);
+  backdrop-filter: blur(14px) saturate(140%);
+  border: 1px solid oklch(0.78 0.13 86 / 0.18);
+}
+
+@utility btn-gold {
+  background-image: linear-gradient(135deg, var(--gold-bright), var(--gold) 60%, var(--gold-deep));
+  color: var(--noir);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  &:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 12px 36px -10px color-mix(in oklch, var(--gold) 55%, transparent);
   }
 }
