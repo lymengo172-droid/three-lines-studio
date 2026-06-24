@@ -88,7 +88,7 @@ export function Customizer({ product }: { product: Product }) {
   return (
     <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr]">
       <div className="lg:sticky lg:top-24 lg:self-start">
-        <PreviewMockup mockup={product.mockup} art={art} layout={previewLayout} framed={product.line === "metal"} />
+        <PreviewMockup mockup={product.mockup} art={art} printArea={product.printArea} layout={previewLayout} framed={product.line === "metal"} />
         <p className="mt-3 text-xs text-muted-foreground">
           {t("Live preview — final print color may vary slightly.", "មើលជាមុន — ពណ៌បោះពុម្ពពិតប្រាកដអាចខុសគ្នាបន្តិច។", lang)}
         </p>

@@ -1,3 +1,21 @@
+import coverAcrylic from "@/assets/cover-acrylic.jpg";
+import coverMetal from "@/assets/cover-metal.jpg";
+import coverMerch from "@/assets/cover-merch.jpg";
+import mockAcrylicBlock from "@/assets/mock-acrylic-block.jpg";
+import mockAcrylicStandee from "@/assets/mock-acrylic-standee.jpg";
+import mockAcrylicPanel from "@/assets/mock-acrylic-panel.jpg";
+import mockKeychain from "@/assets/mock-keychain.jpg";
+import mockMagnet from "@/assets/mock-magnet.jpg";
+import mockShaker from "@/assets/mock-shaker.jpg";
+import mockMetal from "@/assets/mock-metal.jpg";
+import mockTshirt from "@/assets/mock-tshirt.jpg";
+import mockTote from "@/assets/mock-tote.jpg";
+import mockMug from "@/assets/mock-mug.jpg";
+import mockCap from "@/assets/mock-cap.jpg";
+import mockBottle from "@/assets/mock-bottle.jpg";
+import mockGlass from "@/assets/mock-glass.jpg";
+import mockPen from "@/assets/mock-pen.jpg";
+
 // Edit this file to swap real photos, prices, and templates.
 
 export type LineKey = "acrylic" | "metal" | "merch";
@@ -22,6 +40,8 @@ export type Product = {
   bulkNote?: string;
   mockup: string; // background image of the bare product for the preview composite
   thumb: string;
+  // Print area as percentages of the mockup image (where art is overlaid in the live preview).
+  printArea?: { top: number; left: number; width: number; height: number; rounded?: number };
 };
 
 export type Template = {
@@ -35,22 +55,22 @@ export type Template = {
 const U = (q: string, w = 800, h = 800) =>
   `https://images.unsplash.com/${q}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 
-// Lightweight mockups — neutral product silhouettes so uploaded art composites cleanly.
+// Studio-grade product mockups — locally generated, blank surfaces so uploads composite cleanly.
 const MOCK = {
-  acrylicBlock: U("photo-1607344645866-009c320b63e0", 900, 900),
-  acrylicStandee: U("photo-1611162616305-c69b3fa7fbe0", 900, 900),
-  acrylicPanel: U("photo-1505691938895-1758d7feb511", 900, 900),
-  keychain: U("photo-1593998066526-65fcab3021a2", 900, 900),
-  magnet: U("photo-1606744824163-985d376605aa", 900, 900),
-  shaker: U("photo-1611162617213-7d7a39e9b1d7", 900, 900),
-  metalWall: U("photo-1513519245088-0e12902e5a38", 1200, 900),
-  tshirt: U("photo-1521572163474-6864f9cf17ab", 900, 900),
-  tote: U("photo-1591348278863-a8fb3887e2aa", 900, 900),
-  mug: U("photo-1514228742587-6b1558fcca3d", 900, 900),
-  cap: U("photo-1588850561407-ed78c282e89b", 900, 900),
-  bottle: U("photo-1602143407151-7111542de6e8", 900, 900),
-  glass: U("photo-1572119865084-43c285814d63", 900, 900),
-  pen: U("photo-1583485088034-697b5bc36b92", 900, 900),
+  acrylicBlock: mockAcrylicBlock,
+  acrylicStandee: mockAcrylicStandee,
+  acrylicPanel: mockAcrylicPanel,
+  keychain: mockKeychain,
+  magnet: mockMagnet,
+  shaker: mockShaker,
+  metalWall: mockMetal,
+  tshirt: mockTshirt,
+  tote: mockTote,
+  mug: mockMug,
+  cap: mockCap,
+  bottle: mockBottle,
+  glass: mockGlass,
+  pen: mockPen,
 };
 
 export const TEMPLATES: Template[] = [
@@ -85,6 +105,7 @@ export const PRODUCTS: Product[] = [
     ],
     mockup: MOCK.acrylicBlock,
     thumb: MOCK.acrylicBlock,
+    printArea: { top: 31, left: 30, width: 39, height: 42, rounded: 2 },
   },
   {
     id: "custom-standee",
@@ -101,6 +122,7 @@ export const PRODUCTS: Product[] = [
     ],
     mockup: MOCK.acrylicStandee,
     thumb: MOCK.acrylicStandee,
+    printArea: { top: 18, left: 38, width: 24, height: 58, rounded: 999 },
   },
   {
     id: "photo-panel",
@@ -115,16 +137,17 @@ export const PRODUCTS: Product[] = [
     ],
     mockup: MOCK.acrylicPanel,
     thumb: MOCK.acrylicPanel,
+    printArea: { top: 24, left: 25, width: 50, height: 53, rounded: 1 },
   },
   { id: "keychain", line: "acrylic", name: "Acrylic Keychain", blurb: "Double-side print, anti-scratch coat.", basePrice: 5, priceFrom: 5, priceTo: 9,
     sizes: [{ id: "s", label: "5cm", price: 5 }, { id: "m", label: "7cm", price: 7 }, { id: "l", label: "9cm", price: 9 }],
-    mockup: MOCK.keychain, thumb: MOCK.keychain },
+    mockup: MOCK.keychain, thumb: MOCK.keychain, printArea: { top: 38, left: 37, width: 25, height: 38, rounded: 4 } },
   { id: "magnet", line: "acrylic", name: "Acrylic Magnet", blurb: "Strong neodymium magnet backing.", basePrice: 4, priceFrom: 4, priceTo: 8,
     sizes: [{ id: "s", label: "5cm", price: 4 }, { id: "m", label: "7cm", price: 6 }, { id: "l", label: "9cm", price: 8 }],
-    mockup: MOCK.magnet, thumb: MOCK.magnet },
+    mockup: MOCK.magnet, thumb: MOCK.magnet, printArea: { top: 25, left: 26, width: 48, height: 50, rounded: 2 } },
   { id: "shaker", line: "acrylic", name: "Shaker Acrylic", blurb: "Sealed glitter cavity, floating charms.", basePrice: 10, priceFrom: 10, priceTo: 18,
     sizes: [{ id: "s", label: "S", price: 10 }, { id: "m", label: "M", price: 14 }, { id: "l", label: "L", price: 18 }],
-    mockup: MOCK.shaker, thumb: MOCK.shaker },
+    mockup: MOCK.shaker, thumb: MOCK.shaker, printArea: { top: 32, left: 37, width: 26, height: 36, rounded: 999 } },
 
   // ── Metal ──
   {
@@ -156,44 +179,37 @@ export const PRODUCTS: Product[] = [
     ],
     mockup: MOCK.metalWall,
     thumb: MOCK.metalWall,
+    printArea: { top: 22, left: 20, width: 60, height: 56, rounded: 1 },
   },
 
   // ── Merch ──
   { id: "tshirt", line: "merch", name: "T-shirt", basePrice: 10, blurb: "Soft combed cotton, DTG print.", bulkNote: "$8 at 50+", mockup: MOCK.tshirt, thumb: MOCK.tshirt,
+    printArea: { top: 38, left: 38, width: 24, height: 28, rounded: 1 },
     options: [{ type: "select", id: "size", label: "Size", choices: [{ label: "S" }, { label: "M" }, { label: "L" }, { label: "XL" }, { label: "XXL", priceDelta: 1 }] }] },
-  { id: "tote", line: "merch", name: "Tote bag", basePrice: 8, blurb: "12oz canvas, gusseted base.", bulkNote: "$6.5 at 50+", mockup: MOCK.tote, thumb: MOCK.tote },
-  { id: "mug", line: "merch", name: "Mug 11oz", basePrice: 7, blurb: "Sublimation ceramic, dishwasher safe.", bulkNote: "$5.5 at 50+", mockup: MOCK.mug, thumb: MOCK.mug },
-  { id: "cap", line: "merch", name: "Cap", basePrice: 12, blurb: "6-panel, embroidered or printed.", bulkNote: "$10 at 50+", mockup: MOCK.cap, thumb: MOCK.cap },
-  { id: "bottle", line: "merch", name: "Bottle 500ml", basePrice: 13, blurb: "Insulated stainless, 12h cold.", bulkNote: "$11 at 50+", mockup: MOCK.bottle, thumb: MOCK.bottle },
-  { id: "glass", line: "merch", name: "Glass cup", basePrice: 6, blurb: "Tempered glass, UV cured print.", bulkNote: "$4.5 at 50+", mockup: MOCK.glass, thumb: MOCK.glass },
-  { id: "pen", line: "merch", name: "Engraved pen", basePrice: 3, blurb: "Laser-engraved metal barrel.", bulkNote: "$2 at 50+", mockup: MOCK.pen, thumb: MOCK.pen },
+  { id: "tote", line: "merch", name: "Tote bag", basePrice: 8, blurb: "12oz canvas, gusseted base.", bulkNote: "$6.5 at 50+", mockup: MOCK.tote, thumb: MOCK.tote,
+    printArea: { top: 50, left: 36, width: 28, height: 28, rounded: 1 } },
+  { id: "mug", line: "merch", name: "Mug 11oz", basePrice: 7, blurb: "Sublimation ceramic, dishwasher safe.", bulkNote: "$5.5 at 50+", mockup: MOCK.mug, thumb: MOCK.mug,
+    printArea: { top: 42, left: 36, width: 24, height: 28, rounded: 1 } },
+  { id: "cap", line: "merch", name: "Cap", basePrice: 12, blurb: "6-panel, embroidered or printed.", bulkNote: "$10 at 50+", mockup: MOCK.cap, thumb: MOCK.cap,
+    printArea: { top: 36, left: 41, width: 18, height: 18, rounded: 2 } },
+  { id: "bottle", line: "merch", name: "Bottle 500ml", basePrice: 13, blurb: "Insulated stainless, 12h cold.", bulkNote: "$11 at 50+", mockup: MOCK.bottle, thumb: MOCK.bottle,
+    printArea: { top: 45, left: 45, width: 14, height: 30, rounded: 2 } },
+  { id: "glass", line: "merch", name: "Glass cup", basePrice: 6, blurb: "Tempered glass, UV cured print.", bulkNote: "$4.5 at 50+", mockup: MOCK.glass, thumb: MOCK.glass,
+    printArea: { top: 42, left: 39, width: 22, height: 26, rounded: 1 } },
+  { id: "pen", line: "merch", name: "Engraved pen", basePrice: 3, blurb: "Laser-engraved metal barrel.", bulkNote: "$2 at 50+", mockup: MOCK.pen, thumb: MOCK.pen,
+    printArea: { top: 42, left: 32, width: 36, height: 12, rounded: 999 } },
 ];
 
 export const LINES: { key: LineKey; title: string; titleKm: string; subtitle: string; accentVar: string; cover: string }[] = [
-  {
-    key: "acrylic",
-    title: "Acrylic",
-    titleKm: "អាគ្រីលីច",
+  { key: "acrylic", title: "Acrylic", titleKm: "អាគ្រីលីច",
     subtitle: "Line 01 — Objects you hold, stand, and keep.",
-    accentVar: "var(--earth)",
-    cover: U("photo-1611162617213-7d7a39e9b1d7", 1400, 900),
-  },
-  {
-    key: "metal",
-    title: "Metal",
-    titleKm: "លោហៈ",
+    accentVar: "var(--earth)", cover: coverAcrylic },
+  { key: "metal", title: "Metal", titleKm: "លោហៈ",
     subtitle: "Line 02 — Ultra-HD wall art. Premium.",
-    accentVar: "var(--ink)",
-    cover: U("photo-1513519245088-0e12902e5a38", 1400, 900),
-  },
-  {
-    key: "merch",
-    title: "Merch",
-    titleKm: "ទំនិញ",
+    accentVar: "var(--ink)", cover: coverMetal },
+  { key: "merch", title: "Merch", titleKm: "ទំនិញ",
     subtitle: "Line 03 — Wearables, drinkware, everyday print.",
-    accentVar: "var(--forest)",
-    cover: U("photo-1521572163474-6864f9cf17ab", 1400, 900),
-  },
+    accentVar: "var(--forest)", cover: coverMerch },
 ];
 
 export const STUDIO = {

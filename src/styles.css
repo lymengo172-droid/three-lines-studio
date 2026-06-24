@@ -154,5 +154,15 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: "Inter", "Noto Sans Khmer", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  :lang(km), .km {
+    font-family: "Noto Sans Khmer", "Inter", system-ui, sans-serif;
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
   }
 }

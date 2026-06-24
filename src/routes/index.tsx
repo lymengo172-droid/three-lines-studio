@@ -4,6 +4,7 @@ import { Shell } from "@/components/site/Shell";
 import { LINES, STUDIO } from "@/lib/catalog";
 import { useStore, t } from "@/lib/store";
 import { ArrowUpRight } from "lucide-react";
+import heroImg from "@/assets/cover-metal.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,26 +23,65 @@ function Index() {
   return (
     <Shell>
       {/* Hero */}
-      <section className="mx-auto max-w-7xl px-5 pt-12 sm:pt-20 lg:pt-28">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          {t("Phnom Penh · Custom print studio", "ភ្នំពេញ · ស្ទូឌីយោបោះពុម្ព", lang)}
-        </p>
-        <h1 className="mt-4 max-w-4xl text-5xl font-black leading-[0.95] tracking-tight sm:text-7xl lg:text-[8.5rem]">
-          {t("Three lines.", "បីផ្នែក។", lang)}<br/>
-          {t("One studio.", "ស្ទូឌីយោមួយ។", lang)}<br/>
-          <span className="text-signal">{t("Built for Cambodia.", "សម្រាប់កម្ពុជា។", lang)}</span>
-        </h1>
-        <p className="mt-8 max-w-xl text-base text-muted-foreground sm:text-lg">
-          {t("We don't shout — the product does the talking. Acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram.",
-             "យើងមិនស្រែក — ផលិតផលនិយាយជំនួស។ វត្ថុអាគ្រីលីច, លោហៈ Ultra-HD និងទំនិញតាមតម្រូវ។", lang)}
-        </p>
+      <section className="mx-auto grid max-w-7xl items-end gap-10 px-5 pt-10 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-24">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+            {t("Phnom Penh · Custom print studio · est. 2024", "ភ្នំពេញ · ស្ទូឌីយោបោះពុម្ព", lang)}
+          </p>
+          <h1 className="mt-5 text-[3.25rem] font-black leading-[0.92] tracking-[-0.04em] sm:text-7xl lg:text-[6.5rem]">
+            {t("Three lines.", "បីផ្នែក។", lang)}<br/>
+            {t("One studio.", "ស្ទូឌីយោមួយ។", lang)}<br/>
+            <span className="text-signal">{t("Built for Cambodia.", "សម្រាប់កម្ពុជា។", lang)}</span>
+          </h1>
+          <p className="mt-7 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {t("We don't shout — the product does the talking. Acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram.",
+               "យើងមិនស្រែក — ផលិតផលនិយាយជំនួស។ វត្ថុអាគ្រីលីច, លោហៈ Ultra-HD និងទំនិញតាមតម្រូវ។", lang)}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/acrylic" className="rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:opacity-90">
+              {t("Start designing", "ចាប់ផ្តើមរចនា", lang)}
+            </Link>
+            <Link to="/bulk" className="rounded-full border border-border px-6 py-3 text-sm font-semibold hover:bg-accent">
+              {t("B2B inquiries", "បញ្ជាទិញច្រើន", lang)}
+            </Link>
+          </div>
+        </div>
+        <div className="relative">
+          <div className="overflow-hidden rounded-2xl shadow-[0_40px_90px_-40px_rgba(0,0,0,0.35)]">
+            <img src={heroImg} alt="Ultra-HD metal wall print in a minimalist interior" className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]" width={1280} height={1600} />
+          </div>
+          <div className="absolute -bottom-4 -left-4 hidden rounded-xl border border-border bg-background/90 px-4 py-3 text-xs backdrop-blur sm:block">
+            <div className="font-semibold">Line 02 — Metal</div>
+            <div className="text-muted-foreground">Ultra-HD. No nails, no holes.</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Marquee strip */}
+      <section className="mt-20 overflow-hidden border-y border-border bg-foreground py-4 text-background">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-x-8 gap-y-2 px-5 text-[11px] font-medium uppercase tracking-[0.25em]">
+          <span>UV-cured print</span>
+          <span className="opacity-50">·</span>
+          <span>Ultra-HD aluminum</span>
+          <span className="opacity-50">·</span>
+          <span>KHQR / ABA pay</span>
+          <span className="opacity-50">·</span>
+          <span>Bulk 50+ pricing</span>
+          <span className="opacity-50">·</span>
+          <span>Showroom in Toul Kork</span>
+        </div>
       </section>
 
       {/* Three line cards */}
-      <section className="mx-auto mt-16 grid max-w-7xl gap-4 px-5 sm:grid-cols-3 sm:gap-6">
+      <section className="mx-auto mt-20 max-w-7xl px-5">
+        <div className="flex items-end justify-between gap-4">
+          <h2 className="text-3xl font-black tracking-tight sm:text-5xl">{t("Three lines.", "បីផ្នែក។", lang)}</h2>
+          <div className="text-xs text-muted-foreground">{t("One studio. In-house from sketch to ship.", "ស្ទូឌីយោមួយ", lang)}</div>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-6">
         {LINES.map((l, i) => (
           <Link key={l.key} to={`/${l.key}` as "/acrylic"} className="group relative block overflow-hidden rounded-2xl bg-neutral-100">
-            <img src={l.cover} alt={l.title} className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img src={l.cover} alt={l.title} loading="lazy" className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-5 text-white">
               <div className="text-[10px] font-semibold uppercase tracking-[0.2em] opacity-80">Line 0{i + 1}</div>
@@ -56,6 +96,7 @@ function Index() {
             </div>
           </Link>
         ))}
+        </div>
       </section>
 
       {/* How it works */}
