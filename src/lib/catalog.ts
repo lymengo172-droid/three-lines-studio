@@ -40,6 +40,8 @@ export type Product = {
   bulkNote?: string;
   mockup: string; // background image of the bare product for the preview composite
   thumb: string;
+  // Print area as percentages of the mockup image (where art is overlaid in the live preview).
+  printArea?: { top: number; left: number; width: number; height: number; rounded?: number };
 };
 
 export type Template = {
