@@ -13,7 +13,9 @@ import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as BulkRouteImport } from './routes/bulk'
 import { Route as AcrylicRouteImport } from './routes/acrylic'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
@@ -37,9 +39,19 @@ const CartRoute = CartRouteImport.update({
   path: '/cart',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BulkRoute = BulkRouteImport.update({
+  id: '/bulk',
+  path: '/bulk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcrylicRoute = AcrylicRouteImport.update({
   id: '/acrylic',
   path: '/acrylic',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,7 +67,9 @@ const ProductLineIdRoute = ProductLineIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
@@ -64,7 +78,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
@@ -74,7 +90,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
   '/merch': typeof MerchRoute
@@ -85,7 +103,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/acrylic'
+    | '/bulk'
     | '/cart'
     | '/checkout'
     | '/merch'
@@ -94,7 +114,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/acrylic'
+    | '/bulk'
     | '/cart'
     | '/checkout'
     | '/merch'
@@ -103,7 +125,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/acrylic'
+    | '/bulk'
     | '/cart'
     | '/checkout'
     | '/merch'
@@ -113,7 +137,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AcrylicRoute: typeof AcrylicRoute
+  BulkRoute: typeof BulkRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
   MerchRoute: typeof MerchRoute
@@ -151,11 +177,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bulk': {
+      id: '/bulk'
+      path: '/bulk'
+      fullPath: '/bulk'
+      preLoaderRoute: typeof BulkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/acrylic': {
       id: '/acrylic'
       path: '/acrylic'
       fullPath: '/acrylic'
       preLoaderRoute: typeof AcrylicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -177,7 +217,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AcrylicRoute: AcrylicRoute,
+  BulkRoute: BulkRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
   MerchRoute: MerchRoute,
