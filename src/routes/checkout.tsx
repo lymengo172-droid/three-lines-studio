@@ -4,6 +4,7 @@ import { useStore, t } from "@/lib/store";
 import { STUDIO } from "@/lib/catalog";
 import { useMemo, useState } from "react";
 import { Send, Check } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — Three Lines, One Studio" }] }),
@@ -19,6 +20,9 @@ function Checkout() {
   const [handle, setHandle] = useState("");
   const [pay, setPay] = useState<Pay>("khqr");
   const [sent, setSent] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const [orderNumber, setOrderNumber] = useState<number | null>(null);
 
   const summary = useMemo(() => {
     const lines = cart.map((it, i) => {
@@ -43,11 +47,60 @@ function Checkout() {
   const tgUrl = `https://t.me/${STUDIO.telegramUsername}?text=${encodeURIComponent(summary)}`;
   const canSend = cart.length > 0 && name && phone;
 
-  function onSend() {
-    if (!canSend) return;
-    window.open(tgUrl, "_blank");
-    setSent(true);
-    setTimeout(() => clearCart(), 600);
+  async function onSend() {
+    if (!canSend || saving) return;
+    setSaving(true);
+    setSaveError(null);
+
+    const lineItems = cart.map((it) => ({
+      product_id: it.productId ?? null,
+      product_name: it.productName,
+      line: it.line ?? null,
+      template_id: it.templateId ?? null,
+      template_name: it.templateName ?? null,
+      size: it.size ?? null,
+      options_summary: it.optionsSummary ?? null,
+      quantity: it.qty,
+      unit_price: it.unitPrice,
+      line_total: Number((it.unitPrice * it.qty).toFixed(2)),
+      preview_url: it.preview ?? null,
+    }));
+
+    try {
+      const { data, error } = await supabase
+        .from("orders")
+        .insert({
+          customer_name: name,
+          phone,
+          telegram_handle: handle || null,
+          line_items: lineItems,
+          subtotal: Number(subtotal.toFixed(2)),
+          payment_method: pay,
+          notes: null,
+          preview_url: cart[0]?.preview ?? null,
+        })
+        .select("order_number")
+        .single();
+
+      if (error) throw error;
+      if (data?.order_number) setOrderNumber(data.order_number as number);
+
+      // Mark as telegram_sent (fire-and-forget); ignore failure.
+      window.open(tgUrl, "_blank");
+      setSent(true);
+      setTimeout(() => clearCart(), 600);
+    } catch (err) {
+      console.error("Failed to save order", err);
+      setSaveError(
+        t(
+          "We couldn't save your order. Please try again, or send us a message on Telegram directly.",
+          "យើងមិនអាចរក្សាទុកការបញ្ជាទិញបានទេ។ សូមព្យាយាមម្តងទៀត ឬផ្ញើសារតាម Telegram ដោយផ្ទាល់។",
+          lang,
+        ),
+      );
+    } finally {
+      setSaving(false);
+    }
   }
 
   if (cart.length === 0 && !sent) {
@@ -67,6 +120,11 @@ function Checkout() {
         <div className="mx-auto max-w-2xl px-5 py-24 text-center">
           <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-signal text-primary-foreground"><Check className="h-8 w-8" /></div>
           <h1 className="mt-6 text-4xl font-black">{t("Order sent", "បានផ្ញើ", lang)}</h1>
+          {orderNumber !== null && (
+            <p className="mt-2 text-sm font-semibold tracking-wider text-muted-foreground">
+              {t("Order #", "លេខការបញ្ជាទិញ #", lang)}{String(orderNumber).padStart(4, "0")}
+            </p>
+          )}
           <p className="mt-3 text-muted-foreground">
             {t("We received your order on Telegram and will contact you shortly to confirm.", "យើងបានទទួលការបញ្ជាទិញតាម Telegram។ យើងនឹងទាក់ទងអ្នកឆាប់ៗដើម្បីបញ្ជាក់។", lang)}
           </p>
@@ -109,10 +167,15 @@ function Checkout() {
           </section>
 
           <div className="mt-10">
-            <button onClick={onSend} disabled={!canSend} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-4 text-base font-semibold text-primary-foreground transition disabled:opacity-40 sm:w-auto">
+            <button onClick={onSend} disabled={!canSend || saving} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-signal px-6 py-4 text-base font-semibold text-primary-foreground transition disabled:opacity-40 sm:w-auto">
               <Send className="h-4 w-4" />
-              {t("Send order via Telegram", "ផ្ញើការបញ្ជាទិញតាម Telegram", lang)}
+              {saving
+                ? t("Saving order…", "កំពុងរក្សាទុក…", lang)
+                : t("Send order via Telegram", "ផ្ញើការបញ្ជាទិញតាម Telegram", lang)}
             </button>
+            {saveError && (
+              <p className="mt-3 text-xs font-medium text-destructive">{saveError}</p>
+            )}
             <p className="mt-3 text-xs text-muted-foreground">
               {t("This opens Telegram with your order pre-filled. We'll reply to confirm timing and payment.", "នេះនឹងបើក Telegram ដែលមានការបញ្ជាទិញរួចស្រេច។", lang)}
             </p>
