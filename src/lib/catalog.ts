@@ -193,8 +193,8 @@ export const STUDIO = {
   facebook: "https://facebook.com/threelinesstudio",
   tiktok: "https://tiktok.com/@threelinesstudio",
   telegram: "https://t.me/threelinesstudio",
-  // ⚠️ REPLACE with your real Telegram username (no @) before going live.
-  telegramUsername: "REPLACE_WITH_MY_TELEGRAM_USERNAME",
+  // Owner's Telegram username (no @). Used to deep-link orders.
+  telegramUsername: "lymengv",
 };
 
 export function productById(id: string) {
