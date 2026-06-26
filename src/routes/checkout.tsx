@@ -5,6 +5,7 @@ import { STUDIO } from "@/lib/catalog";
 import { useMemo, useState } from "react";
 import { Send, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { dataUrlToBlob } from "@/lib/renderPreview";
 
 export const Route = createFileRoute("/checkout")({
   head: () => ({ meta: [{ title: "Checkout — Three Lines, One Studio" }] }),
@@ -52,6 +53,23 @@ function Checkout() {
     setSaving(true);
     setSaveError(null);
 
+    // Upload composited previews (data URLs) to private storage; keep template URLs as-is.
+    const uploaded: Record<string, string> = {};
+    for (const it of cart) {
+      if (it.preview?.startsWith("data:")) {
+        try {
+          const blob = dataUrlToBlob(it.preview);
+          const path = `${new Date().toISOString().slice(0, 10)}/${it.id}.jpg`;
+          const { error: upErr } = await supabase.storage
+            .from("order-previews")
+            .upload(path, blob, { contentType: "image/jpeg", upsert: true });
+          if (!upErr) uploaded[it.id] = path;
+        } catch (e) {
+          console.warn("preview upload failed", e);
+        }
+      }
+    }
+
     const lineItems = cart.map((it) => ({
       product_id: it.productId ?? null,
       product_name: it.productName,
@@ -63,8 +81,13 @@ function Checkout() {
       quantity: it.qty,
       unit_price: it.unitPrice,
       line_total: Number((it.unitPrice * it.qty).toFixed(2)),
-      preview_url: it.preview ?? null,
+      preview_url: uploaded[it.id] ?? (it.preview?.startsWith("data:") ? null : it.preview ?? null),
+      design_note: it.designNote ?? null,
     }));
+
+    const firstPreviewPath = cart[0] ? uploaded[cart[0].id] : undefined;
+    const firstPreviewFallback = cart[0]?.preview && !cart[0].preview.startsWith("data:") ? cart[0].preview : null;
+    const firstNote = cart.map((it) => it.designNote).filter(Boolean).join(" · ") || null;
 
     try {
       const { data, error } = await supabase
@@ -77,7 +100,8 @@ function Checkout() {
           subtotal: Number(subtotal.toFixed(2)),
           payment_method: pay,
           notes: null,
-          preview_url: cart[0]?.preview ?? null,
+          design_note: firstNote,
+          preview_url: firstPreviewPath ?? firstPreviewFallback,
         })
         .select("order_number")
         .single();
