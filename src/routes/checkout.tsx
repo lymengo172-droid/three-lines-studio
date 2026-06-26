@@ -28,7 +28,8 @@ function Checkout() {
   const summary = useMemo(() => {
     const lines = cart.map((it, i) => {
       const opts = [it.templateName, it.size, it.optionsSummary].filter(Boolean).join(" · ");
-      return `${i + 1}. ${it.productName} — ${opts} × ${it.qty} = $${(it.unitPrice * it.qty).toFixed(2)}`;
+      const main = `${i + 1}. ${it.productName} — ${opts} × ${it.qty} = $${(it.unitPrice * it.qty).toFixed(2)}`;
+      return it.designNote ? `${main}\n   ✎ ${it.designNote}` : main;
     }).join("\n");
     const payLabel = pay === "khqr" ? "ABA Pay / KHQR" : pay === "cod" ? "Cash on Delivery" : "Bank transfer";
     return [
