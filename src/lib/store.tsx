@@ -14,6 +14,7 @@ export type CartItem = {
   qty: number;
   unitPrice: number;
   preview: string;
+  designNote?: string;
 };
 
 type StoreCtx = {
