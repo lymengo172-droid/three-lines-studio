@@ -45,7 +45,7 @@ export function Customizer({ product }: { product: Product }) {
   const layoutChoice = layoutOpt && layoutOpt.type === "select"
     ? layoutOpt.choices.find((c) => c.label === optState.layout) : undefined;
 
-  const unitPrice = useMemo(() => {
+  const baseUnit = useMemo(() => {
     let p = sizePrice;
     product.options?.forEach((o) => {
       const v = optState[o.id];
@@ -60,6 +60,10 @@ export function Customizer({ product }: { product: Product }) {
     });
     return Math.round(p * 100) / 100;
   }, [sizePrice, optState, product.options]);
+
+  const bulkActive = !!(product.bulk && qty >= product.bulk.minQty);
+  const unitPrice = bulkActive ? product.bulk!.unitPrice : baseUnit;
+  const savings = bulkActive ? Math.max(0, Math.round((baseUnit - unitPrice) * qty * 100) / 100) : 0;
 
   const previewLayout: "single" | "triptych" | "grid" | "gallery" =
     layoutChoice?.label?.startsWith("Triptych") ? "triptych" :
@@ -251,7 +255,28 @@ export function Customizer({ product }: { product: Product }) {
             </div>
           </div>
           {product.bulkNote && (
-            <p className="text-xs text-muted-foreground">{t("Bulk 50+:", "បញ្ជាទិញច្រើន ៥០+៖", lang)} {product.bulkNote}</p>
+            <div className="space-y-1.5">
+              <p className="text-xs text-muted-foreground">{t("Bulk 50+:", "បញ្ជាទិញច្រើន ៥០+៖", lang)} {product.bulkNote}</p>
+              {product.bulk && !bulkActive && (
+                <p className="text-xs text-muted-foreground">
+                  {t(`Add ${product.bulk.minQty - qty} more to unlock $${product.bulk.unitPrice.toFixed(2)}/unit.`,
+                     `បន្ថែម ${product.bulk.minQty - qty} ដើម្បីបាន $${product.bulk.unitPrice.toFixed(2)}/ឯកតា។`, lang)}
+                </p>
+              )}
+              {bulkActive && (
+                <div className="rounded-lg border border-gold-deep/30 bg-gold/5 px-3 py-2 text-xs">
+                  <span className="font-semibold gold-text">{t("Bulk price applied", "បានអនុវត្តតម្លៃបរិមាណច្រើន", lang)}</span>
+                  <span className="ml-2 text-muted-foreground line-through">${baseUnit.toFixed(2)}</span>
+                  <span className="ml-2 font-semibold">${unitPrice.toFixed(2)}/{t("unit", "ឯកតា", lang)}</span>
+                  <span className="ml-2 text-emerald-600">{t(`You save $${savings.toFixed(2)}`, `សន្សំ $${savings.toFixed(2)}`, lang)}</span>
+                </div>
+              )}
+              {product.bulk && qty < product.bulk.minQty && (
+                <button onClick={() => setQty(product.bulk!.minQty)} className="text-xs font-semibold underline">
+                  {t(`Jump to ${product.bulk.minQty} for bulk price`, `លោតទៅ ${product.bulk.minQty} សម្រាប់តម្លៃបរិមាណច្រើន`, lang)}
+                </button>
+              )}
+            </div>
           )}
           <div className="flex flex-col gap-2 sm:flex-row">
             <button onClick={() => handleAdd(false)} disabled={busy} className="flex-1 rounded-full border border-foreground px-5 py-3 text-sm font-semibold hover:bg-accent disabled:opacity-50">

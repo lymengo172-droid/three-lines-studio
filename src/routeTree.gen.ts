@@ -15,6 +15,7 @@ import { Route as MerchRouteImport } from './routes/merch'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as BulkRouteImport } from './routes/bulk'
+import { Route as B2bRouteImport } from './routes/b2b'
 import { Route as AcrylicRouteImport } from './routes/acrylic'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -50,6 +51,11 @@ const BulkRoute = BulkRouteImport.update({
   path: '/bulk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const B2bRoute = B2bRouteImport.update({
+  id: '/b2b',
+  path: '/b2b',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AcrylicRoute = AcrylicRouteImport.update({
   id: '/acrylic',
   path: '/acrylic',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/b2b': typeof B2bRoute
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
@@ -87,6 +94,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/b2b': typeof B2bRoute
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
@@ -100,6 +108,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/acrylic': typeof AcrylicRoute
+  '/b2b': typeof B2bRoute
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
@@ -114,6 +123,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/acrylic'
+    | '/b2b'
     | '/bulk'
     | '/cart'
     | '/checkout'
@@ -126,6 +136,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/acrylic'
+    | '/b2b'
     | '/bulk'
     | '/cart'
     | '/checkout'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/acrylic'
+    | '/b2b'
     | '/bulk'
     | '/cart'
     | '/checkout'
@@ -151,6 +163,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AcrylicRoute: typeof AcrylicRoute
+  B2bRoute: typeof B2bRoute
   BulkRoute: typeof BulkRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
@@ -204,6 +217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BulkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/b2b': {
+      id: '/b2b'
+      path: '/b2b'
+      fullPath: '/b2b'
+      preLoaderRoute: typeof B2bRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/acrylic': {
       id: '/acrylic'
       path: '/acrylic'
@@ -239,6 +259,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AcrylicRoute: AcrylicRoute,
+  B2bRoute: B2bRoute,
   BulkRoute: BulkRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,

@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      b2b_requests: {
+        Row: {
+          artwork_path: string | null
+          company: string
+          contact_name: string
+          created_at: string
+          deadline: string | null
+          email: string | null
+          id: string
+          message: string | null
+          phone: string
+          product: string
+          quantity: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          artwork_path?: string | null
+          company: string
+          contact_name: string
+          created_at?: string
+          deadline?: string | null
+          email?: string | null
+          id?: string
+          message?: string | null
+          phone: string
+          product: string
+          quantity: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          artwork_path?: string | null
+          company?: string
+          contact_name?: string
+          created_at?: string
+          deadline?: string | null
+          email?: string | null
+          id?: string
+          message?: string | null
+          phone?: string
+          product?: string
+          quantity?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       orders: {
         Row: {
           created_at: string

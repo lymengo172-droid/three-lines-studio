@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Shell } from "@/components/site/Shell";
 import { LINES, STUDIO } from "@/lib/catalog";
 import { useStore, t } from "@/lib/store";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Building2, Palette, Truck } from "lucide-react";
 import heroImg from "@/assets/cover-metal.jpg";
 
 export const Route = createFileRoute("/")({
@@ -42,7 +42,7 @@ function Index() {
             <Link to="/acrylic" className="btn-gold rounded-full px-6 py-3 text-sm font-semibold">
               {t("Start designing", "ចាប់ផ្តើមរចនា", lang)}
             </Link>
-            <Link to="/bulk" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
+            <Link to="/b2b" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
               {t("B2B inquiries", "បញ្ជាទិញច្រើន", lang)}
             </Link>
           </div>
@@ -131,6 +131,48 @@ function Index() {
           “{t("We print like we'd hang it on our own wall.", "យើងបោះពុម្ពដូចជាដាក់នៅជញ្ជាំងផ្ទះយើងផ្ទាល់។", lang)}”
         </p>
         <div className="mt-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">— {STUDIO.showroom}</div>
+      </section>
+
+      {/* For businesses */}
+      <section className="mx-auto mt-24 max-w-7xl px-5">
+        <div className="overflow-hidden rounded-2xl noir glow-gold">
+          <div className="grid gap-10 p-8 sm:p-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">{t("For businesses", "សម្រាប់អាជីវកម្ម", lang)}</p>
+              <h2 className="mt-3 text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl">
+                {t("White-label merch.", "ទំនិញស្លាកស្វ័យប្រវត្តិ។", lang)}<br/>
+                <span className="gold-text">{t("Bulk pricing from 50.", "តម្លៃច្រើនចាប់ពី ៥០។", lang)}</span>
+              </h2>
+              <p className="mt-5 max-w-lg text-base text-muted-foreground">
+                {t("Corporate gifts, NGO event kits, hotel signage, brand activations. Your logo on the finished product — never ours. Free Phnom Penh delivery above $200.",
+                   "អំណោយក្រុមហ៊ុន ទំនិញ NGO ផ្លាកសញ្ញាសណ្ឋាគារ។ ឡូហ្គូរបស់អ្នកនៅលើផលិតផល — មិនមែនរបស់យើង។", lang)}
+              </p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Link to="/b2b" className="btn-gold rounded-full px-6 py-3 text-sm font-semibold">
+                  {t("Request a quote", "សុំតម្លៃ", lang)}
+                </Link>
+                <Link to="/merch" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
+                  {t("See merch catalog", "មើលកាតាឡុក", lang)}
+                </Link>
+              </div>
+            </div>
+            <ul className="grid gap-3 self-center">
+              {[
+                { Icon: Palette, k: t("White-label", "ស្លាកស្វ័យប្រវត្តិ", lang), d: t("Your branding only. Custom packaging on request.", "ឡូហ្គូរបស់អ្នកតែប៉ុណ្ណោះ។", lang) },
+                { Icon: Building2, k: t("Tiered bulk pricing", "តម្លៃច្រើនកម្រិត", lang), d: t("Auto-discount at 50 units. Sharper rates at 250 and 1,000.", "បញ្ចុះតម្លៃស្វ័យប្រវត្តិចាប់ពី ៥០។", lang) },
+                { Icon: Truck, k: t("Delivery in Cambodia", "ដឹកជញ្ជូននៅកម្ពុជា", lang), d: t("Free in Phnom Penh above $200. Nationwide via courier.", "ឥតគិតថ្លៃនៅភ្នំពេញ។", lang) },
+              ].map(({ Icon, k, d }) => (
+                <li key={k} className="flex items-start gap-4 rounded-xl glass-dark p-4">
+                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                  <div>
+                    <div className="text-sm font-bold">{k}</div>
+                    <div className="text-xs text-white/70">{d}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
     </Shell>
   );
