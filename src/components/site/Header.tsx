@@ -11,7 +11,7 @@ export function Header() {
     { to: "/acrylic", label: t("Acrylic", "អាគ្រីលីច", lang) },
     { to: "/metal", label: t("Metal", "លោហៈ", lang) },
     { to: "/merch", label: t("Merch", "ទំនិញ", lang) },
-    { to: "/bulk", label: t("B2B / Bulk", "បញ្ជាទិញច្រើន", lang) },
+    { to: "/b2b", label: t("B2B / Bulk", "បញ្ជាទិញច្រើន", lang) },
     { to: "/about", label: t("About", "អំពីយើង", lang) },
   ] as const;
 
