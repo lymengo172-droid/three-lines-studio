@@ -33,6 +33,8 @@ export type Product = {
   sizes?: SizeTier[];
   options?: Option[];
   bulkNote?: string;
+  /** Auto-applied bulk pricing when quantity reaches `minQty`. */
+  bulk?: { minQty: number; unitPrice: number };
   mockup: string; // background image of the bare product for the preview composite
   thumb: string;
   // Print area as percentages of the mockup image (where art is overlaid in the live preview).
@@ -156,20 +158,20 @@ export const PRODUCTS: Product[] = [
   },
 
   // ── Merch ──
-  { id: "tshirt", line: "merch", name: "T-shirt", basePrice: 10, blurb: "Soft combed cotton, DTG print.", bulkNote: "$8 at 50+", mockup: MOCK.tshirt, thumb: MOCK.tshirt,
+  { id: "tshirt", line: "merch", name: "T-shirt", basePrice: 10, blurb: "Soft combed cotton, DTG print.", bulkNote: "$8 at 50+", bulk: { minQty: 50, unitPrice: 8 }, mockup: MOCK.tshirt, thumb: MOCK.tshirt,
     printArea: { top: 38, left: 38, width: 24, height: 28, rounded: 1 },
     options: [{ type: "select", id: "size", label: "Size", choices: [{ label: "S" }, { label: "M" }, { label: "L" }, { label: "XL" }, { label: "XXL", priceDelta: 1 }] }] },
-  { id: "tote", line: "merch", name: "Tote bag", basePrice: 8, blurb: "12oz canvas, gusseted base.", bulkNote: "$6.5 at 50+", mockup: MOCK.tote, thumb: MOCK.tote,
+  { id: "tote", line: "merch", name: "Tote bag", basePrice: 8, blurb: "12oz canvas, gusseted base.", bulkNote: "$6.5 at 50+", bulk: { minQty: 50, unitPrice: 6.5 }, mockup: MOCK.tote, thumb: MOCK.tote,
     printArea: { top: 50, left: 36, width: 28, height: 28, rounded: 1 } },
-  { id: "mug", line: "merch", name: "Mug 11oz", basePrice: 7, blurb: "Sublimation ceramic, dishwasher safe.", bulkNote: "$5.5 at 50+", mockup: MOCK.mug, thumb: MOCK.mug,
+  { id: "mug", line: "merch", name: "Mug 11oz", basePrice: 7, blurb: "Sublimation ceramic, dishwasher safe.", bulkNote: "$5.5 at 50+", bulk: { minQty: 50, unitPrice: 5.5 }, mockup: MOCK.mug, thumb: MOCK.mug,
     printArea: { top: 42, left: 36, width: 24, height: 28, rounded: 1 } },
-  { id: "cap", line: "merch", name: "Cap", basePrice: 12, blurb: "6-panel, embroidered or printed.", bulkNote: "$10 at 50+", mockup: MOCK.cap, thumb: MOCK.cap,
+  { id: "cap", line: "merch", name: "Cap", basePrice: 12, blurb: "6-panel, embroidered or printed.", bulkNote: "$10 at 50+", bulk: { minQty: 50, unitPrice: 10 }, mockup: MOCK.cap, thumb: MOCK.cap,
     printArea: { top: 36, left: 41, width: 18, height: 18, rounded: 2 } },
-  { id: "bottle", line: "merch", name: "Bottle 500ml", basePrice: 13, blurb: "Insulated stainless, 12h cold.", bulkNote: "$11 at 50+", mockup: MOCK.bottle, thumb: MOCK.bottle,
+  { id: "bottle", line: "merch", name: "Bottle 500ml", basePrice: 13, blurb: "Insulated stainless, 12h cold.", bulkNote: "$11 at 50+", bulk: { minQty: 50, unitPrice: 11 }, mockup: MOCK.bottle, thumb: MOCK.bottle,
     printArea: { top: 45, left: 45, width: 14, height: 30, rounded: 2 } },
-  { id: "glass", line: "merch", name: "Glass cup", basePrice: 6, blurb: "Tempered glass, UV cured print.", bulkNote: "$4.5 at 50+", mockup: MOCK.glass, thumb: MOCK.glass,
+  { id: "glass", line: "merch", name: "Glass cup", basePrice: 6, blurb: "Tempered glass, UV cured print.", bulkNote: "$4.5 at 50+", bulk: { minQty: 50, unitPrice: 4.5 }, mockup: MOCK.glass, thumb: MOCK.glass,
     printArea: { top: 42, left: 39, width: 22, height: 26, rounded: 1 } },
-  { id: "pen", line: "merch", name: "Engraved pen", basePrice: 3, blurb: "Laser-engraved metal barrel.", bulkNote: "$2 at 50+", mockup: MOCK.pen, thumb: MOCK.pen,
+  { id: "pen", line: "merch", name: "Engraved pen", basePrice: 3, blurb: "Laser-engraved metal barrel.", bulkNote: "$2 at 50+", bulk: { minQty: 50, unitPrice: 2 }, mockup: MOCK.pen, thumb: MOCK.pen,
     printArea: { top: 42, left: 32, width: 36, height: 12, rounded: 999 } },
 ];
 
