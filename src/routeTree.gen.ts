@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as BulkRouteImport } from './routes/bulk'
@@ -34,6 +35,11 @@ const MetalRoute = MetalRouteImport.update({
 const MerchRoute = MerchRouteImport.update({
   id: '/merch',
   path: '/merch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -85,6 +91,7 @@ export interface FileRoutesByFullPath {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -127,6 +136,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/gallery'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
@@ -140,6 +150,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/gallery'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
@@ -153,6 +164,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/gallery'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
@@ -167,6 +179,7 @@ export interface RootRouteChildren {
   BulkRoute: typeof BulkRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  GalleryRoute: typeof GalleryRoute
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -194,6 +207,13 @@ declare module '@tanstack/react-router' {
       path: '/merch'
       fullPath: '/merch'
       preLoaderRoute: typeof MerchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -263,6 +283,7 @@ const rootRouteChildren: RootRouteChildren = {
   BulkRoute: BulkRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  GalleryRoute: GalleryRoute,
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -271,13 +292,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

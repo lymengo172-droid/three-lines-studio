@@ -69,26 +69,26 @@
   --color-gold-deep: var(--gold-deep);
   --color-noir: var(--noir);
   --color-noir-2: var(--noir-2);
-  --font-display: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  --font-display: "Manrope", "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  /* Warm ivory paper + near-black ink */
-  --paper: oklch(0.975 0.012 85);   /* #FAF8F2 */
-  --ink: oklch(0.18 0.005 60);      /* #1A1A1A */
-  /* Gold palette — #D4AF37 / #F5D77E / #A07B22 */
-  --gold: oklch(0.78 0.13 86);
-  --gold-bright: oklch(0.88 0.12 92);
-  --gold-deep: oklch(0.58 0.11 78);
+  --radius: 1rem;
+  /* Pure white paper + charcoal ink (#1A1A1A) */
+  --paper: oklch(1 0 0);
+  --ink: oklch(0.18 0.005 60);
+  /* Soft gold — #B8924A / #D4B070 / #8C6E2E */
+  --gold: oklch(0.66 0.09 80);
+  --gold-bright: oklch(0.76 0.09 84);
+  --gold-deep: oklch(0.52 0.08 75);
   --noir: oklch(0.13 0.005 260);    /* #0B0B0D */
   --noir-2: oklch(0.18 0.005 260);  /* #15151A */
   --signal: var(--gold);
   --signal-foreground: oklch(0.13 0.005 260);
   --earth: oklch(0.63 0.11 55);
   --forest: oklch(0.45 0.09 155);
-  --line-muted: oklch(0.9 0.01 85);
+  --line-muted: oklch(0.92 0.005 80);
   --background: var(--paper);
   --foreground: var(--ink);
   --card: oklch(1 0 0);
@@ -97,11 +97,11 @@
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--signal-foreground);
-  --secondary: oklch(0.95 0.008 85);
+  --secondary: oklch(0.97 0.003 80);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.95 0.008 85);
-  --muted-foreground: oklch(0.45 0.01 250);
-  --accent: oklch(0.93 0.015 85);
+  --muted: oklch(0.97 0.003 80);
+  --muted-foreground: oklch(0.48 0.005 80);
+  --accent: oklch(0.95 0.005 80);
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0.005 95);
@@ -175,8 +175,41 @@
     font-family: "Noto Sans Khmer", "Inter", system-ui, sans-serif;
   }
   h1, h2, h3 {
-    letter-spacing: -0.025em;
+    font-family: "Manrope", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    font-feature-settings: "ss01", "ss02";
   }
+  h4, h5, h6 {
+    font-family: "Manrope", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ───────────── Motion ─────────────
+ * Subtle premium fades and slide-ups used across the redesigned site.
+ */
+@keyframes tls-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes tls-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@utility tls-fade-up {
+  animation: tls-fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@utility tls-fade-in {
+  animation: tls-fade-in 0.8s ease-out both;
+}
+@utility tls-lift {
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease;
+  &:hover { transform: translateY(-3px); }
+}
+@utility tls-zoom {
+  overflow: hidden;
+  & > img { transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
+  &:hover > img { transform: scale(1.04); }
 }
 
 /* ───────────── Luxury utilities ─────────────

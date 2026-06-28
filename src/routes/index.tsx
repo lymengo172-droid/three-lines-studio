@@ -1,18 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Shell } from "@/components/site/Shell";
-import { LINES, STUDIO } from "@/lib/catalog";
+import { STUDIO } from "@/lib/catalog";
 import { useStore, t } from "@/lib/store";
-import { ArrowUpRight, Building2, Palette, Truck } from "lucide-react";
+import {
+  ArrowUpRight, ArrowRight, ChevronDown, Plus, Minus,
+  Sparkles, Gem, PenTool, Clock, Truck, MessageCircle,
+  Send, Phone, Mail, MapPin,
+} from "lucide-react";
+import { useState } from "react";
 import heroImg from "@/assets/cover-metal.jpg";
+import imgAcrylic from "@/assets/cover-acrylic.jpg";
+import imgMerch from "@/assets/cover-merch.jpg";
+import imgMetal from "@/assets/cover-metal.jpg";
+import imgMug from "@/assets/mock-mug.jpg";
+import imgTote from "@/assets/mock-tote.jpg";
+import imgTshirt from "@/assets/mock-tshirt.jpg";
+import imgPanel from "@/assets/mock-acrylic-panel.jpg";
+import imgBlock from "@/assets/mock-acrylic-block.jpg";
+import imgStandee from "@/assets/mock-acrylic-standee.jpg";
+import imgKeychain from "@/assets/mock-keychain.jpg";
+import imgGlass from "@/assets/mock-glass.jpg";
+import imgPen from "@/assets/mock-pen.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Three Lines, One Studio — Built for Cambodia" },
-      { name: "description", content: "A quiet, premium custom-print studio in Phnom Penh. Acrylic, ultra-HD metal wall art, and merch — designed and printed in-house." },
-      { property: "og:title", content: "Three Lines, One Studio" },
-      { property: "og:description", content: "Three lines. One studio. Built for Cambodia." },
+      { title: "Three Lines Studio — Crafted with Precision. Personalized for You." },
+      { name: "description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
+      { property: "og:title", content: "Three Lines Studio — Crafted with Precision" },
+      { property: "og:description", content: "Premium laser engraving, UV printing, and personalized gifts crafted in Phnom Penh." },
+      { property: "og:image", content: heroImg },
     ],
   }),
   component: Index,
@@ -21,159 +39,355 @@ export const Route = createFileRoute("/")({
 function Index() {
   const { lang } = useStore();
   return (
-    <Shell>
-      {/* Hero — gold on noir */}
-      <section className="noir relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl items-end gap-10 px-5 pt-14 pb-20 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:pt-28 lg:pb-28">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">
-            {t("Phnom Penh · Custom print studio · est. 2024", "ភ្នំពេញ · ស្ទូឌីយោបោះពុម្ព", lang)}
-          </p>
-          <h1 className="mt-5 text-[3.25rem] font-black leading-[0.92] tracking-[-0.04em] sm:text-7xl lg:text-[6.5rem]">
-            {t("Three lines.", "បីផ្នែក។", lang)}<br/>
-            {t("One studio.", "ស្ទូឌីយោមួយ។", lang)}<br/>
-            <span className="gold-text">{t("Built for Cambodia.", "សម្រាប់កម្ពុជា។", lang)}</span>
-          </h1>
-          <p className="mt-7 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {t("We don't shout — the product does the talking. Acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram.",
-               "យើងមិនស្រែក — ផលិតផលនិយាយជំនួស។ វត្ថុអាគ្រីលីច, លោហៈ Ultra-HD និងទំនិញតាមតម្រូវ។", lang)}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/acrylic" className="btn-gold rounded-full px-6 py-3 text-sm font-semibold">
-              {t("Start designing", "ចាប់ផ្តើមរចនា", lang)}
-            </Link>
-            <Link to="/b2b" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
-              {t("B2B inquiries", "បញ្ជាទិញច្រើន", lang)}
-            </Link>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl glow-gold">
-            <img src={heroImg} alt="Ultra-HD metal wall print in a minimalist interior" className="aspect-[4/5] w-full object-cover lg:aspect-[3/4]" width={1280} height={1600} />
-          </div>
-          <div className="absolute -bottom-4 -left-4 hidden rounded-xl glass-dark px-4 py-3 text-xs sm:block">
-            <div className="font-semibold text-gold">Line 02 — Metal</div>
-            <div className="text-white/70">Ultra-HD. No nails, no holes.</div>
-          </div>
-        </div>
-        </div>
-      </section>
+    <Shell heroOverlay>
+      <Hero lang={lang} />
+      <Categories lang={lang} />
+      <BestSellers lang={lang} />
+      <Why lang={lang} />
+      <HowItWorks lang={lang} />
+      <GalleryStrip lang={lang} />
+      <Testimonials lang={lang} />
+      <FAQ lang={lang} />
+      <ContactCTA lang={lang} />
+    </Shell>
+  );
+}
 
-      {/* Marquee strip */}
-      <section className="overflow-hidden border-y border-border bg-noir py-4 text-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-around gap-x-8 gap-y-2 px-5 text-[11px] font-medium uppercase tracking-[0.3em]">
-          <span>UV-cured print</span>
-          <span className="text-gold">·</span>
-          <span>Ultra-HD aluminum</span>
-          <span className="text-gold">·</span>
-          <span>KHQR / ABA pay</span>
-          <span className="text-gold">·</span>
-          <span>Bulk 50+ pricing</span>
-          <span className="text-gold">·</span>
-          <span>Showroom in Toul Kork</span>
-        </div>
-      </section>
+/* ───────────────────────── Sections ───────────────────────── */
 
-      {/* Three line cards */}
-      <section className="mx-auto mt-20 max-w-7xl px-5">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="text-3xl font-black tracking-tight sm:text-5xl">{t("Three lines.", "បីផ្នែក។", lang)}</h2>
-          <div className="text-xs text-muted-foreground">{t("One studio. In-house from sketch to ship.", "ស្ទូឌីយោមួយ", lang)}</div>
+function Hero({ lang }: { lang: "en" | "km" }) {
+  return (
+    <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden bg-noir text-white">
+      <img
+        src={heroImg}
+        alt="Premium custom print and engraving studio in Phnom Penh"
+        className="absolute inset-0 h-full w-full object-cover tls-fade-in"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/75" />
+      <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-24 pt-32 sm:pb-28">
+        <p className="tls-fade-up text-[11px] font-semibold uppercase tracking-[0.32em] text-gold" style={{ animationDelay: "0.1s" }}>
+          {t("Phnom Penh · Est. 2024", "ភ្នំពេញ · ឆ្នាំ ២០២៤", lang)}
+        </p>
+        <h1 className="tls-fade-up mt-5 max-w-4xl font-display text-5xl font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-7xl lg:text-[5.5rem]" style={{ animationDelay: "0.2s" }}>
+          {t("Crafted with Precision.", "ឆ្លាក់ដោយភាពច្បាស់លាស់។", lang)}<br/>
+          <span className="text-gold-bright">{t("Personalized for You.", "បង្កើតសម្រាប់អ្នក។", lang)}</span>
+        </h1>
+        <p className="tls-fade-up mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg" style={{ animationDelay: "0.35s" }}>
+          {t(
+            "Premium laser engraving, UV printing, and personalized creations designed to celebrate every occasion.",
+            "ការឆ្លាក់ឡាស៊ែរ និងបោះពុម្ព UV ប្រណិត រចនាសម្រាប់ឱកាសពិសេសរបស់អ្នក។",
+            lang,
+          )}
+        </p>
+        <div className="tls-fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "0.5s" }}>
+          <Link to="/b2b" className="tls-lift inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold tracking-wide text-foreground">
+            {t("Request Custom Order", "សុំបញ្ជាទិញតាមតម្រូវ", lang)}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link to="/acrylic" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
+            {t("Explore Collection", "មើលទាំងអស់", lang)}
+          </Link>
         </div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-3 sm:gap-6">
-        {LINES.map((l, i) => (
-          <Link key={l.key} to={`/${l.key}` as "/acrylic"} className={`group relative block overflow-hidden rounded-2xl ${l.key === "metal" ? "noir glow-gold" : "bg-neutral-100 gold-hairline"}`}>
-            <img src={l.cover} alt={l.title} loading="lazy" className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
-            <div className={`absolute inset-0 ${l.key === "metal" ? "bg-gradient-to-t from-black/85 via-black/30 to-transparent" : "bg-gradient-to-t from-black/65 via-black/10 to-transparent"}`} />
-            <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gold">Line 0{i + 1}</div>
-              <div className="mt-1 flex items-end justify-between gap-2">
-                <div>
-                  <h2 className="text-3xl font-black tracking-tight">
-                    {l.key === "metal" ? <span className="gold-text">{l.title}</span> : l.title}
-                  </h2>
-                  <div className="text-xs opacity-80">{l.titleKm}</div>
-                </div>
-                <ArrowUpRight className="h-6 w-6 shrink-0 transition group-hover:-translate-y-1 group-hover:translate-x-1" />
+      </div>
+      <a href="#categories" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 animate-bounce text-white/70 sm:block" aria-label="Scroll">
+        <ChevronDown className="h-6 w-6" />
+      </a>
+    </section>
+  );
+}
+
+const CATEGORIES = [
+  { key: "personalized", label: { en: "Personalized Gifts", km: "អំណោយផ្ទាល់ខ្លួន" }, img: imgKeychain, to: "/acrylic" },
+  { key: "corporate",    label: { en: "Corporate Gifts",    km: "អំណោយក្រុមហ៊ុន" }, img: imgPen, to: "/b2b" },
+  { key: "wedding",      label: { en: "Wedding & Event",    km: "អាពាហ៍ពិពាហ៍" },   img: imgPanel, to: "/acrylic" },
+  { key: "decor",        label: { en: "Home Decor",         km: "តុបតែងផ្ទះ" },     img: imgMetal, to: "/metal" },
+  { key: "signage",      label: { en: "Business Signage",   km: "ផ្លាកសញ្ញា" },     img: imgStandee, to: "/acrylic" },
+  { key: "drinkware",    label: { en: "Custom Drinkware",   km: "កែវផ្ទាល់ខ្លួន" }, img: imgGlass, to: "/merch" },
+] as const;
+
+function Categories({ lang }: { lang: "en" | "km" }) {
+  return (
+    <section id="categories" className="mx-auto max-w-7xl px-5 pt-28 sm:pt-36">
+      <SectionEyebrow eyebrow={t("Collections", "បណ្ដុំ", lang)} title={t("Featured categories", "ប្រភេទពិសេស", lang)} kicker={t("Six worlds. One studio. Browse what resonates.", "ប្រាំមួយពិភព ស្ទូឌីយោមួយ។", lang)} />
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {CATEGORIES.map((c, i) => (
+          <Link
+            key={c.key}
+            to={c.to as "/acrylic"}
+            className="tls-zoom group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-secondary"
+            style={{ animationDelay: `${i * 60}ms` }}
+          >
+            <img src={c.img} alt={c.label.en} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
+              <div>
+                <h3 className="font-display text-xl font-bold tracking-tight">{lang === "km" ? c.label.km : c.label.en}</h3>
+                <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/70">{t("View collection", "មើល", lang)}</p>
               </div>
-              <p className="mt-2 max-w-xs text-xs opacity-90">{l.subtitle}</p>
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur transition group-hover:bg-gold">
+                <ArrowUpRight className="h-4 w-4" />
+              </span>
             </div>
           </Link>
         ))}
-        </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* How it works */}
-      <section className="mx-auto mt-24 max-w-7xl px-5">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="text-2xl font-black tracking-tight sm:text-4xl">{t("How it works", "របៀបធ្វើការ", lang)}</h2>
-          <div className="text-xs text-muted-foreground">{t("Four steps. No hassle.", "បួនជំហាន។", lang)}</div>
-        </div>
-        <ol className="mt-8 grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-4">
-          {[
-            { n: "01", k: t("Pick a template", "ជ្រើសម៉ូឌែល", lang), d: t("Choose from K-pop, anime, graduation, couple, family, or your logo.", "K-pop, anime, បញ្ចប់ការសិក្សា, គូស្នេហ៍, គ្រួសារ ឬ logo របស់អ្នក។", lang) },
-            { n: "02", k: t("Choose size", "ជ្រើសទំហំ", lang), d: t("Pick the format and options that fit your space.", "ជ្រើសទំហំនិងជម្រើស។", lang) },
-            { n: "03", k: t("Preview live", "មើលជាមុន", lang), d: t("See your design on the product before you commit.", "មើលឃើញការរចនាមុនទិញ។", lang) },
-            { n: "04", k: t("Order", "បញ្ជាទិញ", lang), d: t("Send to us on Telegram, pay with ABA / KHQR / COD.", "ផ្ញើតាម Telegram, បង់ ABA / KHQR / COD។", lang) },
-          ].map((s) => (
-            <li key={s.n} className="bg-background p-6">
-              <div className="text-xs font-semibold text-gold-deep">{s.n}</div>
-              <div className="mt-2 text-lg font-bold">{s.k}</div>
-              <p className="mt-1 text-sm text-muted-foreground">{s.d}</p>
+const BEST = [
+  { name: "Acrylic LED Sign",        desc: "Glow-edge acrylic with custom name or logo.",         price: 38, img: imgPanel,   to: "/acrylic" },
+  { name: "Engraved Wooden Plaque",  desc: "Laser-engraved hardwood, ready to gift.",             price: 22, img: imgBlock,   to: "/acrylic" },
+  { name: "Personalized Tumbler",    desc: "Insulated steel with your name or message.",          price: 14, img: imgMug,     to: "/merch" },
+  { name: "Custom Wedding Gift",     desc: "Acrylic keepsake for the moment that matters.",       price: 28, img: imgStandee, to: "/acrylic" },
+  { name: "Premium Name Plate",      desc: "Brushed metal nameplate, magnetic mount.",            price: 18, img: imgMetal,   to: "/metal" },
+  { name: "UV Printed Acrylic Display", desc: "Ultra-HD photo print on clear acrylic.",           price: 32, img: imgAcrylic, to: "/acrylic" },
+];
+
+function BestSellers({ lang }: { lang: "en" | "km" }) {
+  return (
+    <section className="mx-auto max-w-7xl px-5 pt-32">
+      <SectionEyebrow eyebrow={t("Best sellers", "លក់ដាច់បំផុត", lang)} title={t("Customer favourites", "ដែលអតិថិជនពេញចិត្ត", lang)} kicker={t("Hand-picked pieces our clients keep coming back for.", "ផលិតផលដែលត្រូវបានជ្រើសរើស។", lang)} />
+      <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        {BEST.map((p) => (
+          <article key={p.name} className="group flex flex-col">
+            <div className="tls-zoom relative aspect-[5/6] overflow-hidden rounded-2xl bg-secondary">
+              <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover" />
+            </div>
+            <div className="mt-5 flex items-start justify-between gap-3">
+              <div>
+                <h3 className="font-display text-lg font-bold tracking-tight">{p.name}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
+                <p className="mt-2 text-sm">
+                  <span className="text-muted-foreground">{t("From", "ចាប់ពី", lang)}</span>{" "}
+                  <span className="font-semibold text-foreground">${p.price}</span>
+                </p>
+              </div>
+              <Link to={p.to as "/acrylic"} className="shrink-0 rounded-full border border-border px-4 py-2 text-xs font-semibold tracking-wide text-foreground transition hover:border-gold hover:text-gold">
+                {t("Customize", "កែតម្រូវ", lang)}
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Why({ lang }: { lang: "en" | "km" }) {
+  const pillars = [
+    { Icon: Gem,     k: t("Precision craftsmanship", "ភាពច្បាស់លាស់", lang),    d: t("Every cut, every print measured to the millimetre. We obsess so you don't have to.", "ការកាត់ និងបោះពុម្ពយ៉ាងម៉ត់ចត់។", lang) },
+    { Icon: Sparkles, k: t("Premium materials", "សម្ភារៈពិសេស", lang),          d: t("Cast acrylic, aircraft-grade aluminium, food-safe drinkware — sourced for longevity.", "សម្ភារៈប្រណិត និងស្ថិតស្ថេរ។", lang) },
+    { Icon: PenTool,  k: t("Personalized designs", "រចនាផ្ទាល់ខ្លួន", lang),     d: t("Bring a sketch, a photo, or a wild idea — we'll turn it into something you'd want to keep forever.", "នាំយកគំនិតមកយើងបង្កើតឲ្យ។", lang) },
+    { Icon: Clock,    k: t("Fast turnaround", "ផលិតរហ័ស", lang),                 d: t("Most personalized orders ready in 3–5 days. Rush production available on request.", "បញ្ចប់ភាគច្រើនក្នុង ៣–៥ ថ្ងៃ។", lang) },
+    { Icon: Truck,    k: t("Nationwide delivery", "ដឹកជញ្ជូនទូទាំងប្រទេស", lang), d: t("Same-day pickup in Phnom Penh. Trusted courier partners to every province.", "ដឹកជញ្ជូនទូទាំងកម្ពុជា។", lang) },
+    { Icon: MessageCircle, k: t("Friendly support", "ការគាំទ្ររាក់ទាក់", lang),  d: t("Real humans on Telegram and Messenger — answering questions in your language.", "ឆ្លើយតបយ៉ាងរហ័ស។", lang) },
+  ];
+  return (
+    <section className="mx-auto max-w-7xl px-5 pt-32">
+      <SectionEyebrow eyebrow={t("Why Three Lines", "ហេតុអ្វី", lang)} title={t("Built around the details.", "ផ្តោតលើព័ត៌មានលម្អិត។", lang)} kicker={t("Six quiet reasons our customers stay with us.", "ហេតុផលដែលអតិថិជននៅជាមួយយើង។", lang)} />
+      <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {pillars.map(({ Icon, k, d }) => (
+          <div key={k} className="bg-background p-8 transition hover:bg-secondary">
+            <Icon className="h-6 w-6 text-gold" strokeWidth={1.5} />
+            <h3 className="mt-5 font-display text-lg font-bold tracking-tight">{k}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function HowItWorks({ lang }: { lang: "en" | "km" }) {
+  const steps = [
+    { n: "01", k: t("Share your idea", "ប្រាប់គំនិត", lang),  d: t("Telegram us your concept, photo, or rough sketch.", "ផ្ញើតាម Telegram។", lang) },
+    { n: "02", k: t("Receive a quote", "ទទួលតម្លៃ", lang),    d: t("We confirm material, size and price within hours.", "យើងបញ្ជាក់តម្លៃក្នុងរយៈពេលខ្លី។", lang) },
+    { n: "03", k: t("Approve design", "យល់ព្រមការរចនា", lang), d: t("Review a digital proof, revise until perfect.", "មើល និងកែសម្រួលរហូតពេញចិត្ត។", lang) },
+    { n: "04", k: t("We craft", "យើងផលិត", lang),             d: t("Engraving, printing and finishing in-house.", "ផលិតនៅស្ទូឌីយោផ្ទាល់។", lang) },
+    { n: "05", k: t("Pickup or delivery", "ទទួល ឬដឹក", lang), d: t("Collect in Toul Kork or we ship to your door.", "យកនៅទួលគោក ឬដឹកជូន។", lang) },
+  ];
+  return (
+    <section className="mt-32 border-y border-border bg-secondary py-24">
+      <div className="mx-auto max-w-7xl px-5">
+        <SectionEyebrow eyebrow={t("Process", "ដំណើរការ", lang)} title={t("How it works", "របៀបធ្វើការ", lang)} kicker={t("From first message to finished piece — five quiet steps.", "ប្រាំជំហានស្ងាត់ៗ។", lang)} />
+        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+          {steps.map((s, i) => (
+            <li key={s.n} className="relative">
+              <div className="font-display text-3xl font-extrabold text-gold">{s.n}</div>
+              <div className="mt-3 font-display text-lg font-bold tracking-tight">{s.k}</div>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+              {i < steps.length - 1 && (
+                <div className="absolute right-0 top-4 hidden h-px w-12 -translate-y-1/2 bg-border lg:block" />
+              )}
             </li>
           ))}
         </ol>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Quiet pitch */}
-      <section className="mx-auto mt-24 max-w-3xl px-5 text-center">
-        <p className="text-2xl font-medium leading-snug tracking-tight sm:text-3xl">
-          “{t("We print like we'd hang it on our own wall.", "យើងបោះពុម្ពដូចជាដាក់នៅជញ្ជាំងផ្ទះយើងផ្ទាល់។", lang)}”
-        </p>
-        <div className="mt-4 text-xs uppercase tracking-[0.2em] text-muted-foreground">— {STUDIO.showroom}</div>
-      </section>
-
-      {/* For businesses */}
-      <section className="mx-auto mt-24 max-w-7xl px-5">
-        <div className="overflow-hidden rounded-2xl noir glow-gold">
-          <div className="grid gap-10 p-8 sm:p-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">{t("For businesses", "សម្រាប់អាជីវកម្ម", lang)}</p>
-              <h2 className="mt-3 text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl">
-                {t("White-label merch.", "ទំនិញស្លាកស្វ័យប្រវត្តិ។", lang)}<br/>
-                <span className="gold-text">{t("Bulk pricing from 50.", "តម្លៃច្រើនចាប់ពី ៥០។", lang)}</span>
-              </h2>
-              <p className="mt-5 max-w-lg text-base text-muted-foreground">
-                {t("Corporate gifts, NGO event kits, hotel signage, brand activations. Your logo on the finished product — never ours. Free Phnom Penh delivery above $200.",
-                   "អំណោយក្រុមហ៊ុន ទំនិញ NGO ផ្លាកសញ្ញាសណ្ឋាគារ។ ឡូហ្គូរបស់អ្នកនៅលើផលិតផល — មិនមែនរបស់យើង។", lang)}
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link to="/b2b" className="btn-gold rounded-full px-6 py-3 text-sm font-semibold">
-                  {t("Request a quote", "សុំតម្លៃ", lang)}
-                </Link>
-                <Link to="/merch" className="rounded-full gold-hairline px-6 py-3 text-sm font-semibold text-foreground hover:bg-white/5">
-                  {t("See merch catalog", "មើលកាតាឡុក", lang)}
-                </Link>
-              </div>
-            </div>
-            <ul className="grid gap-3 self-center">
-              {[
-                { Icon: Palette, k: t("White-label", "ស្លាកស្វ័យប្រវត្តិ", lang), d: t("Your branding only. Custom packaging on request.", "ឡូហ្គូរបស់អ្នកតែប៉ុណ្ណោះ។", lang) },
-                { Icon: Building2, k: t("Tiered bulk pricing", "តម្លៃច្រើនកម្រិត", lang), d: t("Auto-discount at 50 units. Sharper rates at 250 and 1,000.", "បញ្ចុះតម្លៃស្វ័យប្រវត្តិចាប់ពី ៥០។", lang) },
-                { Icon: Truck, k: t("Delivery in Cambodia", "ដឹកជញ្ជូននៅកម្ពុជា", lang), d: t("Free in Phnom Penh above $200. Nationwide via courier.", "ឥតគិតថ្លៃនៅភ្នំពេញ។", lang) },
-              ].map(({ Icon, k, d }) => (
-                <li key={k} className="flex items-start gap-4 rounded-xl glass-dark p-4">
-                  <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-                  <div>
-                    <div className="text-sm font-bold">{k}</div>
-                    <div className="text-xs text-white/70">{d}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+function GalleryStrip({ lang }: { lang: "en" | "km" }) {
+  const tiles = [imgAcrylic, imgMetal, imgTshirt, imgMug, imgPanel, imgKeychain, imgTote, imgStandee];
+  return (
+    <section className="mx-auto max-w-7xl px-5 pt-32">
+      <div className="flex items-end justify-between gap-6">
+        <SectionEyebrow eyebrow={t("Gallery", "វិចិត្រសាល", lang)} title={t("Recent work", "ស្នាដៃថ្មីៗ", lang)} kicker={t("A glance at what's been leaving the studio.", "ការងារថ្មីៗរបស់ស្ទូឌីយោ។", lang)} />
+        <Link to="/gallery" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-foreground/80 hover:text-gold sm:inline-flex">
+          {t("View full gallery", "មើលទាំងអស់", lang)} <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {tiles.map((src, i) => (
+          <div key={i} className={`tls-zoom relative overflow-hidden rounded-2xl bg-secondary ${i % 5 === 0 ? "row-span-2 aspect-[1/2]" : "aspect-square"}`}>
+            <img src={src} alt="Studio work" loading="lazy" className="h-full w-full object-cover" />
           </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Testimonials({ lang }: { lang: "en" | "km" }) {
+  const stories = [
+    { q: "The acrylic sign for our cafe opening looked twice as expensive as what we paid. The team revised the proof three times without a complaint.", a: "Sokha P.", r: "Cafe owner, BKK1" },
+    { q: "Ordered 120 engraved tumblers for our team retreat — flawless and delivered a day early. They're now our default gift partner.", a: "Dara C.", r: "HR Lead, fintech" },
+    { q: "I sent a blurry phone photo of our grandparents and they made it look like a magazine print on metal. My mum cried.", a: "Lyna S.", r: "Anniversary gift" },
+  ];
+  const stats = [
+    { n: "500+", k: t("Happy customers", "អតិថិជនពេញចិត្ត", lang) },
+    { n: "62%",  k: t("Reorder within 6 months", "បញ្ជាទិញម្តងទៀត", lang) },
+    { n: "<2h",  k: t("Average response time", "ពេលឆ្លើយតប", lang) },
+  ];
+  return (
+    <section className="mx-auto max-w-7xl px-5 pt-32">
+      <SectionEyebrow eyebrow={t("Stories", "រឿងរ៉ាវ", lang)} title={t("Trusted across Cambodia.", "ទុកចិត្តដោយអតិថិជន។", lang)} />
+      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        {stories.map((s) => (
+          <figure key={s.a} className="flex h-full flex-col rounded-3xl border border-border bg-background p-8">
+            <blockquote className="font-display text-lg leading-relaxed tracking-tight text-foreground">
+              “{s.q}”
+            </blockquote>
+            <figcaption className="mt-6 border-t border-border pt-4 text-sm">
+              <div className="font-semibold">{s.a}</div>
+              <div className="text-muted-foreground">{s.r}</div>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-3">
+        {stats.map((s) => (
+          <div key={s.k} className="bg-background p-8 text-center">
+            <div className="font-display text-4xl font-extrabold tracking-tight text-foreground">{s.n}</div>
+            <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.k}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FAQ({ lang }: { lang: "en" | "km" }) {
+  const items = [
+    { q: t("How do I place a custom order?", "តើខ្ញុំបញ្ជាទិញតាមតម្រូវយ៉ាងម៉េច?", lang), a: t("Tap “Request Custom Order” or message us on Telegram. Share your idea, photo, or sketch and we'll quote within hours.", "ចុច «សុំបញ្ជាទិញ» ឬផ្ញើតាម Telegram។ យើងឆ្លើយក្នុងរយៈពេលខ្លី។", lang) },
+    { q: t("How long does production take?", "តើផលិតយូរប៉ុណ្ណា?", lang),                a: t("Most personalized pieces are ready in 3–5 working days. Bulk and complex orders take 7–14 days; rush options available.", "ភាគច្រើនប្រហែល ៣–៥ ថ្ងៃ។", lang) },
+    { q: t("Can I order in bulk?", "តើបញ្ជាទិញច្រើនបានទេ?", lang),                        a: t("Yes — bulk pricing auto-applies from 50 units on merch, with sharper rates at 250 and 1,000.", "បាន — តម្លៃបញ្ចុះចាប់ពី ៥០ ឯកតា។", lang) },
+    { q: t("Do you deliver across Cambodia?", "ដឹកជូនទូទាំងកម្ពុជាទេ?", lang),            a: t("Yes. Free same-day in Phnom Penh above $200. Nationwide via trusted courier (1–3 days).", "បាទ ដឹកជូនទូទាំងប្រទេស។", lang) },
+    { q: t("Can I provide my own design?", "តើខ្ញុំអាចផ្ដល់ការរចនាផ្ទាល់ខ្លួនបានទេ?", lang), a: t("Absolutely. Send PNG, JPG, PDF or AI files. We'll prep print-ready artwork before production at no extra cost.", "បាន ផ្ញើ PNG, JPG, PDF ឬ AI។", lang) },
+  ];
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <section className="mx-auto max-w-3xl px-5 pt-32">
+      <SectionEyebrow eyebrow="FAQ" title={t("Quick answers", "ចម្លើយរហ័ស", lang)} center />
+      <div className="mt-12 divide-y divide-border border-y border-border">
+        {items.map((it, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={it.q}>
+              <button
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="flex w-full items-center justify-between gap-4 py-6 text-left"
+              >
+                <span className="font-display text-base font-semibold tracking-tight sm:text-lg">{it.q}</span>
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border text-foreground/70">
+                  {isOpen ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                </span>
+              </button>
+              {isOpen && (
+                <p className="pb-6 pr-12 text-sm leading-relaxed text-muted-foreground tls-fade-up">{it.a}</p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function ContactCTA({ lang }: { lang: "en" | "km" }) {
+  return (
+    <section id="contact" className="mx-auto mt-32 max-w-7xl px-5">
+      <div className="overflow-hidden rounded-3xl border border-border bg-foreground text-background">
+        <div className="grid gap-10 p-10 sm:p-14 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold-bright">{t("Let's create something", "ចូលរួមបង្កើត", lang)}</p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-5xl">
+              {t("Have an idea?", "មានគំនិតមែនទេ?", lang)}<br/>
+              <span className="text-gold-bright">{t("Tell us about it.", "ប្រាប់យើង។", lang)}</span>
+            </h2>
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-background/70">
+              {t(
+                "Reach us on your favourite channel — most messages get a real reply in under two hours during business hours.",
+                "ទាក់ទងតាមឆាណែលដែលអ្នកចូលចិត្ត។",
+                lang,
+              )}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={STUDIO.telegram} target="_blank" rel="noreferrer" className="tls-lift inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-white">
+                <Send className="h-4 w-4" /> Telegram
+              </a>
+              <a href={STUDIO.facebook} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-background/30 px-6 py-3 text-sm font-semibold text-background hover:bg-background/10">
+                <MessageCircle className="h-4 w-4" /> Messenger
+              </a>
+              <Link to="/b2b" className="inline-flex items-center gap-2 rounded-full border border-background/30 px-6 py-3 text-sm font-semibold text-background hover:bg-background/10">
+                {t("Request Quote", "សុំតម្លៃ", lang)} <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+          <ul className="grid gap-4 self-center text-sm">
+            <ContactRow Icon={MapPin}  k={t("Showroom", "ទីតាំង", lang)} v={STUDIO.showroom} />
+            <ContactRow Icon={Clock}   k={t("Hours", "ម៉ោងបើក", lang)} v={t("Mon – Sat · 9:00 – 19:00", "ច័ន្ទ–សៅរ៍ · ៩:០០–១៩:០០", lang)} />
+            <ContactRow Icon={Phone}   k={t("Call", "ហៅទូរស័ព្ទ", lang)} v="+855 12 345 678" />
+            <ContactRow Icon={Mail}    k="Email" v="hello@threelinesstudio.com" />
+          </ul>
         </div>
-      </section>
-    </Shell>
+        <div className="h-56 w-full bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=70')] bg-cover bg-center opacity-60 grayscale" aria-label="Map placeholder" />
+      </div>
+    </section>
+  );
+}
+
+/* ───────────────────────── Primitives ───────────────────────── */
+
+function SectionEyebrow({ eyebrow, title, kicker, center = false }: { eyebrow: string; title: string; kicker?: string; center?: boolean }) {
+  return (
+    <div className={center ? "mx-auto max-w-xl text-center" : "max-w-2xl"}>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold">{eyebrow}</p>
+      <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-5xl">{title}</h2>
+      {kicker && <p className="mt-4 text-base text-muted-foreground">{kicker}</p>}
+    </div>
+  );
+}
+
+function ContactRow({ Icon, k, v }: { Icon: typeof MapPin; k: string; v: string }) {
+  return (
+    <li className="flex items-start gap-4 rounded-2xl border border-background/15 p-4">
+      <Icon className="mt-0.5 h-5 w-5 shrink-0 text-gold-bright" strokeWidth={1.5} />
+      <div>
+        <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-background/60">{k}</div>
+        <div className="mt-1 text-sm font-medium">{v}</div>
+      </div>
+    </li>
   );
 }
