@@ -24,6 +24,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TemplateIdRouteImport } from './routes/template.$id'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
+import { Route as TemplateIdCustomizeRouteImport } from './routes/template.$id.customize'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -101,6 +102,11 @@ const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => CollectionsRoute,
 } as any)
+const TemplateIdCustomizeRoute = TemplateIdCustomizeRouteImport.update({
+  id: '/customize',
+  path: '/customize',
+  getParentRoute: () => TemplateIdRoute,
+} as any)
 const ProductLineIdRoute = ProductLineIdRouteImport.update({
   id: '/product/$line/$id',
   path: '/product/$line/$id',
@@ -122,8 +128,9 @@ export interface FileRoutesByFullPath {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
-  '/template/$id': typeof TemplateIdRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -140,8 +147,9 @@ export interface FileRoutesByTo {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
-  '/template/$id': typeof TemplateIdRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -159,8 +167,9 @@ export interface FileRoutesById {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
-  '/template/$id': typeof TemplateIdRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -181,6 +190,7 @@ export interface FileRouteTypes {
     | '/collections/$slug'
     | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -199,6 +209,7 @@ export interface FileRouteTypes {
     | '/collections/$slug'
     | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   id:
     | '__root__'
     | '/'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/collections/$slug'
     | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -233,7 +245,7 @@ export interface RootRouteChildren {
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  TemplateIdRoute: typeof TemplateIdRoute
+  TemplateIdRoute: typeof TemplateIdRouteWithChildren
   ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
@@ -344,6 +356,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CollectionsSlugRouteImport
       parentRoute: typeof CollectionsRoute
     }
+    '/template/$id/customize': {
+      id: '/template/$id/customize'
+      path: '/customize'
+      fullPath: '/template/$id/customize'
+      preLoaderRoute: typeof TemplateIdCustomizeRouteImport
+      parentRoute: typeof TemplateIdRoute
+    }
     '/product/$line/$id': {
       id: '/product/$line/$id'
       path: '/product/$line/$id'
@@ -366,6 +385,18 @@ const CollectionsRouteWithChildren = CollectionsRoute._addFileChildren(
   CollectionsRouteChildren,
 )
 
+interface TemplateIdRouteChildren {
+  TemplateIdCustomizeRoute: typeof TemplateIdCustomizeRoute
+}
+
+const TemplateIdRouteChildren: TemplateIdRouteChildren = {
+  TemplateIdCustomizeRoute: TemplateIdCustomizeRoute,
+}
+
+const TemplateIdRouteWithChildren = TemplateIdRoute._addFileChildren(
+  TemplateIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -380,7 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  TemplateIdRoute: TemplateIdRoute,
+  TemplateIdRoute: TemplateIdRouteWithChildren,
   ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
