@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Shell } from "@/components/site/Shell";
 import { STUDIO } from "@/lib/catalog";
+import { COLLECTIONS } from "@/lib/collections";
+import { CollectionCard } from "./collections";
 import { useStore, t } from "@/lib/store";
 import {
   ArrowUpRight, ArrowRight, ChevronDown, Plus, Minus,
@@ -41,7 +43,7 @@ function Index() {
   return (
     <Shell heroOverlay>
       <Hero lang={lang} />
-      <Categories lang={lang} />
+      <DesignCollections lang={lang} />
       <BestSellers lang={lang} />
       <Why lang={lang} />
       <HowItWorks lang={lang} />
@@ -80,12 +82,12 @@ function Hero({ lang }: { lang: "en" | "km" }) {
           )}
         </p>
         <div className="tls-fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "0.5s" }}>
-          <Link to="/b2b" className="tls-lift inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold tracking-wide text-foreground">
-            {t("Request Custom Order", "សុំបញ្ជាទិញតាមតម្រូវ", lang)}
+          <Link to="/collections" className="tls-lift inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold tracking-wide text-foreground">
+            {t("Browse Collections", "មើលបណ្ដុំ", lang)}
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/acrylic" className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
-            {t("Explore Collection", "មើលទាំងអស់", lang)}
+          <Link to="/collections/$slug" params={{ slug: "acrylic-keychains" }} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
+            {t("Explore Keychains", "ខ្សែសោអាគ្រីលីច", lang)}
           </Link>
         </div>
       </div>
