@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as CheckoutRouteImport } from './routes/checkout'
@@ -45,6 +46,11 @@ const MerchRoute = MerchRouteImport.update({
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -123,6 +129,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
     | '/merch'
     | '/metal'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
     | '/merch'
     | '/metal'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
     | '/merch'
     | '/metal'
@@ -241,6 +253,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   CollectionsRoute: typeof CollectionsRouteWithChildren
   ContactRoute: typeof ContactRoute
+  FavoritesRoute: typeof FavoritesRoute
   GalleryRoute: typeof GalleryRoute
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
@@ -277,6 +290,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -407,6 +427,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   CollectionsRoute: CollectionsRouteWithChildren,
   ContactRoute: ContactRoute,
+  FavoritesRoute: FavoritesRoute,
   GalleryRoute: GalleryRoute,
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
