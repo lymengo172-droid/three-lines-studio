@@ -22,6 +22,7 @@ import { Route as B2bRouteImport } from './routes/b2b'
 import { Route as AcrylicRouteImport } from './routes/acrylic'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TemplateIdRouteImport } from './routes/template.$id'
 import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
@@ -90,6 +91,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TemplateIdRoute = TemplateIdRouteImport.update({
+  id: '/template/$id',
+  path: '/template/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesByTo {
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRoutesById {
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRoute
   '/product/$line/$id': typeof ProductLineIdRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/metal'
     | '/sitemap.xml'
     | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/metal'
     | '/sitemap.xml'
     | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
   id:
     | '__root__'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/metal'
     | '/sitemap.xml'
     | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
   fileRoutesById: FileRoutesById
 }
@@ -221,6 +233,7 @@ export interface RootRouteChildren {
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TemplateIdRoute: typeof TemplateIdRoute
   ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
@@ -317,6 +330,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/template/$id': {
+      id: '/template/$id'
+      path: '/template/$id'
+      fullPath: '/template/$id'
+      preLoaderRoute: typeof TemplateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/collections/$slug': {
       id: '/collections/$slug'
       path: '/$slug'
@@ -360,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TemplateIdRoute: TemplateIdRoute,
   ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
