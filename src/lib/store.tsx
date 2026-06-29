@@ -27,6 +27,9 @@ type StoreCtx = {
   clearCart: () => void;
   subtotal: number;
   count: number;
+  favorites: string[];
+  toggleFavorite: (templateId: string) => void;
+  isFavorite: (templateId: string) => boolean;
 };
 
 const Ctx = createContext<StoreCtx | null>(null);
@@ -34,6 +37,7 @@ const Ctx = createContext<StoreCtx | null>(null);
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   // hydrate from localStorage
   useEffect(() => {
@@ -42,6 +46,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       if (raw) setCart(JSON.parse(raw));
       const l = localStorage.getItem("tls_lang") as Lang | null;
       if (l === "en" || l === "km") setLang(l);
+      const f = localStorage.getItem("tls_favs");
+      if (f) setFavorites(JSON.parse(f));
     } catch {}
   }, []);
   useEffect(() => {
@@ -50,6 +56,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     try { localStorage.setItem("tls_lang", lang); } catch {}
   }, [lang]);
+  useEffect(() => {
+    try { localStorage.setItem("tls_favs", JSON.stringify(favorites)); } catch {}
+  }, [favorites]);
 
   const value = useMemo<StoreCtx>(() => ({
     lang, setLang,
@@ -60,7 +69,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     clearCart: () => setCart([]),
     subtotal: cart.reduce((s, x) => s + x.unitPrice * x.qty, 0),
     count: cart.reduce((s, x) => s + x.qty, 0),
-  }), [lang, cart]);
+    favorites,
+    toggleFavorite: (tid) => setFavorites((f) => f.includes(tid) ? f.filter((x) => x !== tid) : [...f, tid]),
+    isFavorite: (tid) => favorites.includes(tid),
+  }), [lang, cart, favorites]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

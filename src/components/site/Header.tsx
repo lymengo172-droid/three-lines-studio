@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useStore, t } from "@/lib/store";
 
@@ -19,9 +19,9 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
 
   const nav = [
     { to: "/", label: t("Home", "ដើម", lang) },
-    { to: "/acrylic", label: t("Products", "ផលិតផល", lang) },
+    { to: "/collections", label: t("Collections", "បណ្ដុំ", lang) },
+    { to: "/inspiration", label: t("Inspiration", "គំនិត", lang) },
     { to: "/b2b", label: t("Custom Orders", "បញ្ជាទិញ", lang) },
-    { to: "/gallery", label: t("Gallery", "វិចិត្រសាល", lang) },
     { to: "/about", label: t("About", "អំពីយើង", lang) },
     { to: "/contact", label: t("Contact", "ទំនាក់ទំនង", lang) },
   ] as const;
@@ -68,6 +68,18 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
           >
             {lang === "en" ? "EN" : "ខ្មែរ"}
           </button>
+          <Link
+            to="/favorites"
+            aria-label="Favorites"
+            className={[
+              "rounded-full border p-2 transition",
+              transparent
+                ? "border-white/30 text-white hover:bg-white/10"
+                : "border-border text-foreground/70 hover:bg-accent hover:text-foreground",
+            ].join(" ")}
+          >
+            <Heart className="h-4 w-4" />
+          </Link>
           <Link
             to="/cart"
             className={[

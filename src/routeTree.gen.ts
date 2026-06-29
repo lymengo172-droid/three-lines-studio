@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
+import { Route as InspirationRouteImport } from './routes/inspiration'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FavoritesRouteImport } from './routes/favorites'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as BulkRouteImport } from './routes/bulk'
@@ -21,6 +24,9 @@ import { Route as B2bRouteImport } from './routes/b2b'
 import { Route as AcrylicRouteImport } from './routes/acrylic'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TemplateIdRouteImport } from './routes/template.$id'
+import { Route as CollectionsSlugRouteImport } from './routes/collections.$slug'
+import { Route as TemplateIdCustomizeRouteImport } from './routes/template.$id.customize'
 import { Route as ProductLineIdRouteImport } from './routes/product.$line.$id'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -38,14 +44,29 @@ const MerchRoute = MerchRouteImport.update({
   path: '/merch',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InspirationRoute = InspirationRouteImport.update({
+  id: '/inspiration',
+  path: '/inspiration',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FavoritesRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -83,6 +104,21 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TemplateIdRoute = TemplateIdRouteImport.update({
+  id: '/template/$id',
+  path: '/template/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsSlugRoute = CollectionsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CollectionsRoute,
+} as any)
+const TemplateIdCustomizeRoute = TemplateIdCustomizeRouteImport.update({
+  id: '/customize',
+  path: '/customize',
+  getParentRoute: () => TemplateIdRoute,
+} as any)
 const ProductLineIdRoute = ProductLineIdRouteImport.update({
   id: '/product/$line/$id',
   path: '/product/$line/$id',
@@ -97,12 +133,18 @@ export interface FileRoutesByFullPath {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
+  '/inspiration': typeof InspirationRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -112,12 +154,18 @@ export interface FileRoutesByTo {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
+  '/inspiration': typeof InspirationRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -128,12 +176,18 @@ export interface FileRoutesById {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRouteWithChildren
   '/contact': typeof ContactRoute
+  '/favorites': typeof FavoritesRoute
   '/gallery': typeof GalleryRoute
+  '/inspiration': typeof InspirationRoute
   '/merch': typeof MerchRoute
   '/metal': typeof MetalRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collections/$slug': typeof CollectionsSlugRoute
+  '/template/$id': typeof TemplateIdRouteWithChildren
   '/product/$line/$id': typeof ProductLineIdRoute
+  '/template/$id/customize': typeof TemplateIdCustomizeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -145,12 +199,18 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
+    | '/inspiration'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
+    | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -160,12 +220,18 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
+    | '/inspiration'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
+    | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   id:
     | '__root__'
     | '/'
@@ -175,12 +241,18 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
+    | '/favorites'
     | '/gallery'
+    | '/inspiration'
     | '/merch'
     | '/metal'
     | '/sitemap.xml'
+    | '/collections/$slug'
+    | '/template/$id'
     | '/product/$line/$id'
+    | '/template/$id/customize'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,11 +263,15 @@ export interface RootRouteChildren {
   BulkRoute: typeof BulkRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  CollectionsRoute: typeof CollectionsRouteWithChildren
   ContactRoute: typeof ContactRoute
+  FavoritesRoute: typeof FavoritesRoute
   GalleryRoute: typeof GalleryRoute
+  InspirationRoute: typeof InspirationRoute
   MerchRoute: typeof MerchRoute
   MetalRoute: typeof MetalRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TemplateIdRoute: typeof TemplateIdRouteWithChildren
   ProductLineIdRoute: typeof ProductLineIdRoute
 }
 
@@ -222,6 +298,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MerchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inspiration': {
+      id: '/inspiration'
+      path: '/inspiration'
+      fullPath: '/inspiration'
+      preLoaderRoute: typeof InspirationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -229,11 +312,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -285,6 +382,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/template/$id': {
+      id: '/template/$id'
+      path: '/template/$id'
+      fullPath: '/template/$id'
+      preLoaderRoute: typeof TemplateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections/$slug': {
+      id: '/collections/$slug'
+      path: '/$slug'
+      fullPath: '/collections/$slug'
+      preLoaderRoute: typeof CollectionsSlugRouteImport
+      parentRoute: typeof CollectionsRoute
+    }
+    '/template/$id/customize': {
+      id: '/template/$id/customize'
+      path: '/customize'
+      fullPath: '/template/$id/customize'
+      preLoaderRoute: typeof TemplateIdCustomizeRouteImport
+      parentRoute: typeof TemplateIdRoute
+    }
     '/product/$line/$id': {
       id: '/product/$line/$id'
       path: '/product/$line/$id'
@@ -295,6 +413,30 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CollectionsRouteChildren {
+  CollectionsSlugRoute: typeof CollectionsSlugRoute
+}
+
+const CollectionsRouteChildren: CollectionsRouteChildren = {
+  CollectionsSlugRoute: CollectionsSlugRoute,
+}
+
+const CollectionsRouteWithChildren = CollectionsRoute._addFileChildren(
+  CollectionsRouteChildren,
+)
+
+interface TemplateIdRouteChildren {
+  TemplateIdCustomizeRoute: typeof TemplateIdCustomizeRoute
+}
+
+const TemplateIdRouteChildren: TemplateIdRouteChildren = {
+  TemplateIdCustomizeRoute: TemplateIdCustomizeRoute,
+}
+
+const TemplateIdRouteWithChildren = TemplateIdRoute._addFileChildren(
+  TemplateIdRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -303,11 +445,15 @@ const rootRouteChildren: RootRouteChildren = {
   BulkRoute: BulkRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  CollectionsRoute: CollectionsRouteWithChildren,
   ContactRoute: ContactRoute,
+  FavoritesRoute: FavoritesRoute,
   GalleryRoute: GalleryRoute,
+  InspirationRoute: InspirationRoute,
   MerchRoute: MerchRoute,
   MetalRoute: MetalRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TemplateIdRoute: TemplateIdRouteWithChildren,
   ProductLineIdRoute: ProductLineIdRoute,
 }
 export const routeTree = rootRouteImport
