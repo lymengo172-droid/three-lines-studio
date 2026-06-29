@@ -137,6 +137,28 @@ function Categories({ lang }: { lang: "en" | "km" }) {
   );
 }
 
+function DesignCollections({ lang }: { lang: "en" | "km" }) {
+  return (
+    <section id="collections" className="mx-auto max-w-7xl px-5 pt-28 sm:pt-36">
+      <div className="flex items-end justify-between gap-6">
+        <SectionEyebrow
+          eyebrow={t("Design Collections", "បណ្ដុំរចនា", lang)}
+          title={t("Browse. Personalize. Order.", "មើល · កែ · បញ្ជាទិញ។", lang)}
+          kicker={t("Curated template collections — each one designed in-studio and ready to be made yours.", "បណ្ដុំទម្រង់ដែលរចនាក្នុងស្ទូឌីយោ ត្រៀមបង្កើតសម្រាប់អ្នក។", lang)}
+        />
+        <Link to="/collections" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-foreground/80 hover:text-gold sm:inline-flex">
+          {t("All collections", "ទាំងអស់", lang)} <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {COLLECTIONS.slice(0, 6).map((c) => (
+          <CollectionCard key={c.slug} c={c} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const BEST = [
   { name: "Acrylic LED Sign",        desc: "Glow-edge acrylic with custom name or logo.",         price: 38, img: imgPanel,   to: "/acrylic" },
   { name: "Engraved Wooden Plaque",  desc: "Laser-engraved hardwood, ready to gift.",             price: 22, img: imgBlock,   to: "/acrylic" },
