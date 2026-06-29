@@ -14,6 +14,7 @@ import { Route as MetalRouteImport } from './routes/metal'
 import { Route as MerchRouteImport } from './routes/merch'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CollectionsRouteImport } from './routes/collections'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as BulkRouteImport } from './routes/bulk'
@@ -46,6 +47,11 @@ const GalleryRoute = GalleryRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollectionsRoute = CollectionsRouteImport.update({
+  id: '/collections',
+  path: '/collections',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutRoute = CheckoutRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/bulk': typeof BulkRoute
   '/cart': typeof CartRoute
   '/checkout': typeof CheckoutRoute
+  '/collections': typeof CollectionsRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
   '/merch': typeof MerchRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
     | '/gallery'
     | '/merch'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
     | '/gallery'
     | '/merch'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/cart'
     | '/checkout'
+    | '/collections'
     | '/contact'
     | '/gallery'
     | '/merch'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   BulkRoute: typeof BulkRoute
   CartRoute: typeof CartRoute
   CheckoutRoute: typeof CheckoutRoute
+  CollectionsRoute: typeof CollectionsRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
   MerchRoute: typeof MerchRoute
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collections': {
+      id: '/collections'
+      path: '/collections'
+      fullPath: '/collections'
+      preLoaderRoute: typeof CollectionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   BulkRoute: BulkRoute,
   CartRoute: CartRoute,
   CheckoutRoute: CheckoutRoute,
+  CollectionsRoute: CollectionsRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
   MerchRoute: MerchRoute,
