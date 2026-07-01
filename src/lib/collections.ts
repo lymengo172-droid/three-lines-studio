@@ -4,11 +4,19 @@ import imgPanel from "@/assets/mock-acrylic-panel.jpg";
 import imgStandee from "@/assets/mock-acrylic-standee.jpg";
 import imgBlock from "@/assets/mock-acrylic-block.jpg";
 import imgAcrylic from "@/assets/cover-acrylic.jpg";
+import imgMagnet from "@/assets/mock-magnet.jpg";
+import imgMerch from "@/assets/cover-merch.jpg";
+import imgTshirt from "@/assets/mock-tshirt.jpg";
+import imgTote from "@/assets/mock-tote.jpg";
+import imgMug from "@/assets/mock-mug.jpg";
+import imgPen from "@/assets/mock-pen.jpg";
 
 const U = (q: string, w = 900, h = 1100) =>
   `https://images.unsplash.com/${q}?auto=format&fit=crop&w=${w}&h=${h}&q=80`;
 
 export type CollectionStatus = "available" | "coming-soon";
+
+export type ParentCategory = "acrylic" | "metal" | "merch";
 
 export type Collection = {
   slug: string;
@@ -20,6 +28,7 @@ export type Collection = {
   templateCount: number;
   priceFrom: number;
   material: string;
+  parent: ParentCategory;
 };
 
 export type TemplateCategory =
@@ -55,25 +64,26 @@ export const COLLECTIONS: Collection[] = [
     templateCount: 24,
     priceFrom: 4,
     material: "3mm cast acrylic",
+    parent: "acrylic",
   },
-  {
-    slug: "metal-collection",
-    title: "Metal Collection",
-    shortDesc: "Ultra-HD dye-sublimated aluminium prints, brushed nameplates, and engraved metal keepsakes.",
-    longDesc: "Premium aluminium pieces with archival print quality. Launching soon.",
-    cover: imgMetal,
-    status: "coming-soon",
-    templateCount: 0,
-    priceFrom: 18,
-    material: "Aluminium",
-  },
-  { slug: "acrylic-stands", title: "Acrylic Stands", shortDesc: "Die-cut character and photo stands with bevelled bases.", longDesc: "Custom acrylic standees.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 8, material: "5mm acrylic" },
-  { slug: "acrylic-photo-blocks", title: "Acrylic Photo Blocks", shortDesc: "Solid acrylic blocks with crystal-clear photo prints.", longDesc: "Photo blocks.", cover: imgBlock, status: "coming-soon", templateCount: 0, priceFrom: 22, material: "20mm acrylic" },
-  { slug: "led-acrylic-signs", title: "LED Acrylic Signs", shortDesc: "Glow-edge acrylic signs with warm and cool light options.", longDesc: "LED signs.", cover: imgPanel, status: "coming-soon", templateCount: 0, priceFrom: 38, material: "Acrylic + LED base" },
-  { slug: "name-plates", title: "Name Plates", shortDesc: "Personal and office name plates in acrylic or brushed metal.", longDesc: "Name plates.", cover: imgAcrylic, status: "coming-soon", templateCount: 0, priceFrom: 12, material: "Acrylic or metal" },
-  { slug: "metal-wall-art", title: "Metal Wall Art", shortDesc: "Large-format Ultra-HD metal prints for walls that deserve more.", longDesc: "Wall art.", cover: imgMetal, status: "coming-soon", templateCount: 0, priceFrom: 28, material: "Aluminium" },
-  { slug: "office-signs", title: "Office Signs", shortDesc: "Reception logos, door signs, wayfinding — engraved or printed.", longDesc: "Office signage.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 25, material: "Acrylic or metal" },
-  { slug: "home-decor", title: "Home Décor", shortDesc: "Curated home pieces — photo frames, ornaments, decorative panels.", longDesc: "Home décor.", cover: imgPanel, status: "coming-soon", templateCount: 0, priceFrom: 15, material: "Mixed" },
+  // ── Acrylic subcategories ──
+  { slug: "acrylic-stands", title: "Acrylic Stands", shortDesc: "Die-cut character and photo stands with bevelled bases.", longDesc: "Custom acrylic standees.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 8, material: "5mm acrylic", parent: "acrylic" },
+  { slug: "acrylic-photo-blocks", title: "Acrylic Photo Blocks", shortDesc: "Solid acrylic blocks with crystal-clear photo prints.", longDesc: "Photo blocks.", cover: imgBlock, status: "coming-soon", templateCount: 0, priceFrom: 22, material: "20mm acrylic", parent: "acrylic" },
+  { slug: "led-acrylic-signs", title: "Acrylic LED Signs", shortDesc: "Glow-edge acrylic signs with warm and cool light options.", longDesc: "LED signs.", cover: imgPanel, status: "coming-soon", templateCount: 0, priceFrom: 38, material: "Acrylic + LED base", parent: "acrylic" },
+  { slug: "acrylic-magnets", title: "Acrylic Magnets", shortDesc: "Full-colour printed acrylic magnets — fridge-ready keepsakes.", longDesc: "Acrylic magnets.", cover: imgMagnet, status: "coming-soon", templateCount: 0, priceFrom: 3, material: "3mm cast acrylic", parent: "acrylic" },
+
+  // ── Metal (Aluminium) subcategories ──
+  { slug: "aluminum-signs", title: "Aluminum Signs", shortDesc: "Brushed aluminium signs — indoor and outdoor grade.", longDesc: "Aluminium signage.", cover: imgMetal, status: "coming-soon", templateCount: 0, priceFrom: 20, material: "Aluminium", parent: "metal" },
+  { slug: "name-plates", title: "Name Plates", shortDesc: "Personal and office name plates in brushed metal.", longDesc: "Name plates.", cover: imgAcrylic, status: "coming-soon", templateCount: 0, priceFrom: 12, material: "Brushed aluminium", parent: "metal" },
+  { slug: "metal-wall-art", title: "Metal Wall Art", shortDesc: "Large-format Ultra-HD metal prints for walls that deserve more.", longDesc: "Wall art.", cover: imgMetal, status: "coming-soon", templateCount: 0, priceFrom: 28, material: "Aluminium", parent: "metal" },
+  { slug: "metal-business-cards", title: "Business Cards", shortDesc: "Etched or printed metal business cards — the kind people keep.", longDesc: "Metal business cards.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 4, material: "Aluminium", parent: "metal" },
+
+  // ── Merch subcategories ──
+  { slug: "merch-stickers", title: "Stickers", shortDesc: "Die-cut vinyl stickers — matte, gloss, or holographic.", longDesc: "Custom stickers.", cover: imgMerch, status: "coming-soon", templateCount: 0, priceFrom: 1, material: "Vinyl", parent: "merch" },
+  { slug: "merch-tshirts", title: "T-Shirts", shortDesc: "Soft combed cotton tees, DTG or screen printed.", longDesc: "Custom t-shirts.", cover: imgTshirt, status: "coming-soon", templateCount: 0, priceFrom: 10, material: "100% cotton", parent: "merch" },
+  { slug: "merch-totes", title: "Tote Bags", shortDesc: "12oz canvas totes — everyday carry, custom printed.", longDesc: "Tote bags.", cover: imgTote, status: "coming-soon", templateCount: 0, priceFrom: 8, material: "12oz canvas", parent: "merch" },
+  { slug: "merch-mugs", title: "Mugs", shortDesc: "Sublimation ceramic mugs, dishwasher safe.", longDesc: "Custom mugs.", cover: imgMug, status: "coming-soon", templateCount: 0, priceFrom: 7, material: "Ceramic", parent: "merch" },
+  { slug: "merch-pens", title: "Engraved Pens", shortDesc: "Laser-engraved metal barrel pens — corporate favourite.", longDesc: "Engraved pens.", cover: imgPen, status: "coming-soon", templateCount: 0, priceFrom: 3, material: "Metal", parent: "merch" },
 ];
 
 const K = (q: string) => U(q, 900, 1100);
@@ -111,6 +121,9 @@ export const KEYCHAIN_CATEGORIES: TemplateCategory[] = [
 
 export function collectionBySlug(slug: string) {
   return COLLECTIONS.find((c) => c.slug === slug);
+}
+export function collectionsByParent(parent: ParentCategory) {
+  return COLLECTIONS.filter((c) => c.parent === parent);
 }
 export function templatesByCollection(slug: string) {
   return KEYCHAIN_TEMPLATES.filter((t) => t.collection === slug);
