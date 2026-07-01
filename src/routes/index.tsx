@@ -85,100 +85,87 @@ function Hero({ lang }: { lang: "en" | "km" }) {
   );
 }
 
-const CATEGORIES = [
-  { key: "personalized", label: { en: "Personalized Gifts", km: "អំណោយផ្ទាល់ខ្លួន" }, img: imgKeychain, to: "/acrylic" },
-  { key: "corporate",    label: { en: "Corporate Gifts",    km: "អំណោយក្រុមហ៊ុន" }, img: imgPen, to: "/b2b" },
-  { key: "wedding",      label: { en: "Wedding & Event",    km: "អាពាហ៍ពិពាហ៍" },   img: imgPanel, to: "/acrylic" },
-  { key: "decor",        label: { en: "Home Decor",         km: "តុបតែងផ្ទះ" },     img: imgMetal, to: "/metal" },
-  { key: "signage",      label: { en: "Business Signage",   km: "ផ្លាកសញ្ញា" },     img: imgStandee, to: "/acrylic" },
-  { key: "drinkware",    label: { en: "Custom Drinkware",   km: "កែវផ្ទាល់ខ្លួន" }, img: imgGlass, to: "/merch" },
+const THREE_CATEGORIES = [
+  {
+    key: "acrylic",
+    to: "/acrylic" as const,
+    eyebrow: "01",
+    label: { en: "Acrylic", km: "អាគ្រីលីច" },
+    desc: {
+      en: "Cast acrylic keychains, stands, LED signs and photo blocks — UV-printed in full colour, hand-finished with a polished edge. Our flagship category.",
+      km: "អាគ្រីលីច — ខ្សែសោ តម្កល់ ផ្លាកសញ្ញា LED និងប្លុករូបភាព។",
+    },
+    img: imgAcrylic,
+  },
+  {
+    key: "metal",
+    to: "/metal" as const,
+    eyebrow: "02",
+    label: { en: "Metal (Aluminum)", km: "លោហៈ" },
+    desc: {
+      en: "Aluminum signs, brushed name plates, Ultra-HD wall art and metal business cards. Aircraft-grade materials, built to last.",
+      km: "អាលុយមីញ៉ូម — ផ្លាកសញ្ញា ឈ្មោះ រូបផ្ទាំង និងកាតធុរកិច្ច។",
+    },
+    img: imgMetal,
+  },
+  {
+    key: "merch",
+    to: "/merch" as const,
+    eyebrow: "03",
+    label: { en: "Merch", km: "ទំនិញ" },
+    desc: {
+      en: "Stickers, t-shirts, tote bags, mugs and engraved pens. Everyday branded pieces with bulk pricing that scales with you.",
+      km: "ស្ទីកឃ័រ អាវយឺត ថង់ កែវ និងប៊ិចឆ្លាក់។",
+    },
+    img: imgMerch,
+  },
 ] as const;
 
-function Categories({ lang }: { lang: "en" | "km" }) {
+function ThreeCategories({ lang }: { lang: "en" | "km" }) {
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-5 pt-28 sm:pt-36">
-      <SectionEyebrow eyebrow={t("Collections", "បណ្ដុំ", lang)} title={t("Featured categories", "ប្រភេទពិសេស", lang)} kicker={t("Six worlds. One studio. Browse what resonates.", "ប្រាំមួយពិភព ស្ទូឌីយោមួយ។", lang)} />
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {CATEGORIES.map((c, i) => (
+    <section id="categories" className="mx-auto max-w-7xl px-5 pt-24 sm:pt-32">
+      <SectionEyebrow
+        eyebrow={t("Categories", "ប្រភេទ", lang)}
+        title={t("Choose your world.", "ជ្រើសពិភពរបស់អ្នក។", lang)}
+        kicker={t(
+          "Three focused categories — each with its own subcategories and custom templates.",
+          "បីប្រភេទសំខាន់ ដែលនីមួយៗមានទម្រង់ផ្ទាល់ខ្លួន។",
+          lang,
+        )}
+      />
+      <div className="mt-14 flex flex-col gap-8">
+        {THREE_CATEGORIES.map((c, i) => (
           <Link
             key={c.key}
-            to={c.to as "/acrylic"}
-            className="tls-zoom group relative block aspect-[4/5] overflow-hidden rounded-2xl bg-secondary"
-            style={{ animationDelay: `${i * 60}ms` }}
+            to={c.to}
+            className="tls-zoom group relative block overflow-hidden rounded-3xl bg-secondary"
+            style={{ animationDelay: `${i * 80}ms` }}
           >
-            <img src={c.img} alt={c.label.en} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 text-white">
-              <div>
-                <h3 className="font-display text-xl font-bold tracking-tight">{lang === "km" ? c.label.km : c.label.en}</h3>
-                <p className="mt-1 text-[11px] uppercase tracking-[0.2em] text-white/70">{t("View collection", "មើល", lang)}</p>
+            <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[21/9]">
+              <img
+                src={c.img}
+                alt={c.label.en}
+                loading="lazy"
+                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/10" />
+              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white sm:p-14">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold-bright">
+                  {t("Category", "ប្រភេទ", lang)} {c.eyebrow}
+                </p>
+                <h3 className="mt-3 font-display text-4xl font-extrabold tracking-[-0.03em] sm:text-6xl">
+                  {lang === "km" ? c.label.km : c.label.en}
+                </h3>
+                <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+                  {t(c.desc.en, c.desc.km, lang)}
+                </p>
+                <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-semibold text-foreground transition group-hover:bg-gold group-hover:text-white">
+                  {t("Explore Collection", "រុករកបណ្ដុំ", lang)}
+                  <ArrowUpRight className="h-4 w-4" />
+                </span>
               </div>
-              <span className="grid h-10 w-10 place-items-center rounded-full bg-white/15 backdrop-blur transition group-hover:bg-gold">
-                <ArrowUpRight className="h-4 w-4" />
-              </span>
             </div>
           </Link>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function DesignCollections({ lang }: { lang: "en" | "km" }) {
-  return (
-    <section id="collections" className="mx-auto max-w-7xl px-5 pt-28 sm:pt-36">
-      <div className="flex items-end justify-between gap-6">
-        <SectionEyebrow
-          eyebrow={t("Design Collections", "បណ្ដុំរចនា", lang)}
-          title={t("Browse. Personalize. Order.", "មើល · កែ · បញ្ជាទិញ។", lang)}
-          kicker={t("Curated template collections — each one designed in-studio and ready to be made yours.", "បណ្ដុំទម្រង់ដែលរចនាក្នុងស្ទូឌីយោ ត្រៀមបង្កើតសម្រាប់អ្នក។", lang)}
-        />
-        <Link to="/collections" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-foreground/80 hover:text-gold sm:inline-flex">
-          {t("All collections", "ទាំងអស់", lang)} <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {COLLECTIONS.slice(0, 6).map((c) => (
-          <CollectionCard key={c.slug} c={c} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-const BEST = [
-  { name: "Acrylic LED Sign",        desc: "Glow-edge acrylic with custom name or logo.",         price: 38, img: imgPanel,   to: "/acrylic" },
-  { name: "Engraved Wooden Plaque",  desc: "Laser-engraved hardwood, ready to gift.",             price: 22, img: imgBlock,   to: "/acrylic" },
-  { name: "Personalized Tumbler",    desc: "Insulated steel with your name or message.",          price: 14, img: imgMug,     to: "/merch" },
-  { name: "Custom Wedding Gift",     desc: "Acrylic keepsake for the moment that matters.",       price: 28, img: imgStandee, to: "/acrylic" },
-  { name: "Premium Name Plate",      desc: "Brushed metal nameplate, magnetic mount.",            price: 18, img: imgMetal,   to: "/metal" },
-  { name: "UV Printed Acrylic Display", desc: "Ultra-HD photo print on clear acrylic.",           price: 32, img: imgAcrylic, to: "/acrylic" },
-];
-
-function BestSellers({ lang }: { lang: "en" | "km" }) {
-  return (
-    <section className="mx-auto max-w-7xl px-5 pt-32">
-      <SectionEyebrow eyebrow={t("Best sellers", "លក់ដាច់បំផុត", lang)} title={t("Customer favourites", "ដែលអតិថិជនពេញចិត្ត", lang)} kicker={t("Hand-picked pieces our clients keep coming back for.", "ផលិតផលដែលត្រូវបានជ្រើសរើស។", lang)} />
-      <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-        {BEST.map((p) => (
-          <article key={p.name} className="group flex flex-col">
-            <div className="tls-zoom relative aspect-[5/6] overflow-hidden rounded-2xl bg-secondary">
-              <img src={p.img} alt={p.name} loading="lazy" className="h-full w-full object-cover" />
-            </div>
-            <div className="mt-5 flex items-start justify-between gap-3">
-              <div>
-                <h3 className="font-display text-lg font-bold tracking-tight">{p.name}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
-                <p className="mt-2 text-sm">
-                  <span className="text-muted-foreground">{t("From", "ចាប់ពី", lang)}</span>{" "}
-                  <span className="font-semibold text-foreground">${p.price}</span>
-                </p>
-              </div>
-              <Link to={p.to as "/acrylic"} className="shrink-0 rounded-full border border-border px-4 py-2 text-xs font-semibold tracking-wide text-foreground transition hover:border-gold hover:text-gold">
-                {t("Customize", "កែតម្រូវ", lang)}
-              </Link>
-            </div>
-          </article>
         ))}
       </div>
     </section>
@@ -234,27 +221,6 @@ function HowItWorks({ lang }: { lang: "en" | "km" }) {
             </li>
           ))}
         </ol>
-      </div>
-    </section>
-  );
-}
-
-function GalleryStrip({ lang }: { lang: "en" | "km" }) {
-  const tiles = [imgAcrylic, imgMetal, imgTshirt, imgMug, imgPanel, imgKeychain, imgTote, imgStandee];
-  return (
-    <section className="mx-auto max-w-7xl px-5 pt-32">
-      <div className="flex items-end justify-between gap-6">
-        <SectionEyebrow eyebrow={t("Gallery", "វិចិត្រសាល", lang)} title={t("Recent work", "ស្នាដៃថ្មីៗ", lang)} kicker={t("A glance at what's been leaving the studio.", "ការងារថ្មីៗរបស់ស្ទូឌីយោ។", lang)} />
-        <Link to="/gallery" className="hidden shrink-0 items-center gap-1 text-sm font-semibold text-foreground/80 hover:text-gold sm:inline-flex">
-          {t("View full gallery", "មើលទាំងអស់", lang)} <ArrowRight className="h-4 w-4" />
-        </Link>
-      </div>
-      <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {tiles.map((src, i) => (
-          <div key={i} className={`tls-zoom relative overflow-hidden rounded-2xl bg-secondary ${i % 5 === 0 ? "row-span-2 aspect-[1/2]" : "aspect-square"}`}>
-            <img src={src} alt="Studio work" loading="lazy" className="h-full w-full object-cover" />
-          </div>
-        ))}
       </div>
     </section>
   );
