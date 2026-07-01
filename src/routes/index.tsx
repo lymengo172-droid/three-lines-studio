@@ -2,8 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { Shell } from "@/components/site/Shell";
 import { STUDIO } from "@/lib/catalog";
-import { COLLECTIONS } from "@/lib/collections";
-import { CollectionCard } from "./collections";
 import { useStore, t } from "@/lib/store";
 import {
   ArrowUpRight, ArrowRight, ChevronDown, Plus, Minus,
@@ -15,15 +13,6 @@ import heroImg from "@/assets/cover-metal.jpg";
 import imgAcrylic from "@/assets/cover-acrylic.jpg";
 import imgMerch from "@/assets/cover-merch.jpg";
 import imgMetal from "@/assets/cover-metal.jpg";
-import imgMug from "@/assets/mock-mug.jpg";
-import imgTote from "@/assets/mock-tote.jpg";
-import imgTshirt from "@/assets/mock-tshirt.jpg";
-import imgPanel from "@/assets/mock-acrylic-panel.jpg";
-import imgBlock from "@/assets/mock-acrylic-block.jpg";
-import imgStandee from "@/assets/mock-acrylic-standee.jpg";
-import imgKeychain from "@/assets/mock-keychain.jpg";
-import imgGlass from "@/assets/mock-glass.jpg";
-import imgPen from "@/assets/mock-pen.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -43,11 +32,9 @@ function Index() {
   return (
     <Shell heroOverlay>
       <Hero lang={lang} />
-      <DesignCollections lang={lang} />
-      <BestSellers lang={lang} />
+      <ThreeCategories lang={lang} />
       <Why lang={lang} />
       <HowItWorks lang={lang} />
-      <GalleryStrip lang={lang} />
       <Testimonials lang={lang} />
       <FAQ lang={lang} />
       <ContactCTA lang={lang} />
