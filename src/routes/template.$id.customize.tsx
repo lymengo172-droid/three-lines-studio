@@ -90,7 +90,15 @@ function CustomizePage() {
           {/* Live preview */}
           <div className="order-2 lg:order-1">
             <div className="overflow-hidden rounded-3xl bg-secondary">
-              <img src={tpl.image} alt={tpl.title} className="aspect-[4/5] w-full object-cover" />
+              {tpl.placeholder || !tpl.image ? (
+                <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 border border-dashed border-border bg-secondary p-8 text-center">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">{tpl.category}</span>
+                  <span className="font-display text-2xl font-semibold tracking-tight">{tpl.title}</span>
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">Upload your photo to preview</span>
+                </div>
+              ) : (
+                <img src={tpl.image} alt={tpl.title} className="aspect-[4/5] w-full object-cover" />
+              )}
             </div>
             {text && (
               <p className="mt-3 text-center font-display text-lg font-semibold">"{text}"</p>
