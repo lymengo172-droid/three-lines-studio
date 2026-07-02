@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { Shell } from "@/components/site/Shell";
-import { templateById, KEYCHAIN_TEMPLATES } from "@/lib/collections";
+import { templateById, KEYCHAIN_TEMPLATES, collectionBySlug } from "@/lib/collections";
 import { Heart, ArrowRight } from "lucide-react";
 import { useStore } from "@/lib/store";
 import { TemplateCard } from "./collections.$slug";
@@ -30,6 +30,8 @@ function TemplatePage() {
 
   const fav = isFavorite(tpl.id);
   const related = KEYCHAIN_TEMPLATES.filter((x) => x.id !== tpl.id && x.category === tpl.category).slice(0, 4);
+  const collection = collectionBySlug(tpl.collection);
+  const isPlaceholder = tpl.placeholder || !tpl.image;
 
   return (
     <Shell>
@@ -39,7 +41,7 @@ function TemplatePage() {
           <span className="mx-2">/</span>
           <Link to="/collections" className="hover:underline">Collections</Link>
           <span className="mx-2">/</span>
-          <Link to="/collections/$slug" params={{ slug: tpl.collection }} className="hover:underline">Acrylic Keychains</Link>
+          <Link to="/collections/$slug" params={{ slug: tpl.collection }} className="hover:underline">{collection?.title ?? tpl.collection}</Link>
           <span className="mx-2">/</span>
           <span className="text-foreground">{tpl.title}</span>
         </div>
@@ -47,14 +49,15 @@ function TemplatePage() {
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_1fr]">
           <div>
             <div className="overflow-hidden rounded-3xl bg-secondary">
-              <img src={tpl.image} alt={tpl.title} className="aspect-[4/5] w-full object-cover" />
-            </div>
-            <div className="mt-3 grid grid-cols-3 gap-3">
-              {[tpl.image, tpl.image, tpl.image].map((src, i) => (
-                <div key={i} className="aspect-square overflow-hidden rounded-2xl bg-secondary">
-                  <img src={src} alt="" className="h-full w-full object-cover" />
+              {isPlaceholder ? (
+                <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 border border-dashed border-border bg-secondary p-8 text-center">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-foreground">{tpl.category}</span>
+                  <span className="font-display text-3xl font-semibold tracking-tight">{tpl.title}</span>
+                  <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/70">Artwork coming soon</span>
                 </div>
-              ))}
+              ) : (
+                <img src={tpl.image} alt={tpl.title} className="aspect-[4/5] w-full object-cover" />
+              )}
             </div>
           </div>
 
