@@ -33,7 +33,7 @@ function FavoritesPage() {
             <Heart className="h-7 w-7 text-gold" />
             <p className="mt-4 font-display text-xl font-semibold">No favorites yet</p>
             <p className="mt-2 max-w-sm text-sm text-muted-foreground">Browse the collection and tap the heart to save designs you love.</p>
-            <Link to="/collections/$slug" params={{ slug: "acrylic-keychains" }} className="tls-lift mt-6 inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:bg-gold">
+            <Link to="/collections/$slug" params={{ slug: "acrylic-plate" }} className="tls-lift mt-6 inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-semibold text-background hover:bg-gold">
               Browse keychains
             </Link>
           </div>

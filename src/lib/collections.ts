@@ -1,10 +1,5 @@
-import imgKeychain from "@/assets/mock-keychain.jpg";
 import imgMetal from "@/assets/cover-metal.jpg";
 import imgPanel from "@/assets/mock-acrylic-panel.jpg";
-import imgStandee from "@/assets/mock-acrylic-standee.jpg";
-import imgBlock from "@/assets/mock-acrylic-block.jpg";
-import imgAcrylic from "@/assets/cover-acrylic.jpg";
-import imgMagnet from "@/assets/mock-magnet.jpg";
 import imgMerch from "@/assets/cover-merch.jpg";
 import imgTshirt from "@/assets/mock-tshirt.jpg";
 import imgTote from "@/assets/mock-tote.jpg";
@@ -31,9 +26,7 @@ export type Collection = {
   parent: ParentCategory;
 };
 
-export type TemplateCategory =
-  | "Anime" | "Couple" | "Pet" | "Minimal" | "Business"
-  | "Birthday" | "Graduation" | "Wedding" | "Cute" | "Gaming" | "Seasonal";
+export type TemplateCategory = string;
 
 export type KeychainTemplate = {
   id: string;
@@ -41,6 +34,7 @@ export type KeychainTemplate = {
   title: string;
   category: TemplateCategory;
   image: string;
+  placeholder?: boolean;
   gallery?: string[];
   popular?: boolean;
   difficulty?: "Easy" | "Medium" | "Advanced";
@@ -52,31 +46,37 @@ export type KeychainTemplate = {
 };
 
 export const COLLECTIONS: Collection[] = [
+  // ── Acrylic ──
   {
-    slug: "acrylic-keychains",
-    title: "Acrylic Keychains",
+    slug: "acrylic-plate",
+    title: "Acrylic Plate",
     shortDesc:
-      "Hundreds of customizable acrylic keychain templates for gifts, fans, pets, couples, businesses, and every special occasion.",
+      "A large clear-acrylic plate holding multiple die-cut photo shapes and text plaques in one layout — our flagship layered piece.",
     longDesc:
-      "Our flagship collection. Premium 3mm cast acrylic, UV-printed in full colour, finished with a polished edge and stainless ring. Designed in-studio in Phnom Penh.",
-    cover: imgKeychain,
+      "Premium cast acrylic plate with layered die-cut photo shapes and personalised text plaques. UV-printed in full colour, hand-finished in Phnom Penh.",
+    cover: imgPanel,
     status: "available",
-    templateCount: 24,
-    priceFrom: 4,
-    material: "3mm cast acrylic",
+    templateCount: 18,
+    priceFrom: 24,
+    material: "Cast acrylic + die-cut layers",
     parent: "acrylic",
   },
-  // ── Acrylic subcategories ──
-  { slug: "acrylic-stands", title: "Acrylic Stands", shortDesc: "Die-cut character and photo stands with bevelled bases.", longDesc: "Custom acrylic standees.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 8, material: "5mm acrylic", parent: "acrylic" },
-  { slug: "acrylic-photo-blocks", title: "Acrylic Photo Blocks", shortDesc: "Solid acrylic blocks with crystal-clear photo prints.", longDesc: "Photo blocks.", cover: imgBlock, status: "coming-soon", templateCount: 0, priceFrom: 22, material: "20mm acrylic", parent: "acrylic" },
-  { slug: "led-acrylic-signs", title: "Acrylic LED Signs", shortDesc: "Glow-edge acrylic signs with warm and cool light options.", longDesc: "LED signs.", cover: imgPanel, status: "coming-soon", templateCount: 0, priceFrom: 38, material: "Acrylic + LED base", parent: "acrylic" },
-  { slug: "acrylic-magnets", title: "Acrylic Magnets", shortDesc: "Full-colour printed acrylic magnets — fridge-ready keepsakes.", longDesc: "Acrylic magnets.", cover: imgMagnet, status: "coming-soon", templateCount: 0, priceFrom: 3, material: "3mm cast acrylic", parent: "acrylic" },
 
-  // ── Metal (Aluminium) subcategories ──
-  { slug: "aluminum-signs", title: "Aluminum Signs", shortDesc: "Brushed aluminium signs — indoor and outdoor grade.", longDesc: "Aluminium signage.", cover: imgMetal, status: "coming-soon", templateCount: 0, priceFrom: 20, material: "Aluminium", parent: "metal" },
-  { slug: "name-plates", title: "Name Plates", shortDesc: "Personal and office name plates in brushed metal.", longDesc: "Name plates.", cover: imgAcrylic, status: "coming-soon", templateCount: 0, priceFrom: 12, material: "Brushed aluminium", parent: "metal" },
-  { slug: "metal-wall-art", title: "Metal Wall Art", shortDesc: "Large-format Ultra-HD metal prints for walls that deserve more.", longDesc: "Wall art.", cover: imgMetal, status: "coming-soon", templateCount: 0, priceFrom: 28, material: "Aluminium", parent: "metal" },
-  { slug: "metal-business-cards", title: "Business Cards", shortDesc: "Etched or printed metal business cards — the kind people keep.", longDesc: "Metal business cards.", cover: imgStandee, status: "coming-soon", templateCount: 0, priceFrom: 4, material: "Aluminium", parent: "metal" },
+  // ── Metal (Aluminium) ──
+  {
+    slug: "metal-wall-art",
+    title: "Metal Wall Art",
+    shortDesc:
+      "Large-format Ultra-HD metal prints — sharp, luminous, and built for walls that deserve more.",
+    longDesc:
+      "Aircraft-grade aluminium panels, Ultra-HD sublimation printed with mounting posts. Curated categories from landscape to fine art.",
+    cover: imgMetal,
+    status: "available",
+    templateCount: 60,
+    priceFrom: 28,
+    material: "Aluminium panel",
+    parent: "metal",
+  },
 
   // ── Merch subcategories ──
   { slug: "merch-stickers", title: "Stickers", shortDesc: "Die-cut vinyl stickers — matte, gloss, or holographic.", longDesc: "Custom stickers.", cover: imgMerch, status: "coming-soon", templateCount: 0, priceFrom: 1, material: "Vinyl", parent: "merch" },
@@ -88,36 +88,88 @@ export const COLLECTIONS: Collection[] = [
 
 const K = (q: string) => U(q, 900, 1100);
 
-export const KEYCHAIN_TEMPLATES: KeychainTemplate[] = [
-  { id: "k-anime-1", collection: "acrylic-keychains", title: "Shoujo Portrait",   category: "Anime",   image: K("photo-1578632767115-351597cf2477"), popular: true, difficulty: "Easy", priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Anime fans · OC commissions" },
-  { id: "k-anime-2", collection: "acrylic-keychains", title: "Chibi Pose",        category: "Anime",   image: K("photo-1604079628040-94301bb21b91"), difficulty: "Easy", priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Anime OC, fan-art" },
-  { id: "k-anime-3", collection: "acrylic-keychains", title: "Idol Stage",        category: "Anime",   image: K("photo-1493225457124-a3eb161ffa5f"), priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "K-pop merch, fan gifts" },
-  { id: "k-couple-1", collection: "acrylic-keychains", title: "His & Hers",       category: "Couple",  image: K("photo-1519741497674-611481863552"), popular: true, difficulty: "Easy", priceFrom: 8, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Anniversaries, gifts" },
-  { id: "k-couple-2", collection: "acrylic-keychains", title: "Golden Hour",      category: "Couple",  image: K("photo-1511285560929-80b456fea0bc"), priceFrom: 8, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Couples, engagements" },
-  { id: "k-pet-1",    collection: "acrylic-keychains", title: "Pet Portrait",     category: "Pet",     image: K("photo-1543466835-00a7907e9de1"), popular: true, difficulty: "Medium", priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + die-cut", productionTime: "3–5 days", recommendedUse: "Dogs, cats, all good boys" },
-  { id: "k-pet-2",    collection: "acrylic-keychains", title: "Cat Silhouette",   category: "Pet",     image: K("photo-1514888286974-6c03e2ca1dba"), priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Cat lovers" },
-  { id: "k-min-1",    collection: "acrylic-keychains", title: "Single Initial",   category: "Minimal", image: K("photo-1494891848038-7bd202a2afeb"), difficulty: "Easy", priceFrom: 4, material: "3mm cast acrylic", productionMethod: "Laser engrave", productionTime: "2–3 days", recommendedUse: "Everyday carry" },
-  { id: "k-min-2",    collection: "acrylic-keychains", title: "Type Only",        category: "Minimal", image: K("photo-1517816743773-6e0fd518b4a6"), priceFrom: 4, material: "3mm cast acrylic", productionMethod: "Laser engrave", productionTime: "2–3 days", recommendedUse: "Minimalists" },
-  { id: "k-min-3",    collection: "acrylic-keychains", title: "Outlined Circle",  category: "Minimal", image: K("photo-1499951360447-b19be8fe80f5"), priceFrom: 4, material: "3mm cast acrylic", productionMethod: "Laser engrave", productionTime: "2–3 days", recommendedUse: "Everyday gifts" },
-  { id: "k-biz-1",    collection: "acrylic-keychains", title: "Logo Mark",        category: "Business",image: K("photo-1611162617213-7d7a39e9b1d7"), popular: true, difficulty: "Medium", priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "5–7 days", recommendedUse: "Corporate gifts, swag" },
-  { id: "k-biz-2",    collection: "acrylic-keychains", title: "Brand Wordmark",   category: "Business",image: K("photo-1542744095-291d1f67b221"), priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "5–7 days", recommendedUse: "Conferences, launches" },
-  { id: "k-bday-1",   collection: "acrylic-keychains", title: "Birthday Bear",    category: "Birthday",image: K("photo-1559454403-b8fb88521f80"), difficulty: "Easy", priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + die-cut", productionTime: "3–5 days", recommendedUse: "Kids parties" },
-  { id: "k-bday-2",   collection: "acrylic-keychains", title: "Confetti Cake",    category: "Birthday",image: K("photo-1464349095431-e9a21285b5f3"), priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Birthday favours" },
-  { id: "k-grad-1",   collection: "acrylic-keychains", title: "Class of 2026",    category: "Graduation", image: K("photo-1523050854058-8df90110c9f1"), popular: true, priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "5–7 days", recommendedUse: "Graduation keepsakes" },
-  { id: "k-grad-2",   collection: "acrylic-keychains", title: "Cap Toss",         category: "Graduation", image: K("photo-1627556704290-2b1f5853ff78"), priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "5–7 days", recommendedUse: "Graduation gifts" },
-  { id: "k-wed-1",    collection: "acrylic-keychains", title: "Wedding Favour",   category: "Wedding", image: K("photo-1519225421980-715cb0215aed"), popular: true, priceFrom: 7, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "7–10 days", recommendedUse: "Wedding favours" },
-  { id: "k-wed-2",    collection: "acrylic-keychains", title: "Save the Date",    category: "Wedding", image: K("photo-1465495976277-4387d4b0e4a6"), priceFrom: 7, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "7–10 days", recommendedUse: "Wedding favours" },
-  { id: "k-cute-1",   collection: "acrylic-keychains", title: "Pastel Daisy",     category: "Cute",    image: K("photo-1490750967868-88aa4486c946"), difficulty: "Easy", priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Friends, students" },
-  { id: "k-cute-2",   collection: "acrylic-keychains", title: "Little Bee",       category: "Cute",    image: K("photo-1503454537195-1dcabb73ffb9"), priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Kids, party favours" },
-  { id: "k-gam-1",    collection: "acrylic-keychains", title: "Pixel Hero",       category: "Gaming",  image: K("photo-1542751371-adc38448a05e"), popular: true, priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Gamers, esports" },
-  { id: "k-gam-2",    collection: "acrylic-keychains", title: "Controller Charm", category: "Gaming",  image: K("photo-1493711662062-fa541adb3fc8"), priceFrom: 6, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Gaming gifts" },
-  { id: "k-season-1", collection: "acrylic-keychains", title: "Cherry Blossom",   category: "Seasonal",image: K("photo-1522383225653-ed111181a951"), priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Spring, gifts" },
-  { id: "k-season-2", collection: "acrylic-keychains", title: "Winter Pine",      category: "Seasonal",image: K("photo-1482517967863-00e15c9b44be"), priceFrom: 5, material: "3mm cast acrylic", productionMethod: "UV print + laser cut", productionTime: "3–5 days", recommendedUse: "Holiday gifting" },
+const LETTERS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T"];
+
+function slugify(s: string) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function buildPlaceholders(opts: {
+  collection: string;
+  category: string;
+  count: number;
+  labelPrefix?: string;
+  priceFrom: number;
+  material: string;
+  productionMethod: string;
+  productionTime: string;
+  recommendedUse: string;
+}): KeychainTemplate[] {
+  const base: Omit<KeychainTemplate, "id" | "title" | "category"> = {
+    collection: opts.collection,
+    image: "",
+    placeholder: true,
+    priceFrom: opts.priceFrom,
+    material: opts.material,
+    productionMethod: opts.productionMethod,
+    productionTime: opts.productionTime,
+    recommendedUse: opts.recommendedUse,
+  };
+  return Array.from({ length: opts.count }, (_, i) => {
+    const letter = LETTERS[i] ?? `${i + 1}`;
+    const title = opts.labelPrefix
+      ? `${opts.labelPrefix} — Template ${letter}`
+      : `Template ${letter}`;
+    return {
+      ...base,
+      id: `${opts.collection}-${slugify(opts.category)}-${letter.toLowerCase()}`,
+      title,
+      category: opts.category,
+    };
+  });
+}
+
+export const METAL_CATEGORIES: string[] = [
+  "Nature & Landscape",
+  "Anime & Pop Culture",
+  "Cityscape & Architecture",
+  "Wildlife & Animals",
+  "Abstract & Minimalist",
+  "Travel & Culture",
+  "Automotive & Sports",
+  "Space & Astronomy",
+  "Black & White Fine Art",
+  "Family & Portrait",
 ];
 
-export const KEYCHAIN_CATEGORIES: TemplateCategory[] = [
-  "Anime","Couple","Pet","Minimal","Business","Birthday","Graduation","Wedding","Cute","Gaming","Seasonal",
+export const KEYCHAIN_TEMPLATES: KeychainTemplate[] = [
+  ...buildPlaceholders({
+    collection: "acrylic-plate",
+    category: "Acrylic Plate",
+    count: 18,
+    priceFrom: 24,
+    material: "Cast acrylic + die-cut layers",
+    productionMethod: "UV print + laser cut",
+    productionTime: "5–7 days",
+    recommendedUse: "Layered photo plates, keepsakes",
+  }),
+  ...METAL_CATEGORIES.flatMap((cat) =>
+    buildPlaceholders({
+      collection: "metal-wall-art",
+      category: cat,
+      count: 6,
+      labelPrefix: cat,
+      priceFrom: 28,
+      material: "Aluminium panel",
+      productionMethod: "Ultra-HD sublimation",
+      productionTime: "7–10 days",
+      recommendedUse: `${cat} wall art`,
+    }),
+  ),
 ];
+
+// Kept for backward compatibility; prefer categoriesForCollection().
+export const KEYCHAIN_CATEGORIES: string[] = ["Acrylic Plate"];
 
 export function collectionBySlug(slug: string) {
   return COLLECTIONS.find((c) => c.slug === slug);
@@ -130,6 +182,18 @@ export function templatesByCollection(slug: string) {
 }
 export function templateById(id: string) {
   return KEYCHAIN_TEMPLATES.find((t) => t.id === id);
+}
+export function categoriesForCollection(slug: string): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const t of KEYCHAIN_TEMPLATES) {
+    if (t.collection !== slug) continue;
+    if (!seen.has(t.category)) {
+      seen.add(t.category);
+      out.push(t.category);
+    }
+  }
+  return out;
 }
 
 export const INSPIRATION_GROUPS: { key: string; title: string; images: string[] }[] = [
