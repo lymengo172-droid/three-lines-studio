@@ -27,7 +27,7 @@ function InspirationPage() {
         <section key={g.key} className="mx-auto max-w-7xl px-5 pb-16">
           <div className="mb-5 flex items-end justify-between">
             <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{g.title}</h2>
-            <Link to="/collections/$slug" params={{ slug: "acrylic-keychains" }} className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-gold sm:inline">Make your own →</Link>
+            <Link to="/collections/$slug" params={{ slug: "acrylic-plate" }} className="hidden text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-gold sm:inline">Make your own →</Link>
           </div>
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
             {g.images.map((src, i) => (

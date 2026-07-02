@@ -73,7 +73,7 @@ function Hero({ lang }: { lang: "en" | "km" }) {
             {t("Browse Collections", "មើលបណ្ដុំ", lang)}
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/collections/$slug" params={{ slug: "acrylic-keychains" }} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
+          <Link to="/collections/$slug" params={{ slug: "acrylic-plate" }} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
             {t("Explore Keychains", "ខ្សែសោអាគ្រីលីច", lang)}
           </Link>
         </div>
