@@ -36,8 +36,18 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
       ].join(" ")}
     >
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
-        <Link to="/" className="min-w-0 truncate font-display text-[15px] font-extrabold tracking-tight">
-          Three Lines <span className="text-gold">·</span> Studio
+        <Link to="/" className="group flex min-w-0 flex-col leading-none">
+          <span className="font-display text-[15px] font-extrabold uppercase tracking-[-0.03em]">
+            Three Lines
+          </span>
+          <span
+            className={[
+              "mt-1 font-display text-[9px] font-light uppercase tracking-[0.4em] transition-colors",
+              transparent ? "text-gold-bright" : "text-gold",
+            ].join(" ")}
+          >
+            Studio
+          </span>
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           {nav.map((n) => (
