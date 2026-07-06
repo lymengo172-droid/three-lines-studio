@@ -4,7 +4,7 @@ import { Shell } from "@/components/site/Shell";
 import { STUDIO } from "@/lib/catalog";
 import { useStore, t } from "@/lib/store";
 import {
-  ArrowUpRight, ArrowRight, ChevronDown, Plus, Minus,
+  ArrowUpRight, ArrowRight, Plus, Minus,
   Sparkles, Gem, PenTool, Clock, Truck, MessageCircle,
   Send, Phone, Mail, MapPin,
 } from "lucide-react";
