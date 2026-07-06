@@ -68,15 +68,12 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
         <div className="flex shrink-0 items-center gap-2">
           <button
             onClick={() => setLang(lang === "en" ? "km" : "en")}
-            className={[
-              "rounded-full border px-3 py-1.5 text-[11px] font-medium tracking-wide transition",
-              transparent
-                ? "border-white/30 text-white hover:bg-white/10"
-                : "border-border text-foreground/70 hover:bg-accent hover:text-foreground",
-            ].join(" ")}
+            className="flex items-center gap-1.5 px-2 py-1.5 text-[11px] font-medium tracking-tight"
             aria-label="Toggle language"
           >
-            {lang === "en" ? "EN" : "ខ្មែរ"}
+            <span className={lang === "en" ? "text-gold-bright" : transparent ? "text-white/40" : "text-foreground/40"}>EN</span>
+            <span className={transparent ? "text-white/20" : "text-foreground/20"}>|</span>
+            <span className={lang === "km" ? "text-gold-bright" : transparent ? "text-white/40" : "text-foreground/40"}>ខ្មែរ</span>
           </button>
           <Link
             to="/favorites"
