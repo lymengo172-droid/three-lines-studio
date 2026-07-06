@@ -4,7 +4,7 @@ import { Shell } from "@/components/site/Shell";
 import { STUDIO } from "@/lib/catalog";
 import { useStore, t } from "@/lib/store";
 import {
-  ArrowUpRight, ArrowRight, ChevronDown, Plus, Minus,
+  ArrowUpRight, ArrowRight, Plus, Minus,
   Sparkles, Gem, PenTool, Clock, Truck, MessageCircle,
   Send, Phone, Mail, MapPin,
 } from "lucide-react";
@@ -52,35 +52,53 @@ function Hero({ lang }: { lang: "en" | "km" }) {
         alt="Premium custom print and engraving studio in Phnom Penh"
         className="absolute inset-0 h-full w-full object-cover tls-fade-in"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25" />
+      <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
+      {/* Vertical gold hairline accent */}
+      <div className="pointer-events-none absolute right-0 top-24 hidden h-64 w-px bg-gradient-to-b from-gold-bright/40 to-transparent sm:block" />
       <div className="relative mx-auto flex h-full max-w-7xl flex-col justify-end px-5 pb-24 pt-32 sm:pb-28">
-        <p className="tls-fade-up text-[11px] font-semibold uppercase tracking-[0.32em] text-gold" style={{ animationDelay: "0.1s" }}>
-          {t("Phnom Penh · Est. 2024", "ភ្នំពេញ · ឆ្នាំ ២០២៤", lang)}
-        </p>
-        <h1 className="tls-fade-up mt-5 max-w-4xl font-display text-5xl font-extrabold leading-[1.02] tracking-[-0.035em] sm:text-7xl lg:text-[5.5rem]" style={{ animationDelay: "0.2s" }}>
-          {t("Crafted with Precision.", "ឆ្លាក់ដោយភាពច្បាស់លាស់។", lang)}<br/>
-          <span className="text-gold-bright">{t("Personalized for You.", "បង្កើតសម្រាប់អ្នក។", lang)}</span>
+        <div className="tls-fade-up flex items-center gap-3" style={{ animationDelay: "0.1s" }}>
+          <span className="h-px w-10 bg-gold-bright" />
+          <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-gold-bright">
+            {t("Phnom Penh · Est. 2024", "ភ្នំពេញ · ឆ្នាំ ២០២៤", lang)}
+          </p>
+        </div>
+        <h1 className="tls-fade-up mt-6 max-w-4xl font-display text-[44px] font-extrabold uppercase leading-[0.92] tracking-[-0.045em] sm:text-7xl lg:text-[5.75rem]" style={{ animationDelay: "0.2s" }}>
+          {t("Crafted with", "ឆ្លាក់ដោយ", lang)}<br/>
+          <span className="gold-text italic">{t("Precision.", "ភាពច្បាស់លាស់។", lang)}</span><br/>
+          {t("Personalized for you.", "បង្កើតសម្រាប់អ្នក។", lang)}
         </h1>
-        <p className="tls-fade-up mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg" style={{ animationDelay: "0.35s" }}>
-          {t(
-            "Premium laser engraving, UV printing, and personalized creations designed to celebrate every occasion.",
-            "ការឆ្លាក់ឡាស៊ែរ និងបោះពុម្ព UV ប្រណិត រចនាសម្រាប់ឱកាសពិសេសរបស់អ្នក។",
-            lang,
+        <div className="tls-fade-up mt-7 max-w-xl space-y-2" style={{ animationDelay: "0.35s" }}>
+          <p className="text-base leading-relaxed text-white/85 sm:text-lg">
+            {t(
+              "Premium laser engraving, UV printing, and personalized creations designed to celebrate every occasion.",
+              "ការឆ្លាក់ឡាស៊ែរ និងបោះពុម្ព UV ប្រណិត រចនាសម្រាប់ឱកាសពិសេសរបស់អ្នក។",
+              lang,
+            )}
+          </p>
+          {lang === "en" && (
+            <p className="text-[13px] font-light leading-relaxed text-white/45">
+              ការបោះពុម្ពអាគ្រីលីក និងលោហៈធាតុដែលផលិតយ៉ាងសម្រិតសម្រាំង។
+            </p>
           )}
-        </p>
-        <div className="tls-fade-up mt-9 flex flex-wrap gap-3" style={{ animationDelay: "0.5s" }}>
-          <Link to="/collections" className="tls-lift inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold tracking-wide text-foreground">
+        </div>
+        <div className="tls-fade-up mt-10 flex flex-wrap items-center gap-3" style={{ animationDelay: "0.5s" }}>
+          <Link to="/collections" className="btn-gold tls-lift inline-flex items-center gap-2 rounded-none px-8 py-4 text-[11px] font-bold uppercase tracking-[0.24em]">
             {t("Browse Collections", "មើលបណ្ដុំ", lang)}
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/collections/$slug" params={{ slug: "acrylic-plate" }} className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold tracking-wide text-white transition hover:bg-white/10">
-            {t("Explore Keychains", "ខ្សែសោអាគ្រីលីច", lang)}
+          <Link to="/collections/$slug" params={{ slug: "acrylic-plate" }} className="inline-flex items-center gap-2 rounded-none border border-white/25 bg-white/5 px-8 py-4 text-[11px] font-bold uppercase tracking-[0.24em] text-white backdrop-blur transition hover:border-gold-bright hover:text-gold-bright">
+            {t("Explore Acrylic", "ខ្សែសោអាគ្រីលីច", lang)}
           </Link>
         </div>
       </div>
-      <a href="#categories" className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 animate-bounce text-white/70 sm:block" aria-label="Scroll">
-        <ChevronDown className="h-6 w-6" />
-      </a>
+      {/* Editorial scroll indicator */}
+      <div className="pointer-events-none absolute bottom-8 right-6 hidden flex-col items-center gap-4 opacity-60 sm:flex">
+        <span className="rotate-90 whitespace-nowrap text-[9px] font-semibold uppercase tracking-[0.55em] text-white/70">
+          {t("Scroll", "រំកិល", lang)}
+        </span>
+        <span className="h-14 w-px bg-white/50" />
+      </div>
     </section>
   );
 }
