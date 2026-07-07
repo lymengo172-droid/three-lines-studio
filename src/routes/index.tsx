@@ -140,47 +140,90 @@ const THREE_CATEGORIES = [
 ] as const;
 
 function ThreeCategories({ lang }: { lang: "en" | "km" }) {
+  const [feature, ...rest] = THREE_CATEGORIES;
   return (
-    <section id="categories" className="mx-auto max-w-7xl px-5 pt-24 sm:pt-32">
-      <SectionEyebrow
-        eyebrow={t("Categories", "ប្រភេទ", lang)}
-        title={t("Choose your world.", "ជ្រើសពិភពរបស់អ្នក។", lang)}
-        kicker={t(
-          "Three focused categories — each with its own subcategories and custom templates.",
-          "បីប្រភេទសំខាន់ ដែលនីមួយៗមានទម្រង់ផ្ទាល់ខ្លួន។",
-          lang,
-        )}
-      />
-      <div className="mt-14 flex flex-col gap-8">
-        {THREE_CATEGORIES.map((c, i) => (
+    <section id="categories" className="mx-auto max-w-7xl px-6 pt-32 sm:px-8 sm:pt-40">
+      <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-2xl">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-gold">
+            {t("Categories", "ប្រភេទ", lang)} · 03
+          </p>
+          <h2 className="mt-6 font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.045em] sm:text-7xl">
+            {t("Three worlds.", "បីពិភព។", lang)}<br/>
+            <span className="italic text-foreground/40">{t("One studio.", "មួយស្ទូឌីយោ។", lang)}</span>
+          </h2>
+        </div>
+        <p className="max-w-xs text-sm leading-relaxed text-muted-foreground sm:text-right">
+          {t("Focused categories, endless personalization.", "ប្រភេទផ្ដោត បង្កើតគ្មានព្រំដែន។", lang)}
+        </p>
+      </div>
+
+      {/* Featured full-bleed */}
+      <Link
+        to={feature.to}
+        className="tls-shadow-lift group relative mt-16 block overflow-hidden rounded-[32px] bg-secondary"
+      >
+        <div className="relative aspect-[16/11] w-full overflow-hidden sm:aspect-[21/9]">
+          <img
+            src={feature.img}
+            alt={feature.label.en}
+            loading="lazy"
+            className="h-full w-full object-cover transition duration-[900ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.05]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/85 via-black/40 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-end p-8 text-white sm:p-16">
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gold-bright" />
+              <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-bright">
+                {t("Flagship", "ធាតុសំខាន់", lang)} · {feature.eyebrow}
+              </p>
+            </div>
+            <h3 className="mt-5 font-display text-5xl font-extrabold uppercase tracking-[-0.04em] sm:text-8xl">
+              {lang === "km" ? feature.label.km : feature.label.en}
+            </h3>
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/80 sm:text-base">
+              {t(feature.desc.en, feature.desc.km, lang)}
+            </p>
+            <span className="mt-8 inline-flex w-fit items-center gap-3 border-b border-gold-bright/60 pb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-gold-bright transition group-hover:gap-5">
+              {t("Enter Collection", "ចូលបណ្ដុំ", lang)}
+              <ArrowUpRight className="h-4 w-4" />
+            </span>
+          </div>
+        </div>
+      </Link>
+
+      {/* Two secondary side-by-side */}
+      <div className="mt-6 grid gap-6 sm:mt-8 sm:grid-cols-2 sm:gap-8">
+        {rest.map((c) => (
           <Link
             key={c.key}
             to={c.to}
-            className="tls-zoom group relative block overflow-hidden rounded-3xl bg-secondary"
-            style={{ animationDelay: `${i * 80}ms` }}
+            className="tls-shadow-lift group relative block overflow-hidden rounded-[28px] bg-secondary"
           >
-            <div className="relative aspect-[16/10] w-full overflow-hidden sm:aspect-[21/9]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
               <img
                 src={c.img}
                 alt={c.label.en}
                 loading="lazy"
-                className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover transition duration-[900ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.06]"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/40 to-black/10" />
-              <div className="absolute inset-0 flex flex-col justify-end p-8 text-white sm:p-14">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-gold-bright">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+              <div className="absolute inset-0 flex flex-col justify-end p-7 text-white sm:p-10">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.4em] text-gold-bright">
                   {t("Category", "ប្រភេទ", lang)} {c.eyebrow}
                 </p>
-                <h3 className="mt-3 font-display text-4xl font-extrabold tracking-[-0.03em] sm:text-6xl">
+                <h3 className="mt-4 font-display text-4xl font-extrabold uppercase tracking-[-0.035em] sm:text-5xl">
                   {lang === "km" ? c.label.km : c.label.en}
                 </h3>
-                <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
+                <p className="mt-3 line-clamp-2 max-w-md text-sm text-white/75">
                   {t(c.desc.en, c.desc.km, lang)}
                 </p>
-                <span className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-white px-6 py-3 text-[13px] font-semibold text-foreground transition group-hover:bg-gold group-hover:text-white">
-                  {t("Explore Collection", "រុករកបណ្ដុំ", lang)}
-                  <ArrowUpRight className="h-4 w-4" />
-                </span>
+                <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/70">
+                  <span>{t("Explore", "រុករក", lang)}</span>
+                  <span className="grid h-11 w-11 place-items-center rounded-full bg-white text-noir transition duration-300 group-hover:bg-gold group-hover:text-white">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </div>
               </div>
             </div>
           </Link>
@@ -200,14 +243,14 @@ function Why({ lang }: { lang: "en" | "km" }) {
     { Icon: MessageCircle, k: t("Friendly support", "ការគាំទ្ររាក់ទាក់", lang),  d: t("Real humans on Telegram and Messenger — answering questions in your language.", "ឆ្លើយតបយ៉ាងរហ័ស។", lang) },
   ];
   return (
-    <section className="mx-auto max-w-7xl px-5 pt-32">
+    <section className="mx-auto max-w-7xl px-6 pt-40 sm:px-8">
       <SectionEyebrow eyebrow={t("Why Three Lines", "ហេតុអ្វី", lang)} title={t("Built around the details.", "ផ្តោតលើព័ត៌មានលម្អិត។", lang)} kicker={t("Six quiet reasons our customers stay with us.", "ហេតុផលដែលអតិថិជននៅជាមួយយើង។", lang)} />
-      <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-16 grid gap-px overflow-hidden rounded-[28px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map(({ Icon, k, d }) => (
-          <div key={k} className="bg-background p-8 transition hover:bg-secondary">
-            <Icon className="h-6 w-6 text-gold" strokeWidth={1.5} />
-            <h3 className="mt-5 font-display text-lg font-bold tracking-tight">{k}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d}</p>
+          <div key={k} className="group bg-background p-10 transition duration-500 hover:bg-secondary">
+            <Icon className="h-6 w-6 text-gold transition duration-500 group-hover:scale-110" strokeWidth={1.25} />
+            <h3 className="mt-8 font-display text-lg font-bold tracking-tight">{k}</h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
           </div>
         ))}
       </div>
@@ -224,17 +267,17 @@ function HowItWorks({ lang }: { lang: "en" | "km" }) {
     { n: "05", k: t("Pickup or delivery", "ទទួល ឬដឹក", lang), d: t("Collect in Toul Kork or we ship to your door.", "យកនៅទួលគោក ឬដឹកជូន។", lang) },
   ];
   return (
-    <section className="mt-32 border-y border-border bg-secondary py-24">
-      <div className="mx-auto max-w-7xl px-5">
+    <section className="mt-40 border-y border-border bg-secondary py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <SectionEyebrow eyebrow={t("Process", "ដំណើរការ", lang)} title={t("How it works", "របៀបធ្វើការ", lang)} kicker={t("From first message to finished piece — five quiet steps.", "ប្រាំជំហានស្ងាត់ៗ។", lang)} />
-        <ol className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
+        <ol className="mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
           {steps.map((s, i) => (
             <li key={s.n} className="relative">
-              <div className="font-display text-3xl font-extrabold text-gold">{s.n}</div>
-              <div className="mt-3 font-display text-lg font-bold tracking-tight">{s.k}</div>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
+              <div className="font-display text-5xl font-extrabold tracking-[-0.04em] text-foreground/10">{s.n}</div>
+              <div className="mt-6 font-display text-lg font-bold tracking-tight">{s.k}</div>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
               {i < steps.length - 1 && (
-                <div className="absolute right-0 top-4 hidden h-px w-12 -translate-y-1/2 bg-border lg:block" />
+                <div className="absolute right-0 top-8 hidden h-px w-8 bg-gold/40 lg:block" />
               )}
             </li>
           ))}
@@ -256,26 +299,27 @@ function Testimonials({ lang }: { lang: "en" | "km" }) {
     { n: "<2h",  k: t("Average response time", "ពេលឆ្លើយតប", lang) },
   ];
   return (
-    <section className="mx-auto max-w-7xl px-5 pt-32">
+    <section className="mx-auto max-w-7xl px-6 pt-40 sm:px-8">
       <SectionEyebrow eyebrow={t("Stories", "រឿងរ៉ាវ", lang)} title={t("Trusted across Cambodia.", "ទុកចិត្តដោយអតិថិជន។", lang)} />
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
+      <div className="mt-16 grid gap-6 lg:grid-cols-3">
         {stories.map((s) => (
-          <figure key={s.a} className="flex h-full flex-col rounded-3xl border border-border bg-background p-8">
-            <blockquote className="font-display text-lg leading-relaxed tracking-tight text-foreground">
-              “{s.q}”
+          <figure key={s.a} className="tls-shadow-soft flex h-full flex-col rounded-[24px] border border-border/60 bg-background p-10">
+            <span className="font-display text-4xl leading-none text-gold">“</span>
+            <blockquote className="mt-2 font-display text-lg leading-[1.5] tracking-tight text-foreground">
+              {s.q}
             </blockquote>
-            <figcaption className="mt-6 border-t border-border pt-4 text-sm">
+            <figcaption className="mt-8 border-t border-border pt-5 text-sm">
               <div className="font-semibold">{s.a}</div>
-              <div className="text-muted-foreground">{s.r}</div>
+              <div className="mt-0.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{s.r}</div>
             </figcaption>
           </figure>
         ))}
       </div>
-      <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-border bg-border sm:grid-cols-3">
+      <div className="mt-12 grid gap-px overflow-hidden rounded-[28px] border border-border bg-border sm:grid-cols-3">
         {stats.map((s) => (
-          <div key={s.k} className="bg-background p-8 text-center">
-            <div className="font-display text-4xl font-extrabold tracking-tight text-foreground">{s.n}</div>
-            <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.k}</div>
+          <div key={s.k} className="bg-background p-12 text-center">
+            <div className="font-display text-6xl font-extrabold tracking-[-0.04em] text-foreground">{s.n}</div>
+            <div className="mt-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-muted-foreground">{s.k}</div>
           </div>
         ))}
       </div>
@@ -368,9 +412,9 @@ function ContactCTA({ lang }: { lang: "en" | "km" }) {
 function SectionEyebrow({ eyebrow, title, kicker, center = false }: { eyebrow: string; title: string; kicker?: string; center?: boolean }) {
   return (
     <div className={center ? "mx-auto max-w-xl text-center" : "max-w-2xl"}>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-gold">{eyebrow}</p>
-      <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.03em] sm:text-4xl lg:text-5xl">{title}</h2>
-      {kicker && <p className="mt-4 text-base text-muted-foreground">{kicker}</p>}
+      <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-gold">{eyebrow}</p>
+      <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-6xl">{title}</h2>
+      {kicker && <p className={["text-base text-muted-foreground", center ? "mx-auto mt-6 max-w-md" : "mt-6 max-w-md"].join(" ")}>{kicker}</p>}
     </div>
   );
 }
