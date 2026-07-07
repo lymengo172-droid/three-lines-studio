@@ -268,3 +268,21 @@
     box-shadow: 0 12px 36px -10px color-mix(in oklch, var(--gold) 55%, transparent);
   }
 }
+
+@utility tls-shadow-soft {
+  box-shadow:
+    0 1px 2px -1px oklch(0 0 0 / 0.06),
+    0 20px 40px -24px oklch(0 0 0 / 0.18);
+}
+@utility tls-shadow-lift {
+  transition: box-shadow 0.5s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 2px 4px -2px oklch(0 0 0 / 0.08),
+      0 30px 60px -28px oklch(0 0 0 / 0.28);
+  }
+}
+@utility tls-hairline {
+  border: 1px solid color-mix(in oklch, var(--foreground) 8%, transparent);
+}
