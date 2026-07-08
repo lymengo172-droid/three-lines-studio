@@ -71,7 +71,7 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
         <p className="text-[11px] font-semibold uppercase tracking-[0.42em] text-gold">
           {t("The Collection", "បណ្ដុំ", lang)}
         </p>
-        <p className="mt-6 font-display text-2xl leading-[1.3] tracking-[-0.02em] text-foreground sm:text-3xl">
+        <p className="mt-6 text-lg font-normal leading-[1.6] tracking-[-0.005em] text-muted-foreground sm:text-xl">
           {t(config.intro.en, config.intro.km, lang)}
         </p>
       </section>
