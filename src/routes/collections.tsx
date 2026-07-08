@@ -6,9 +6,9 @@ import { ArrowUpRight } from "lucide-react";
 export const Route = createFileRoute("/collections")({
   head: () => ({
     meta: [
-      { title: "Design Collections — Three Lines Studio" },
+      { title: "Design Collections — Kiri Studio" },
       { name: "description", content: "Browse premium, customizable design collections — acrylic keychains, metal art, signage, home décor and more. Designed in Phnom Penh." },
-      { property: "og:title", content: "Design Collections — Three Lines Studio" },
+      { property: "og:title", content: "Design Collections — Kiri Studio" },
       { property: "og:description", content: "Curated collections of customizable templates. Personalize and order in minutes." },
     ],
   }),

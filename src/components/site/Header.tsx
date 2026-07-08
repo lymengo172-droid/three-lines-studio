@@ -38,7 +38,7 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
       <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 sm:flex sm:justify-between">
         <Link to="/" className="group flex min-w-0 flex-col leading-none">
           <span className="font-display text-[15px] font-extrabold uppercase tracking-[-0.03em]">
-            Three Lines
+            Kiri
           </span>
           <span
             className={[

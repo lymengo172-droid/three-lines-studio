@@ -6,7 +6,7 @@ import { productById, LINES } from "@/lib/catalog";
 export const Route = createFileRoute("/product/$line/$id")({
   head: ({ params }) => {
     const p = productById(params.id);
-    const title = p ? `${p.name} — Three Lines, One Studio` : "Product — Three Lines, One Studio";
+    const title = p ? `${p.name} — Kiri Studio` : "Product — Kiri Studio";
     return { meta: [
       { title },
       { name: "description", content: p?.blurb ?? "Custom-printed product." },

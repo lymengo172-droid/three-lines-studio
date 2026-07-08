@@ -17,9 +17,9 @@ import imgMetal from "@/assets/cover-metal.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Three Lines Studio — Crafted with Precision. Personalized for You." },
+      { title: "Kiri Studio — Crafted with Precision. Personalized for You." },
       { name: "description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
-      { property: "og:title", content: "Three Lines Studio — Crafted with Precision" },
+      { property: "og:title", content: "Kiri Studio — Crafted with Precision" },
       { property: "og:description", content: "Premium laser engraving, UV printing, and personalized gifts crafted in Phnom Penh." },
       { property: "og:image", content: heroImg },
     ],
@@ -244,7 +244,7 @@ function Why({ lang }: { lang: "en" | "km" }) {
   ];
   return (
     <section className="mx-auto max-w-7xl px-6 pt-40 sm:px-8">
-      <SectionEyebrow eyebrow={t("Why Three Lines", "ហេតុអ្វី", lang)} title={t("Built around the details.", "ផ្តោតលើព័ត៌មានលម្អិត។", lang)} kicker={t("Six quiet reasons our customers stay with us.", "ហេតុផលដែលអតិថិជននៅជាមួយយើង។", lang)} />
+      <SectionEyebrow eyebrow={t("Why Kiri", "ហេតុអ្វី", lang)} title={t("Built around the details.", "ផ្តោតលើព័ត៌មានលម្អិត។", lang)} kicker={t("Six quiet reasons our customers stay with us.", "ហេតុផលដែលអតិថិជននៅជាមួយយើង។", lang)} />
       <div className="mt-16 grid gap-px overflow-hidden rounded-[28px] border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
         {pillars.map(({ Icon, k, d }) => (
           <div key={k} className="group bg-background p-10 transition duration-500 hover:bg-secondary">
@@ -398,7 +398,7 @@ function ContactCTA({ lang }: { lang: "en" | "km" }) {
             <ContactRow Icon={MapPin}  k={t("Showroom", "ទីតាំង", lang)} v={STUDIO.showroom} />
             <ContactRow Icon={Clock}   k={t("Hours", "ម៉ោងបើក", lang)} v={t("Mon – Sat · 9:00 – 19:00", "ច័ន្ទ–សៅរ៍ · ៩:០០–១៩:០០", lang)} />
             <ContactRow Icon={Phone}   k={t("Call", "ហៅទូរស័ព្ទ", lang)} v="+855 12 345 678" />
-            <ContactRow Icon={Mail}    k="Email" v="hello@threelinesstudio.com" />
+            <ContactRow Icon={Mail}    k="Email" v="hello@kiristudio.com" />
           </ul>
         </div>
         <div className="h-56 w-full bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1600&q=70')] bg-cover bg-center opacity-60 grayscale" aria-label="Map placeholder" />

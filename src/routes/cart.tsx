@@ -4,7 +4,7 @@ import { useStore, t } from "@/lib/store";
 import { Trash2 } from "lucide-react";
 
 export const Route = createFileRoute("/cart")({
-  head: () => ({ meta: [{ title: "Cart — Three Lines, One Studio" }] }),
+  head: () => ({ meta: [{ title: "Cart — Kiri Studio" }] }),
   component: CartPage,
 });
 

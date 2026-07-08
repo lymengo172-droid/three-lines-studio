@@ -29,9 +29,9 @@ const TILES = [
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery — Three Lines Studio" },
-      { name: "description", content: "Recent custom prints, engravings, and personalized creations from Three Lines Studio in Phnom Penh." },
-      { property: "og:title", content: "Gallery — Three Lines Studio" },
+      { title: "Gallery — Kiri Studio" },
+      { name: "description", content: "Recent custom prints, engravings, and personalized creations from Kiri Studio in Phnom Penh." },
+      { property: "og:title", content: "Gallery — Kiri Studio" },
       { property: "og:description", content: "A look at recent work from our Phnom Penh studio." },
     ],
   }),

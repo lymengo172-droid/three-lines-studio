@@ -9,7 +9,7 @@ export const Route = createFileRoute("/template/$id/customize")({
   head: ({ params }) => {
     const t = templateById(params.id);
     return { meta: [
-      { title: t ? `Customize ${t.title} — Three Lines Studio` : "Customize — Three Lines Studio" },
+      { title: t ? `Customize ${t.title} — Kiri Studio` : "Customize — Kiri Studio" },
       { name: "description", content: "Personalize your template in a few simple steps." },
     ]};
   },
@@ -53,7 +53,7 @@ function CustomizePage() {
 
   const sendOrder = () => {
     const lines = [
-      `*Three Lines Studio — Custom Order*`,
+      `*Kiri Studio — Custom Order*`,
       `Template: ${tpl.title} (${tpl.category})`,
       `Size: ${sizeSel.label} (${sizeSel.dims})`,
       `Finish: ${finishSel.label}`,

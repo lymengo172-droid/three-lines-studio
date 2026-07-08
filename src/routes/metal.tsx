@@ -4,9 +4,9 @@ import coverMetal from "@/assets/cover-metal.jpg";
 
 export const Route = createFileRoute("/metal")({
   head: () => ({ meta: [
-    { title: "Metal (Aluminum) — Three Lines Studio" },
+    { title: "Metal (Aluminum) — Kiri Studio" },
     { name: "description", content: "Aluminum signs, name plates, wall art and business cards — engraved and Ultra-HD printed in Phnom Penh." },
-    { property: "og:title", content: "Metal (Aluminum) — Three Lines Studio" },
+    { property: "og:title", content: "Metal (Aluminum) — Kiri Studio" },
     { property: "og:description", content: "Premium aluminum pieces — signs, name plates, wall art and more." },
     { property: "og:image", content: coverMetal },
   ]}),

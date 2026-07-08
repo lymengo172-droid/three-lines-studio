@@ -10,9 +10,9 @@ import { Building2, Palette, Truck, ShieldCheck, Upload, Check } from "lucide-re
 export const Route = createFileRoute("/b2b")({
   head: () => ({
     meta: [
-      { title: "B2B & Bulk Orders — Three Lines, One Studio" },
+      { title: "B2B & Bulk Orders — Kiri Studio" },
       { name: "description", content: "Request a custom quote for corporate gifts, NGO merch, school events, and white-label printing in Cambodia. 50-unit minimum." },
-      { property: "og:title", content: "B2B & Bulk Orders — Three Lines, One Studio" },
+      { property: "og:title", content: "B2B & Bulk Orders — Kiri Studio" },
       { property: "og:description", content: "Corporate gifting, white-label merch and bulk printing in Phnom Penh." },
     ],
   }),
@@ -158,7 +158,7 @@ function B2B() {
       <section className="mx-auto max-w-7xl px-5 pt-16">
         <div className="grid gap-px overflow-hidden rounded-2xl bg-border sm:grid-cols-3">
           {[
-            { Icon: Palette, k: t("White-label", "ស្លាកស្វ័យប្រវត្តិ", lang), d: t("Your logo, your colors, your packaging — zero Three Lines branding on the finished product.", "ឡូហ្គូរបស់អ្នក ពណ៌របស់អ្នក។", lang) },
+            { Icon: Palette, k: t("White-label", "ស្លាកស្វ័យប្រវត្តិ", lang), d: t("Your logo, your colors, your packaging — zero Kiri branding on the finished product.", "ឡូហ្គូរបស់អ្នក ពណ៌របស់អ្នក។", lang) },
             { Icon: Building2, k: t("Bulk pricing", "តម្លៃបរិមាណច្រើន", lang), d: t("Tiered discounts from 50 units. Sharper rates above 250 and 1,000 — ask for a custom quote.", "បញ្ចុះតម្លៃចាប់ពី ៥០។", lang) },
             { Icon: Truck, k: t("Delivery in PP", "ដឹកជញ្ជូននៅភ្នំពេញ", lang), d: t("Free delivery in Phnom Penh for orders above $200. Nationwide via partner courier.", "ដឹកជញ្ជូនឥតគិតថ្លៃ។", lang) },
           ].map(({ Icon, k, d }) => (

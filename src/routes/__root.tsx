@@ -12,15 +12,11 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { StoreProvider } from "../lib/store";
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/500.css";
-import "@fontsource/manrope/600.css";
-import "@fontsource/manrope/700.css";
-import "@fontsource/manrope/800.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
+import "@fontsource/plus-jakarta-sans/400.css";
+import "@fontsource/plus-jakarta-sans/500.css";
+import "@fontsource/plus-jakarta-sans/600.css";
+import "@fontsource/plus-jakarta-sans/700.css";
+import "@fontsource/plus-jakarta-sans/800.css";
 
 function NotFoundComponent() {
   return (
@@ -87,10 +83,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Three Lines, One Studio — Custom print in Phnom Penh" },
+      { title: "Kiri Studio — Custom print in Phnom Penh" },
       { name: "description", content: "Premium custom-print studio in Phnom Penh: acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram." },
-      { name: "author", content: "Three Lines, One Studio" },
-      { property: "og:title", content: "Three Lines, One Studio" },
+      { name: "author", content: "Kiri Studio" },
+      { property: "og:title", content: "Kiri Studio" },
       { property: "og:description", content: "Three lines. One studio. Built for Cambodia." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

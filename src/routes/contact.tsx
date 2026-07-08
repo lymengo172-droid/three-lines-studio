@@ -7,10 +7,10 @@ import { MapPin, Clock, Phone, Mail, Send, MessageCircle, ArrowRight } from "luc
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Three Lines Studio" },
+      { title: "Contact — Kiri Studio" },
       { name: "description", content: "Visit our Phnom Penh showroom or message us on Telegram, Messenger, phone, or email." },
-      { property: "og:title", content: "Contact — Three Lines Studio" },
-      { property: "og:description", content: "Get in touch with Three Lines Studio in Phnom Penh." },
+      { property: "og:title", content: "Contact — Kiri Studio" },
+      { property: "og:description", content: "Get in touch with Kiri Studio in Phnom Penh." },
     ],
   }),
   component: ContactPage,
@@ -62,7 +62,7 @@ function ContactPage() {
             <ContactCard Icon={MapPin}  k={t("Showroom", "ទីតាំង", lang)} v={STUDIO.showroom} />
             <ContactCard Icon={Clock}   k={t("Hours", "ម៉ោងបើក", lang)} v={t("Mon – Sat · 9:00 – 19:00", "ច័ន្ទ–សៅរ៍ · ៩:០០–១៩:០០", lang)} />
             <ContactCard Icon={Phone}   k={t("Call", "ហៅទូរស័ព្ទ", lang)} v="+855 12 345 678" />
-            <ContactCard Icon={Mail}    k="Email" v="hello@threelinesstudio.com" />
+            <ContactCard Icon={Mail}    k="Email" v="hello@kiristudio.com" />
             <div className="flex gap-3">
               <a href={STUDIO.telegram} target="_blank" rel="noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-gold px-5 py-3 text-sm font-semibold text-white">
                 <Send className="h-4 w-4" /> Telegram
@@ -76,7 +76,7 @@ function ContactPage() {
 
         <div className="mt-10 h-72 w-full overflow-hidden rounded-3xl border border-border bg-secondary">
           <iframe
-            title="Three Lines Studio location"
+            title="Kiri Studio location"
             src="https://www.google.com/maps?q=Toul+Kork+Phnom+Penh&output=embed"
             className="h-full w-full"
             loading="lazy"

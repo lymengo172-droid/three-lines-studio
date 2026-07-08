@@ -8,7 +8,7 @@ import { TemplateCard } from "./collections.$slug";
 export const Route = createFileRoute("/template/$id")({
   head: ({ params }) => {
     const t = templateById(params.id);
-    const title = t ? `${t.title} — Three Lines Studio` : "Template — Three Lines Studio";
+    const title = t ? `${t.title} — Kiri Studio` : "Template — Kiri Studio";
     return { meta: [
       { title },
       { name: "description", content: t ? `${t.title} · ${t.category} keychain template. From $${t.priceFrom}. ${t.recommendedUse}.` : "Custom template." },
