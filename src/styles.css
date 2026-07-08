@@ -179,11 +179,16 @@
     font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
     letter-spacing: -0.035em;
     font-feature-settings: "ss01", "ss02";
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: none;
   }
   h4, h5, h6 {
     font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
     letter-spacing: -0.02em;
+    overflow-wrap: break-word;
   }
+  p { overflow-wrap: break-word; }
 }
 
 /* ───────────── Motion ─────────────
