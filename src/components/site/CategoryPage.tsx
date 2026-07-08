@@ -39,7 +39,7 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
               {config.eyebrow}
             </p>
           </div>
-          <h1 className="tls-fade-up mt-7 max-w-4xl font-display text-6xl font-extrabold uppercase leading-[0.92] tracking-[-0.045em] sm:text-8xl lg:text-[8.5rem]" style={{ animationDelay: "0.2s" }}>
+          <h1 className="tls-fade-up mt-7 max-w-4xl font-display text-6xl font-extrabold uppercase leading-[1.05] tracking-[-0.04em] pb-2 sm:text-8xl lg:text-[7.5rem]" style={{ animationDelay: "0.2s" }}>
             {lang === "km" ? config.titleKm : config.title}
           </h1>
           <p className="tls-fade-up mt-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg" style={{ animationDelay: "0.35s" }}>
