@@ -144,7 +144,7 @@ function B2B() {
       <section className="noir">
         <div className="mx-auto max-w-7xl px-5 pt-14 pb-14 sm:pt-20">
           <p className="text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">B2B · Wholesale · White-label</p>
-          <h1 className="mt-4 text-5xl font-black leading-[0.95] tracking-tight sm:text-7xl">
+          <h1 className="mt-4 text-5xl font-black leading-[1.05] tracking-tight sm:text-7xl">
             {t("Built for", "សម្រាប់", lang)} <span className="gold-text">{t("businesses.", "អាជីវកម្ម។", lang)}</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
