@@ -176,7 +176,7 @@ function B2B() {
         <h2 className="text-3xl font-black tracking-tight sm:text-4xl">{t("Request a quote", "សុំតម្លៃ", lang)}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("Tell us what you need. We'll reply with pricing, lead time, and a free mockup.", "ប្រាប់យើងពីអ្វីដែលអ្នកត្រូវការ។", lang)}</p>
 
-        <form onSubmit={submit} className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <form onSubmit={submit} className="mt-8 grid grid-cols-[minmax(0,1fr)] gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Field label={t("Company / organisation", "ក្រុមហ៊ុន / អង្គការ", lang)} value={form.company} onChange={(v) => setField("company", v)} required maxLength={120} />
           <Field label={t("Contact name", "ឈ្មោះអ្នកទំនាក់ទំនង", lang)} value={form.contact_name} onChange={(v) => setField("contact_name", v)} required maxLength={120} />
           <Field label={t("Phone", "ទូរស័ព្ទ", lang)} value={form.phone} onChange={(v) => setField("phone", v)} placeholder="012 345 678" required maxLength={40} />
@@ -196,7 +196,7 @@ function B2B() {
 
           <Field label={t("Deadline (optional)", "កាលបរិច្ឆេទ (ស្រេចចិត្ត)", lang)} value={form.deadline} onChange={(v) => setField("deadline", v)} type="date" />
 
-          <label className="sm:col-span-2 block">
+          <label className="sm:col-span-2 block min-w-0">
             <span className="text-xs font-medium text-muted-foreground">{t("Artwork file (optional · max 20 MB)", "ឯកសាររចនា (ស្រេចចិត្ត)", lang)}</span>
             <div className="mt-1 flex items-center gap-3 rounded-lg border border-dashed border-border px-3 py-2.5">
               <Upload className="h-4 w-4 text-muted-foreground" />
@@ -207,7 +207,7 @@ function B2B() {
             {file && <p className="mt-1 text-xs text-muted-foreground">{file.name} · {(file.size / 1024 / 1024).toFixed(2)} MB</p>}
           </label>
 
-          <label className="sm:col-span-2 block">
+          <label className="sm:col-span-2 block min-w-0">
             <span className="text-xs font-medium text-muted-foreground">{t("Project details", "ព័ត៌មានគម្រោង", lang)}</span>
             <textarea value={form.message} onChange={(e) => setField("message", e.target.value)} rows={5} maxLength={4000}
               placeholder={t("Event date, colors, sizing breakdown, special requests…", "កាលបរិច្ឆេទ ពណ៌ ទំហំ…", lang)}
@@ -236,10 +236,10 @@ function Field({ label, value, onChange, placeholder, required, type = "text", m
   label: string; value: string; onChange: (v: string) => void; placeholder?: string; required?: boolean; type?: string; maxLength?: number;
 }) {
   return (
-    <label className="block">
+    <label className="block min-w-0">
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <input value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} required={required} type={type} maxLength={maxLength}
-        className="mt-1 w-full rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-foreground" />
+        className="mt-1 w-full min-w-0 rounded-lg border border-border bg-background px-3 py-2.5 text-sm outline-none focus:border-foreground" />
     </label>
   );
 }
