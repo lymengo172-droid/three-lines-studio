@@ -176,7 +176,7 @@ function B2B() {
         <h2 className="text-3xl font-black tracking-tight sm:text-4xl">{t("Request a quote", "សុំតម្លៃ", lang)}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("Tell us what you need. We'll reply with pricing, lead time, and a free mockup.", "ប្រាប់យើងពីអ្វីដែលអ្នកត្រូវការ។", lang)}</p>
 
-        <form onSubmit={submit} className="mt-8 grid gap-4 sm:grid-cols-2">
+        <form onSubmit={submit} className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Field label={t("Company / organisation", "ក្រុមហ៊ុន / អង្គការ", lang)} value={form.company} onChange={(v) => setField("company", v)} required maxLength={120} />
           <Field label={t("Contact name", "ឈ្មោះអ្នកទំនាក់ទំនង", lang)} value={form.contact_name} onChange={(v) => setField("contact_name", v)} required maxLength={120} />
           <Field label={t("Phone", "ទូរស័ព្ទ", lang)} value={form.phone} onChange={(v) => setField("phone", v)} placeholder="012 345 678" required maxLength={40} />
