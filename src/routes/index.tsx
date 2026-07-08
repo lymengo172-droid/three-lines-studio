@@ -63,7 +63,7 @@ function Hero({ lang }: { lang: "en" | "km" }) {
             {t("Phnom Penh · Est. 2024", "ភ្នំពេញ · ឆ្នាំ ២០២៤", lang)}
           </p>
         </div>
-        <h1 className="tls-fade-up mt-6 max-w-4xl font-display text-[44px] font-extrabold uppercase leading-[0.92] tracking-[-0.045em] sm:text-7xl lg:text-[5.75rem]" style={{ animationDelay: "0.2s" }}>
+        <h1 className="tls-fade-up mt-6 max-w-4xl font-display text-[44px] font-extrabold uppercase leading-[1.02] tracking-[-0.045em] sm:text-7xl lg:text-[5.75rem]" style={{ animationDelay: "0.2s" }}>
           {t("Crafted with", "ឆ្លាក់ដោយ", lang)}<br/>
           <span className="gold-text italic">{t("Precision.", "ភាពច្បាស់លាស់។", lang)}</span><br/>
           {t("Personalized for you.", "បង្កើតសម្រាប់អ្នក។", lang)}
@@ -148,7 +148,7 @@ function ThreeCategories({ lang }: { lang: "en" | "km" }) {
           <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-gold">
             {t("Categories", "ប្រភេទ", lang)} · 03
           </p>
-          <h2 className="mt-6 font-display text-5xl font-extrabold leading-[0.95] tracking-[-0.045em] sm:text-7xl">
+          <h2 className="mt-6 font-display text-5xl font-extrabold leading-[1.05] tracking-[-0.045em] sm:text-7xl">
             {t("Three worlds.", "បីពិភព។", lang)}<br/>
             <span className="italic text-foreground/40">{t("One studio.", "មួយស្ទូឌីយោ។", lang)}</span>
           </h2>
@@ -413,7 +413,7 @@ function SectionEyebrow({ eyebrow, title, kicker, center = false }: { eyebrow: s
   return (
     <div className={center ? "mx-auto max-w-xl text-center" : "max-w-2xl"}>
       <p className="text-[10px] font-semibold uppercase tracking-[0.42em] text-gold">{eyebrow}</p>
-      <h2 className="mt-6 font-display text-4xl font-extrabold leading-[0.98] tracking-[-0.04em] sm:text-5xl lg:text-6xl">{title}</h2>
+      <h2 className="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-[-0.04em] sm:text-5xl lg:text-6xl">{title}</h2>
       {kicker && <p className={["text-base text-muted-foreground", center ? "mx-auto mt-6 max-w-md" : "mt-6 max-w-md"].join(" ")}>{kicker}</p>}
     </div>
   );
