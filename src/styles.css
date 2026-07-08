@@ -171,7 +171,9 @@
     text-rendering: optimizeLegibility;
     font-feature-settings: "ss01", "ss02";
     letter-spacing: -0.01em;
+    overflow-x: hidden;
   }
+  html { overflow-x: hidden; }
   :lang(km), .km {
     font-family: "Noto Sans Khmer", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
   }
