@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { dataUrlToBlob } from "@/lib/renderPreview";
 
 export const Route = createFileRoute("/checkout")({
-  head: () => ({ meta: [{ title: "Checkout — Three Lines, One Studio" }] }),
+  head: () => ({ meta: [{ title: "Checkout — Kiri Studio" }] }),
   component: Checkout,
 });
 

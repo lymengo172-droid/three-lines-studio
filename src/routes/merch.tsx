@@ -4,9 +4,9 @@ import coverMerch from "@/assets/cover-merch.jpg";
 
 export const Route = createFileRoute("/merch")({
   head: () => ({ meta: [
-    { title: "Merch — Three Lines Studio" },
+    { title: "Merch — Kiri Studio" },
     { name: "description", content: "Custom stickers, t-shirts, tote bags, mugs and engraved pens. Bulk-friendly branded merchandise from Phnom Penh." },
-    { property: "og:title", content: "Merch — Three Lines Studio" },
+    { property: "og:title", content: "Merch — Kiri Studio" },
     { property: "og:description", content: "Branded merchandise — stickers, apparel, drinkware and more." },
     { property: "og:image", content: coverMerch },
   ]}),

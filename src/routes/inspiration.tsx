@@ -5,9 +5,9 @@ import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/inspiration")({
   head: () => ({ meta: [
-    { title: "Inspiration — Three Lines Studio" },
+    { title: "Inspiration — Kiri Studio" },
     { name: "description", content: "A gallery of finished customer pieces — anime, pets, business, weddings and more." },
-    { property: "og:title", content: "Inspiration — Three Lines Studio" },
+    { property: "og:title", content: "Inspiration — Kiri Studio" },
   ]}),
   component: InspirationPage,
 });

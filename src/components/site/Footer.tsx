@@ -12,7 +12,7 @@ export function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <h3 className="font-display text-xl font-extrabold tracking-tight">
-              Three Lines <span className="text-gold">·</span> Studio
+              Kiri <span className="text-gold">·</span> Studio
             </h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
               {t(

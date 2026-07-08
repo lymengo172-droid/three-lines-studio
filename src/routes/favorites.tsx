@@ -7,7 +7,7 @@ import { Heart } from "lucide-react";
 
 export const Route = createFileRoute("/favorites")({
   head: () => ({ meta: [
-    { title: "Favorites — Three Lines Studio" },
+    { title: "Favorites — Kiri Studio" },
     { name: "description", content: "Your saved design templates." },
   ]}),
   component: FavoritesPage,

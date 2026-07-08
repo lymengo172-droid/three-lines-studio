@@ -4,9 +4,9 @@ import coverAcrylic from "@/assets/cover-acrylic.jpg";
 
 export const Route = createFileRoute("/acrylic")({
   head: () => ({ meta: [
-    { title: "Acrylic — Three Lines Studio" },
+    { title: "Acrylic — Kiri Studio" },
     { name: "description", content: "Premium custom acrylic keychains, stands, photo blocks, LED signs and magnets. Designed and printed in Phnom Penh." },
-    { property: "og:title", content: "Acrylic — Three Lines Studio" },
+    { property: "og:title", content: "Acrylic — Kiri Studio" },
     { property: "og:description", content: "Flagship acrylic category — keychains, stands, LED signs and more." },
     { property: "og:image", content: coverAcrylic },
   ]}),

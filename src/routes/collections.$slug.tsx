@@ -8,7 +8,7 @@ import { useStore } from "@/lib/store";
 export const Route = createFileRoute("/collections/$slug")({
   head: ({ params }) => {
     const c = collectionBySlug(params.slug);
-    const title = c ? `${c.title} — Three Lines Studio` : "Collection — Three Lines Studio";
+    const title = c ? `${c.title} — Kiri Studio` : "Collection — Kiri Studio";
     return { meta: [
       { title },
       { name: "description", content: c?.shortDesc ?? "Custom design collection." },

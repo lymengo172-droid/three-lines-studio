@@ -87,10 +87,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Three Lines, One Studio — Custom print in Phnom Penh" },
+      { title: "Kiri Studio — Custom print in Phnom Penh" },
       { name: "description", content: "Premium custom-print studio in Phnom Penh: acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram." },
-      { name: "author", content: "Three Lines, One Studio" },
-      { property: "og:title", content: "Three Lines, One Studio" },
+      { name: "author", content: "Kiri Studio" },
+      { property: "og:title", content: "Kiri Studio" },
       { property: "og:description", content: "Three lines. One studio. Built for Cambodia." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

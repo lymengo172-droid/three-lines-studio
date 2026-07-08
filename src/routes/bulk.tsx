@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export const Route = createFileRoute("/bulk")({
   head: () => ({ meta: [
-    { title: "B2B & Bulk orders — Three Lines, One Studio" },
+    { title: "B2B & Bulk orders — Kiri Studio" },
     { name: "description", content: "Bulk pricing for corporates and NGOs in Cambodia — 50+ units. Request a quote." },
     { property: "og:title", content: "B2B & Bulk orders" },
     { property: "og:description", content: "Bulk pricing for corporates and NGOs in Cambodia." },

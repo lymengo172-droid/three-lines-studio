@@ -188,13 +188,13 @@ export const LINES: { key: LineKey; title: string; titleKm: string; subtitle: st
 ];
 
 export const STUDIO = {
-  name: "Three Lines, One Studio",
+  name: "Kiri Studio",
   tagline: "Three lines. One studio. Built for Cambodia.",
   city: "Phnom Penh",
   showroom: "Toul Kork, Phnom Penh",
-  facebook: "https://facebook.com/threelinesstudio",
-  tiktok: "https://tiktok.com/@threelinesstudio",
-  telegram: "https://t.me/threelinesstudio",
+  facebook: "https://facebook.com/kiristudio",
+  tiktok: "https://tiktok.com/@kiristudio",
+  telegram: "https://t.me/kiristudio",
   // Owner's Telegram username (no @). Used to deep-link orders.
   telegramUsername: "lymengv",
 };
