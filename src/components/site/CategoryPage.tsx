@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, ArrowRight, Sparkles } from "lucide-react";
 import { Shell } from "./Shell";
@@ -15,7 +15,7 @@ export type CategoryConfig = {
   hero: string;
 };
 
-export function CategoryPage({ config }: { config: CategoryConfig }) {
+export function CategoryPage({ config, children }: { config: CategoryConfig; children?: ReactNode }) {
   const { lang } = useStore();
   const collections = collectionsByParent(config.key);
   const [active, setActive] = useState<string>("all");
@@ -93,6 +93,8 @@ export function CategoryPage({ config }: { config: CategoryConfig }) {
           </div>
         )}
       </section>
+
+      {children}
     </Shell>
   );
 }
