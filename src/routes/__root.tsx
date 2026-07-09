@@ -83,13 +83,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Kiri Studio — Custom print in Phnom Penh" },
-      { name: "description", content: "Premium custom-print studio in Phnom Penh: acrylic objects, ultra-HD metal wall art, and custom merch. Pick a template, preview live, order on Telegram." },
+      { title: "Kiri Studio — Crafted with Precision. Personalized for You." },
+      { name: "description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
       { name: "author", content: "Kiri Studio" },
-      { property: "og:title", content: "Kiri Studio" },
-      { property: "og:description", content: "Three lines. One studio. Built for Cambodia." },
+      { property: "og:title", content: "Kiri Studio — Crafted with Precision. Personalized for You." },
+      { property: "og:description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Kiri Studio — Crafted with Precision. Personalized for You." },
+      { name: "twitter:description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/179ce67c-ea6e-495c-ba66-625bbcd0296d/id-preview-b8f265fe--9a7b36a8-b3c8-42b8-a906-d95d61979978.lovable.app-1783583388147.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/179ce67c-ea6e-495c-ba66-625bbcd0296d/id-preview-b8f265fe--9a7b36a8-b3c8-42b8-a906-d95d61979978.lovable.app-1783583388147.png" },
     ],
     links: [
       {

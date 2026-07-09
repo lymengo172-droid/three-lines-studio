@@ -19,8 +19,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Kiri Studio — Crafted with Precision. Personalized for You." },
       { name: "description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
-      { property: "og:title", content: "Kiri Studio — Crafted with Precision" },
-      { property: "og:description", content: "Premium laser engraving, UV printing, and personalized gifts crafted in Phnom Penh." },
+      { property: "og:title", content: "Kiri Studio — Crafted with Precision. Personalized for You." },
+      { property: "og:description", content: "Premium laser engraving, UV printing, and personalized creations designed in Phnom Penh to celebrate every occasion." },
       { property: "og:image", content: heroImg },
     ],
   }),
