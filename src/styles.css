@@ -69,8 +69,8 @@
   --color-gold-deep: var(--gold-deep);
   --color-noir: var(--noir);
   --color-noir-2: var(--noir-2);
-  --font-display: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
-  --font-sans: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 :root {
@@ -166,7 +166,7 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: "Satoshi", "Plus Jakarta Sans", "Noto Sans Khmer", system-ui, sans-serif;
+    font-family: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-feature-settings: "ss01", "ss02";
@@ -175,10 +175,10 @@
   }
   html { overflow-x: hidden; }
   :lang(km), .km {
-    font-family: "Noto Sans Khmer", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
   }
   h1, h2, h3 {
-    font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
     letter-spacing: -0.035em;
     font-feature-settings: "ss01", "ss02";
     overflow-wrap: break-word;
@@ -186,7 +186,7 @@
     hyphens: none;
   }
   h4, h5, h6 {
-    font-family: "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: "Kantumruy Pro", "Satoshi", "Plus Jakarta Sans", system-ui, sans-serif;
     letter-spacing: -0.02em;
     overflow-wrap: break-word;
   }
